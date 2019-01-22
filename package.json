@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "npm run build && live-server out",
+    "start": "npm install && npm run build && live-server out",
     "build": "elm make src/*.elm --output=out/main.js",
     "watch": "chokidar '**/*.elm' -c 'npm run build' --initial",
     "test": "echo \"Error: no test specified\" && exit 1"

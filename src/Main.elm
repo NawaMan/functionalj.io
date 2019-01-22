@@ -44,14 +44,14 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ button [ onClick Increment ] [ text "Increse" ]
-        , div []
-            [ text <| String.fromInt model.count
-            , button [ onClick Reset ] [ text "Reset to zero" ]
-            ]
-        , button [ onClick Decrement ] [ text "Decrese" ]
-        ]
+    div [] []
+        -- [ button [ onClick Increment ] [ text "Increse" ]
+        -- , div []
+        --     [ text <| String.fromInt model.count
+        --     , button [ onClick Reset ] [ text "Reset to zero" ]
+        --     ]
+        -- , button [ onClick Decrement ] [ text "Decrese" ]
+        -- ]
 
 main : Program () Model Msg
 main =

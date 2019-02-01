@@ -1,16 +1,336 @@
 <html>
 
 <head>
+	<title>FunctionalJ</title>
+
+	<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+	<link rel="manifest" href="/favicons/manifest.json">
+	<meta name="theme-color" content="#ffffff">
+
+	<script src='layout-mode.min.js'></script>
+
+	<style>
+		pre.elmsh {
+			padding: 10px;
+			margin: 0;
+			text-align: left;
+			overflow: auto;
+			background-color: black;
+
+			font-size: 1.2em !important;
+		}
+
+		code.elmsh {
+			padding: 0;
+		}
+
+		.elmsh-line:before {
+			content: attr(data-elmsh-lc);
+			display: inline-block;
+			text-align: right;
+			width: 40px;
+			padding: 0 20px 0 0;
+			opacity: 0.3;
+		}
+
+		.elmsh {
+			color: #f8f8f2;
+			background: #23241f;
+		}
+
+		.elmsh-hl {
+			background: #343434;
+		}
+
+		.elmsh-add {
+			background: #003800;
+		}
+
+		.elmsh-del {
+			background: #380000;
+		}
+
+		.elmsh-comm {
+			color: #75715e;
+		}
+
+		.elmsh1 {
+			color: #ae81ff;
+		}
+
+		.elmsh2 {
+			color: #e6db74;
+		}
+
+		.elmsh3 {
+			color: red !important;
+			font-weight: bold !important;
+		}
+
+		.elmsh4 {
+			color: #66d9ef;
+		}
+
+		.elmsh5 {
+			color: #a6e22e;
+		}
+
+		.elmsh6 {
+			color: #ae81ff;
+		}
+
+		.elmsh7 {
+			color: #fd971f;
+		}
+
+		.elmsh-elm-ts,
+		.elmsh-js-dk,
+		.elmsh-css-p {
+			font-style: italic;
+			color: #66d9ef;
+		}
+
+		.elmsh-js-ce {
+			font-style: italic;
+			color: #a6e22e;
+		}
+
+		.elmsh-css-ar-i {
+			font-weight: bold;
+			color: #f92672;
+		}
+
+		body,
+		html {
+			padding: 0px;
+			margin: 0px;
+			border: 0px;
+			background-color: white;
+		}
+
+		#main {
+			width: 100%;
+			color: white;
+		}
+
+		#main div#top-bar {
+			background-color: #001871;
+			height: 3em;
+		}
+
+		/** Declare default content width and the top and bottom padding */
+		body {
+			--section-content-width: 1000px;
+			--section-top-bottom-padding: 2em;
+		}
+
+		/** This the meat - very reusable. */
+		.section {
+			width: var(--section-content-width);
+			padding: var(--section-top-bottom-padding) calc(50% - var(--section-content-width)/2);
+		}
+
+		.section>*:first-child {
+			padding-top: 0px;
+			margin-top: 0px;
+		}
+
+		.section>*:last-child {
+			padding-bottom: 0px;
+			margin-bottom: 0px;
+		}
+
+		.section-first {
+			background: #000d33;
+		}
+
+		.section-first .content {
+			text-align: center;
+			margin: auto;
+			font-size: 10em;
+		}
+
+		.section-introduction {
+			background: #000d33;
+			margin-top: 0px;
+			padding-top: 0px;
+		}
+
+		.section-introduction h1 {
+			text-align: center;
+		}
+
+		.section-introduction div {
+			text-align: justify;
+			font-size: 1.3em;
+			font-family: Verdana, Geneva, sans-serif;
+		}
+
+		.section-features {
+			--section-content-width: 1000px;
+			/* Should use grid gab to implement this padding */
+			padding-top: 1.5em;
+			padding-bottom: 1.5em;
+			background: white;
+			color: black;
+		}
+
+		body.mode-mobile .features {
+			display: grid;
+			grid-template-columns: 1fr;
+			grid-column-gap: 2.5em;
+			grid-row-gap: 1em;
+			font-size: 1em;
+			font-family: Tahoma, Geneva, sans-serif;
+		}
+
+		body.mode-desktop .features {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-column-gap: 2.5em;
+			grid-row-gap: 1em;
+			font-size: 1em;
+			font-family: Tahoma, Geneva, sans-serif;
+		}
+
+		.section-features .feature {
+			padding: 5px;
+		}
+
+		.section-features .feature .title {
+			text-align: center;
+			font-weight: bold;
+		}
+
+		.section-features .feature .description {
+			text-align: justify;
+		}
+
+		.section-features .feature {
+			border: solid 3px white;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.section-features .feature:hover {
+			border: solid 3px gray;
+		}
+
+		.section-features .feature.select-feature {
+			border: solid 3px #fc962f;
+		}
+
+		.section-examples {
+			width: 1000px;
+			/* Make this color softer */
+			background: #fc962f;
+			font-family: Tahoma, Geneva, sans-serif;
+		}
+
+		.section-examples h1 {
+			text-align: center;
+			padding-bottom: 0px;
+			margin-bottom: 0px;
+		}
+
+		.section-examples .example-selector {
+			font-size: 2em;
+			text-align: center;
+		}
+
+		.section-examples .example-selector .example-dot {
+			cursor: pointer;
+		}
+
+		.section-examples .example-selector .example-dot:hover {
+			color: gray;
+		}
+
+		.section-examples .example-selector .example-dot.selected-example {
+			color: #001871;
+		}
+
+		.section-usages {
+			width: 1000px;
+			/* Make this color softer */
+			background: #001871;
+			color: white;
+			font-family: Tahoma, Geneva, sans-serif;
+			text-align: justify;
+		}
+
+		.section-usages a,
+		.section-usages a:active,
+		.section-usages a:visited {
+			color: #fc962f;
+		}
+
+		.section-usages h1 {
+			text-align: center;
+		}
+
+		.section-usages p {
+			text-align: justify;
+		}
+
+		.section-usages pre {
+			width: 960px;
+			font-size: 1.1em;
+			padding-top: 1.0em;
+			padding-bottom: 1.0em;
+			padding-right: 0.5em;
+			padding-left: 0.5em;
+		}
+
+		.section-bottom {
+			text-align: center;
+			color: black;
+		}
+
+		body>.css-layout-mode-selector>div.mode-mobile {
+			display: block;
+		}
+
+		@media(min-width: 600px) {
+			body>.css-layout-mode-selector>div.mode-mobile {
+				display: none;
+			}
+
+			body>.css-layout-mode-selector>div.mode-desktop {
+				display: block;
+			}
+		}
+	</style>
+
 </head>
 
 <body>
-	Hello!
-	<main></main>
+	<div id="main">
+		<main></main>
+	</div>
 	<script src="main.js"></script>
 	<script>
+		var layoutMode = LayoutMode.init(['mobile', 'desktop'])
+
+
 		var app = Elm.Main.init({ node: document.querySelector('main') })
 	</script>
 
+	<div id="bottom-spacer" style='height: 500px'>
+
+	</div>
 </body>
 
 </html>

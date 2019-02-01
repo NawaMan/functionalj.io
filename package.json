@@ -14,5 +14,8 @@
   "devDependencies": {
     "chokidar-cli": "^1.2.1",
     "live-server": "^1.2.1"
+  },
+  "dependencies": {
+    "layoutmode": "0.0.5"
   }
 }

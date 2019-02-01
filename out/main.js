@@ -7989,7 +7989,7 @@ var author$project$Features$exampleDot = F2(
 				]),
 			_List_fromArray(
 				[
-					elm$html$Html$text('●')
+					elm$html$Html$text('*')
 				]));
 	});
 var author$project$Features$exampleSelector = F2(

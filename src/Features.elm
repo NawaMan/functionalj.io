@@ -43,7 +43,7 @@ exampleDot index selected =
         [ class (markSelect index selected "example-dot" "selected-example")
         , onClick (SelectExample index)
         ]
-        [ text "●"
+        [ text "*"
         ]
 
 

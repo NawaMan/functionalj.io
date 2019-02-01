@@ -114,6 +114,7 @@
 
 		body,
 		html {
+			width: 1000px;
 			padding: 0px;
 			margin: 0px;
 			border: 0px;
@@ -127,7 +128,8 @@
 
 		#main div#top-bar {
 			background-color: #001871;
-			height: 3em;
+			height: 0em;
+			width: 100%;
 		}
 
 		/** Declare default content width and the top and bottom padding */
@@ -311,6 +313,15 @@
 			body>.css-layout-mode-selector>div.mode-desktop {
 				display: block;
 			}
+		}
+
+		img.github-ribbon {
+			position: fixed;
+			top: 20px;
+			right: -58px;
+			border: 0;
+			z-index: 100;
+			transform: rotate(45deg);
 		}
 	</style>
 

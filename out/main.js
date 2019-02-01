@@ -7945,6 +7945,13 @@ var author$project$Main$firstSection = A2(
 					elm$html$Html$text('FunctionaJ')
 				]))
 		]));
+var elm$html$Html$a = _VirtualDom_node('a');
+var elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
 var author$project$Main$sectionBottom = A2(
 	elm$html$Html$div,
 	_List_fromArray(
@@ -7953,7 +7960,30 @@ var author$project$Main$sectionBottom = A2(
 		]),
 	_List_fromArray(
 		[
-			elm$html$Html$text('© 2017-2019 NawaMan\'s FunctionalJ — FunctionalJ is Open Source, Apache 2 License')
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('© 2017-2019 NawaMan\'s FunctionalJ — FunctionalJ is Open Source, Apache 2 License')
+				])),
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Find code on '),
+					A2(
+					elm$html$Html$a,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$href('https://github.com/NawaMan/FunctionalJ')
+						]),
+					_List_fromArray(
+						[
+							elm$html$Html$text('GitHub')
+						]))
+				]))
 		]));
 var author$project$Features$markSelect = F4(
 	function (index, selected, prefix, text) {
@@ -8092,7 +8122,6 @@ var author$project$Features$featureView = F3(
 						]))
 				]));
 	});
-var elm$html$Html$a = _VirtualDom_node('a');
 var elm$html$Html$Attributes$name = elm$html$Html$Attributes$stringProperty('name');
 var author$project$Main$sectionFeatures = function (model) {
 	return A2(
@@ -8134,12 +8163,6 @@ var author$project$Main$sectionIntroduction = A2(
 		]),
 	_List_fromArray(
 		[author$project$Introduction$introductionView]));
-var elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
 var author$project$Main$useGradle = A2(
 	elm$html$Html$div,
 	_List_Nil,
@@ -8197,7 +8220,37 @@ var author$project$Main$sectionUsages = A2(
 				])),
 			author$project$Main$useGradle
 		]));
+var elm$html$Html$img = _VirtualDom_node('img');
 var elm$html$Html$Attributes$id = elm$html$Html$Attributes$stringProperty('id');
+var elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
+var author$project$Main$topBar = A2(
+	elm$html$Html$div,
+	_List_Nil,
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$a,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$href('https://github.com/NawaMan/FunctionalJ')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$img,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$id('github-ribbon'),
+							elm$html$Html$Attributes$src('github-ribbon.png')
+						]),
+					_List_Nil)
+				]))
+		]));
 var author$project$Main$view = function (model) {
 	return A2(
 		elm$html$Html$div,
@@ -8211,9 +8264,7 @@ var author$project$Main$view = function (model) {
 						elm$html$Html$Attributes$id('top-bar')
 					]),
 				_List_fromArray(
-					[
-						elm$html$Html$text('toolbar')
-					])),
+					[author$project$Main$topBar])),
 				A2(
 				elm$html$Html$div,
 				_List_fromArray(

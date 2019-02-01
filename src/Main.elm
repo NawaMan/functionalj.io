@@ -4,8 +4,8 @@ import Browser
 import CodeBlock exposing (codeBlock)
 import Feature exposing (..)
 import Features exposing (..)
-import Html exposing (Html, a, button, code, div, h1, p, pre, span, text)
-import Html.Attributes exposing (class, href, id, name)
+import Html exposing (Html, a, button, code, div, h1, p, pre, span, text, img)
+import Html.Attributes exposing (class, href, id, name, src)
 import Html.Events exposing (onClick)
 import Introduction exposing (introduction, introductionView)
 import Msg exposing (..)
@@ -70,7 +70,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ div [ id "top-bar" ] [ text "toolbar" ]
+        [ div [ id "top-bar" ] [ topBar ]
         , div [ id "body" ]
             [ firstSection
             , sectionIntroduction
@@ -96,6 +96,16 @@ main =
         , update = update
         , subscriptions = subscriptions
         }
+
+
+
+topBar : Html Msg
+topBar = div [] [
+        a [ href "https://github.com/NawaMan/FunctionalJ" ] [
+            img [ id "github-ribbon", src "github-ribbon.png"] []
+        ]
+    ]
+
 
 
 firstSection : Html Msg
@@ -153,4 +163,6 @@ sectionUsages =
 sectionBottom : Html Msg
 sectionBottom =
     div [ class "section section-bottom" ]
-        [ text "© 2017-2019 NawaMan's FunctionalJ — FunctionalJ is Open Source, Apache 2 License" ]
+        [ p [] [ text "© 2017-2019 NawaMan's FunctionalJ — FunctionalJ is Open Source, Apache 2 License" ]
+        , p [] [ text "Find code on ",
+                 a [ href "https://github.com/NawaMan/FunctionalJ" ] [ text "GitHub" ] ]]

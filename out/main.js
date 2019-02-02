@@ -7556,9 +7556,9 @@ var author$project$Features$Lens$featLens = A3(
 	_List_fromArray(
 		[author$project$Features$Lens$exampleReadAccess, author$project$Features$Lens$exampleWriteLens]));
 var author$project$Features$ListMap$description = '\n      Functional lazy-evaluated list and map.\n      This allows access functional methods right with list and map.\n      ';
-var author$project$Features$ListMap$firstExample = A2(
+var author$project$Features$ListMap$exampleFunctionalMethods = A2(
 	author$project$Feature$Example,
-	'ToBeAdded',
+	'Functional Methods',
 	_List_fromArray(
 		[
 			A2(
@@ -7566,9 +7566,23 @@ var author$project$Features$ListMap$firstExample = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('To be added')
+					elm$html$Html$text('FuncList and FuncMap has functional methods')
 				])),
-			author$project$Feature$codeShow('\n// To be added\n')
+			author$project$Feature$codeShow('\nvar list = FuncList.of("I", "Me", "Myself");\nvar map  = FuncMap .of("One", 1.0, "PI", 3.14159, "E", 2.71828);\n\nassertEquals("[1, 2, 6]",          list.map(String::length).toString());\nassertEquals("{One:1, PI:3, E:3}", map .map(Math::round)   .toString());\n')
+		]));
+var author$project$Features$ListMap$exampleImmutableModification = A2(
+	author$project$Feature$Example,
+	'Immutable Modification',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('FuncList and FuncMap cannot be changed in place but you can create new list/map with the changes.')
+				])),
+			author$project$Feature$codeShow('\nval list = FuncList.of("I", "Me", "Myself");\nval map  = FuncMap .of("One", 1.0, "PI", 3.14159, "E", 2.71828);\n\nval newList = list.append("First-Person");\nval newMap  = map .with("Ten", 10.0);\n\nassertEquals("[I, Me, Myself]",                            list.toString());\nassertEquals("{One:1.0, PI:3.14159, E:2.71828}",           map .toString());\nassertEquals("[I, Me, Myself, First-Person]",              newList.toString());\nassertEquals("{One:1.0, PI:3.14159, E:2.71828, Ten:10.0}", newMap .toString());\n')
 		]));
 var author$project$Features$ListMap$title = 'Functional List and Map';
 var author$project$Features$ListMap$featListMap = A3(
@@ -7576,7 +7590,7 @@ var author$project$Features$ListMap$featListMap = A3(
 	author$project$Features$ListMap$title,
 	author$project$Features$ListMap$description,
 	_List_fromArray(
-		[author$project$Features$ListMap$firstExample]));
+		[author$project$Features$ListMap$exampleFunctionalMethods, author$project$Features$ListMap$exampleImmutableModification]));
 var author$project$Features$PipeablePipeLine$description = '\n        Pipeable makes any data pipeable through a function flow.\n        PipeLine lets functions be composed together to be used as one function.\n      ';
 var author$project$Features$PipeablePipeLine$examplePipe = A2(
 	author$project$Feature$Example,
@@ -7636,9 +7650,9 @@ var author$project$Features$Ref$featRef = A3(
 	_List_fromArray(
 		[author$project$Features$Ref$firstExample]));
 var author$project$Features$Result$description = '\n        Boxed object similar to MayBe or Either types.\n        Result is designed to work well with Java exception.\n      ';
-var author$project$Features$Result$firstExample = A2(
+var author$project$Features$Result$exampleAcceptable = A2(
 	author$project$Feature$Example,
-	'ToBeAdded',
+	'Acceptable',
 	_List_fromArray(
 		[
 			A2(
@@ -7646,9 +7660,37 @@ var author$project$Features$Result$firstExample = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('To be added')
+					elm$html$Html$text('Acceptable (a sub-class of Result) can have validation built into a type.')
 				])),
-			author$project$Feature$codeShow('\n// To be added\n')
+			author$project$Feature$codeShow('\n// Type of three-digit string.\npublic class ThreeDigitString extends Acceptable<String> {\n    public ThreeDigitString(String value) {\n        super(value, Validation.ToBoolean(str -> str.matches("^[0-9]{3}$"), "Three digit string is required."));\n    }\n}\n...\n\nassertTrue (new ThreeDigitString("123").isPresent());\nassertFalse(new ThreeDigitString("12") .isPresent());\nassertFalse(new ThreeDigitString("ABC").isPresent());\nassertFalse(new ThreeDigitString(null) .isPresent());\n')
+		]));
+var author$project$Features$Result$exampleHandleException = A2(
+	author$project$Feature$Example,
+	'Handle Exception',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Handle exception gracefully. The code below will return wordCount as 0 but will print out a file not found exception.')
+				])),
+			author$project$Feature$codeShow('\nval wordCount\n        = Result.of(()->Files.readAllBytes(Paths.get("FileNotFound.txt")))\n        .map(String::new)\n        .map(matches("[a-zA-Z]+"))\n        .map(Stream::count)\n        .ifException(Exception::printStackTrace)\n        .orElse(0L)\n        ;\nassertEquals(0L, wordCount.longValue());\n')
+		]));
+var author$project$Features$Result$exampleValidation = A2(
+	author$project$Feature$Example,
+	'Validate value',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Validation can be built in to the flow. More complex exception can also be done.')
+				])),
+			author$project$Feature$codeShow('\nval result1\n        = Result.valueOf("One Two Three Four Five Six")\n        .map(matches("[a-zA-Z]+"))\n        .map(Stream::count)\n        .validate("Too few words: %d", count -> count > 5)\n        ;\nassertEquals("Result:{ Value: 6 }", result1.toString());\n\nval result2\n        = Result.valueOf("One Two Three Four")\n        .map(matches("[a-zA-Z]+"))\n        .map(Stream::count)\n        .validate("Too few words: %d", count -> count > 5)\n        ;\nassertEquals("Result:{ Invalid: Too few word: 4 }", result2.toString());\n')
 		]));
 var author$project$Features$Result$title = 'Result';
 var author$project$Features$Result$featResult = A3(
@@ -7656,7 +7698,7 @@ var author$project$Features$Result$featResult = A3(
 	author$project$Features$Result$title,
 	author$project$Features$Result$description,
 	_List_fromArray(
-		[author$project$Features$Result$firstExample]));
+		[author$project$Features$Result$exampleHandleException, author$project$Features$Result$exampleValidation, author$project$Features$Result$exampleAcceptable]));
 var author$project$Features$RuleTypes$description = '\n      Rule types make it easy to create type with constrains to limit variant of data.\n      ';
 var author$project$Features$RuleTypes$firstExample = A2(
 	author$project$Feature$Example,
@@ -8008,7 +8050,7 @@ var author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{feature: newFeature}),
+						{exampleIndex: 0, feature: newFeature}),
 					author$project$Main$requestRandomExample(newFeature));
 			case 'SelectExample':
 				var index = msg.a;
@@ -8327,7 +8369,7 @@ var author$project$Main$sectionFeatures = function (model) {
 					]))
 			]));
 };
-var author$project$Introduction$introduction = '\nFunctionalJ is a library for writing functional style code in Java.\nIt aims be a practical expansion to functional programming added in Java 8.\nFunctionalJ is a pure Java library with all code written in Java\n  so its usages will be just like other Java library.\nNo additional build steps or tools are required outside of adding dependencies.\n';
+var author$project$Introduction$introduction = '\nFunctionalJ is a library for writing functional style code in Java.\nIt aims be a practical expansion to functional programming added in Java 8.\nFunctionalJ is a pure Java library with all code written in Java\n  so its usages will be just like other Java library.\nNo additional build steps or tools are required outside of adding dependencies.\nFuncionalJ works with Java 8 and up.\n';
 var author$project$Introduction$introductionView = A2(
 	elm$html$Html$div,
 	_List_Nil,

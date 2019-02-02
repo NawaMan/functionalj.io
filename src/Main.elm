@@ -57,7 +57,7 @@ update msg model =
                 newFeature =
                     featureAt index
             in
-            ( { model | feature = newFeature }
+            ( { model | feature = newFeature, exampleIndex = 0 }
             , requestRandomExample newFeature
             )
 

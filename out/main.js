@@ -8133,6 +8133,16 @@ var author$project$Main$sectionFeatures = function (model) {
 		_List_fromArray(
 			[
 				A2(
+				elm$html$Html$h1,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$class('center')
+					]),
+				_List_fromArray(
+					[
+						elm$html$Html$text('Features')
+					])),
+				A2(
 				elm$html$Html$a,
 				_List_fromArray(
 					[
@@ -8144,7 +8154,17 @@ var author$project$Main$sectionFeatures = function (model) {
 					function (index) {
 						return A2(author$project$Features$featureView, index, model.feature);
 					},
-					author$project$Features$features))
+					author$project$Features$features)),
+				A2(
+				elm$html$Html$p,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$class('center')
+					]),
+				_List_fromArray(
+					[
+						elm$html$Html$text('Click on any feature to see example below.')
+					]))
 			]));
 };
 var author$project$Introduction$introduction = '\nFunctionalJ is a library for writing functional style code in Java.\nIt aims be a practical expansion to functional programming added in Java 8.\nFunctionalJ is a pure Java library with all code written in Java\n  so its usages will be just like other Java library.\nNo additional build steps or tools are required outside of adding dependencies.\n';

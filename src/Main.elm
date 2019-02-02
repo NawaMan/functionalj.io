@@ -4,7 +4,7 @@ import Browser
 import CodeBlock exposing (codeBlock)
 import Feature exposing (..)
 import Features exposing (..)
-import Html exposing (Html, a, button, code, div, h1, p, pre, span, text, img)
+import Html exposing (Html, a, button, code, div, h1, img, p, pre, span, text)
 import Html.Attributes exposing (class, href, id, name, src)
 import Html.Events exposing (onClick)
 import Introduction exposing (introduction, introductionView)
@@ -31,7 +31,7 @@ requestRandomFeature =
 
 requestRandomExample : Feature -> Cmd Msg
 requestRandomExample feature =
-    Random.generate SelectExample (Random.int 0 ((List.length feature.examples) - 1))
+    Random.generate SelectExample (Random.int 0 (List.length feature.examples - 1))
 
 
 featureAt : Int -> Feature
@@ -98,14 +98,13 @@ main =
         }
 
 
-
 topBar : Html Msg
-topBar = div [] [
-        a [ href "https://github.com/NawaMan/FunctionalJ" ] [
-            img [ id "github-ribbon", src "github-ribbon.png"] []
+topBar =
+    div []
+        [ a [ href "https://github.com/NawaMan/FunctionalJ" ]
+            [ img [ id "github-ribbon", src "github-ribbon.png" ] []
+            ]
         ]
-    ]
-
 
 
 firstSection : Html Msg
@@ -124,8 +123,10 @@ sectionIntroduction =
 sectionFeatures : Model -> Html Msg
 sectionFeatures model =
     div [ class "section section-features" ]
-        [ a [ name "features", class "features" ]
+        [ h1 [ class "center" ] [ text "Features" ]
+        , a [ name "features", class "features" ]
             (List.indexedMap (\index -> featureView index model.feature) features)
+        , p [ class "center" ] [ text "Click on any feature to see example below." ]
         ]
 
 
@@ -164,5 +165,8 @@ sectionBottom : Html Msg
 sectionBottom =
     div [ class "section section-bottom" ]
         [ p [] [ text "© 2017-2019 NawaMan's FunctionalJ — FunctionalJ is Open Source, Apache 2 License" ]
-        , p [] [ text "Find code on ",
-                 a [ href "https://github.com/NawaMan/FunctionalJ" ] [ text "GitHub" ] ]]
+        , p []
+            [ text "Find code on "
+            , a [ href "https://github.com/NawaMan/FunctionalJ" ] [ text "GitHub" ]
+            ]
+        ]

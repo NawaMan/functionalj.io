@@ -66,6 +66,16 @@ update msg model =
             , Cmd.none
             )
 
+        ChooseGradle ->
+            ( { model | usage = Gradle }
+            , Cmd.none
+            )
+
+        ChooseMaven ->
+            ( { model | usage = Maven }
+            , Cmd.none
+            )
+
 
 view : Model -> Html Msg
 view model =
@@ -76,7 +86,7 @@ view model =
             , sectionIntroduction
             , sectionFeatures model
             , sectionExamples model
-            , sectionUsages
+            , sectionUsages model
             , sectionBottom
             ]
         ]
@@ -126,7 +136,7 @@ sectionFeatures model =
         [ h1 [ class "center" ] [ text "Features" ]
         , a [ name "features", class "features" ]
             (List.indexedMap (\index -> featureView index model.feature) features)
-        , p [ class "center" ] [ text "Click on any feature to see example below." ]
+        , p [ class "center" ] [ text "Click on any feature to see examples below." ]
         ]
 
 
@@ -150,21 +160,74 @@ useGradle =
         , codeBlock "maven { url 'https://raw.githubusercontent.com/nawmaman/nawaman-maven-repository/master/' }"
         , p [] [ text "and the dependencies to FunctionalJ." ]
         , codeBlock "compile 'functionalj:functionalj-all:0.1.60.0' // Please lookup for the latest version."
+        , p []
+            [ a [ href "https://github.com/NawaMan/UseFunctionalJGradle" ] [ text "UseFunctionalJGradle" ]
+            , text " is an example project that use FunctionalJ. You can use that as a starting point."
+            ]
         ]
 
 
-sectionUsages : Html Msg
-sectionUsages =
+useMaven : Html Msg
+useMaven =
+    div []
+        [ p []
+            [ text "This project binary is published on "
+            , a [ href "https://github.com/NawaMan/nawaman-maven-repository" ]
+                [ text "my maven repo"
+                ]
+            , text " hosted on GitHub. So to use FunctionalJ you will need to ..."
+            ]
+        , p [] [ text "Adding the required maven repository (hosted by github)." ]
+        , codeBlock """
+<repository>
+    <id>Nullable-mvn-repo</id>
+    <url>https://raw.githubusercontent.com/nawaman/nawaman-maven-repository/master/</url>
+    <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+    </snapshots>
+</repository>
+        """
+        , p [] [ text "and the dependencies to FunctionalJ." ]
+        , codeBlock """
+    <dependency>
+        <groupId>functionalj</groupId>
+        <artifactId>functionalj-all</artifactId>
+        <version>0.1.60.0</version>
+    </dependency>
+        """
+        , p []
+            [ a [ href "https://github.com/NawaMan/UseFunctionalJMaven" ] [ text "UseFunctionalJMaven" ]
+            , text " is an example project that use FunctionalJ. You can use that as a starting point."
+            ]
+        ]
+
+
+sectionUsages : Model -> Html Msg
+sectionUsages model =
     div [ class "section section-usages" ]
         [ h1 [] [ text "Usages" ]
-        , useGradle
+        , div [ class "usage-selector" ]
+            [ button [ onClick ChooseGradle ] [ text "GRADLE" ]
+            , button [ onClick ChooseMaven ] [ text "MAVEN" ]
+            ]
+        , case model.usage of
+            Gradle ->
+                useGradle
+
+            Maven ->
+                useMaven
         ]
 
 
 sectionBottom : Html Msg
 sectionBottom =
     div [ class "section section-bottom" ]
-        [ p [] [ text "© 2017-2019 NawaMan's FunctionalJ — FunctionalJ is Open Source, Apache 2 License" ]
+        [ p []
+            [ text "© 2017-2019 NawaMan's FunctionalJ — FunctionalJ is Open Source, "
+            , a [ href "https://github.com/NawaMan/FunctionalJ/blob/master/LICENSE" ] [ text "MIT License" ]
+            , text "."
+            ]
         , p []
             [ text "Find code on "
             , a [ href "https://github.com/NawaMan/FunctionalJ" ] [ text "GitHub" ]

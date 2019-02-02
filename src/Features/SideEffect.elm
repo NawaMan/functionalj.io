@@ -7,17 +7,25 @@ import Html.Attributes exposing (class, id)
 
 
 featSideEffect =
-    Feature "Side Effect"
-        """
-        DeferAction, Promise and IO help manage side effects in functional-style way.
-        """
-        [ -- 0
-          [ p []
-                [ text "To be added"
-                ]
-          , codeShow """
-    // To be added
-    """
-          ]
-        ]
+    Feature title
+        description
+        [ firstExample ]
 
+
+title =
+    "Side Effect"
+
+
+description =
+    """
+      DeferAction, Promise and IO help manage side effects in functional-style way.
+      """
+
+
+firstExample =
+    Example "ToBeAdded"
+        [ p [] [ text "To be added" ]
+        , codeShow """
+// To be added
+"""
+        ]

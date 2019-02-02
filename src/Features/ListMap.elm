@@ -7,17 +7,26 @@ import Html.Attributes exposing (class, id)
 
 
 featListMap =
-  Feature "Functional List and Map"
-  """
-  Functional lazy-evaluated list and map.
-  This allows access functional methods right with list and map.
-  """
-  [ -- 0
-    [ p []
-          [ text "To be added"
-          ]
-    , codeShow """
+    Feature title
+        description
+        [ firstExample ]
+
+
+title =
+    "Functional List and Map"
+
+
+description =
+    """
+      Functional lazy-evaluated list and map.
+      This allows access functional methods right with list and map.
+      """
+
+
+firstExample =
+    Example "ToBeAdded"
+        [ p [] [ text "To be added" ]
+        , codeShow """
 // To be added
 """
-    ]
-  ]
+        ]

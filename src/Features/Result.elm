@@ -7,18 +7,26 @@ import Html.Attributes exposing (class, id)
 
 
 featResult =
-    Feature "Result"
-        """
+    Feature title
+        description
+        [ firstExample ]
+
+
+title =
+    "Result"
+
+
+description =
+    """
         Boxed object similar to MayBe or Either types.
         Result is designed to work well with Java exception.
-        """
-        [ -- 0
-          [ p []
-                [ text "To be added"
-                ]
-          , codeShow """
-    // To be added
-    """
-          ]
-        ]
+      """
 
+
+firstExample =
+    Example "ToBeAdded"
+        [ p [] [ text "To be added" ]
+        , codeShow """
+// To be added
+"""
+        ]

@@ -11,26 +11,45 @@ featFunctions =
         """
     More function types and many ways to manipulate and use them.
     """
-        [ -- 0
-          [ p []
-                [ text "Since functions are functional interfaces, Java 8 method references can be used to create function."
-                ]
-          , codeShow """
+        [ exampleMethodReference
+        , exampleWhenAbsent
+        , exampleSafely
+        ]
+
+
+title =
+    "Functions"
+
+
+description =
+    """
+    More function types and many ways to manipulate and use them.
+    """
+
+
+exampleMethodReference =
+    Example "Function from method refernece"
+        [ p [] [ text "Since functions are functional interfaces, Java 8 method references can be used to create function." ]
+        , codeShow """
 public int toInt(String str) {
-    return Integer.parseInt(str);
+return Integer.parseInt(str);
 }
 
 ...
-    val toInt = (Func1<String, Integer>)this::toInt;
-    assertEquals(42, (int)toInt.apply("42"));
+val toInt = (Func1<String, Integer>)this::toInt;
+assertEquals(42, (int)toInt.apply("42"));
 ...
 """
-          ]
-        , -- 1
-          [ p []
-                [ text "Since functions are functional interfaces, Java 8 method references can be used to create function."
-                ]
-          , codeShow """
+        ]
+
+
+exampleWhenAbsent =
+    Example "Recover from Absent"
+        [ p []
+            [ code [] [ text "whenAbsentUse(...)" ]
+            , text " method let you specify what to return if the result of the function is absent (null or exception)."
+            ]
+        , codeShow """
 import static functionalj.function.Func.f;
 
 public List<String> readLines(String fileName) throws IOException {
@@ -43,21 +62,23 @@ public List<String> readLines(String fileName) throws IOException {
     assertEquals("[]", lines.toString());
     ...
 """
-          ]
-        , -- 2
-          [ p []
-                [ text "Function body can throw an exception and function can be converted to return "
-                , code [] [ text "Result" ]
-                , text " using method "
-                , code [] [ text "safely()" ]
-                , text "."
-                ]
-          , codeShow """
+        ]
+
+
+exampleSafely =
+    Example "Call method safely"
+        [ p []
+            [ text "Function body can throw an exception and function can be converted to return "
+            , code [] [ text "Result" ]
+            , text " using method "
+            , code [] [ text "safely()" ]
+            , text "."
+            ]
+        , codeShow """
 var readLines = f(this::readLines).safely();
 var lines     = readLines.apply("FileNotFound.txt");
 assertEquals(
-        "Result:{ Exception: java.nio.file.NoSuchFileException: FileNotFound.txt }",
-        lines.toString());
+    "Result:{ Exception: java.nio.file.NoSuchFileException: FileNotFound.txt }",
+    lines.toString());
 """
-          ]
         ]

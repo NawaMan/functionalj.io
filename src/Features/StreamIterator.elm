@@ -7,16 +7,25 @@ import Html.Attributes exposing (class, id)
 
 
 featStreamIterator =
-    Feature "Stream and Iterator"
-        """
-        Additional functionalities to Streams and Iterator.
-        """
-        [ -- 0
-          [ p []
-                [ text "To be added"
-                ]
-          , codeShow """
-    // To be added
+    Feature title
+        description
+        [ firstExample ]
+
+
+title =
+    "Stream and Iterator"
+
+
+description =
     """
-          ]
+      Additional functionalities to Streams and Iterator.
+      """
+
+
+firstExample =
+    Example "ToBeAdded"
+        [ p [] [ text "To be added" ]
+        , codeShow """
+// To be added
+"""
         ]

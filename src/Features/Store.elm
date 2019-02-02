@@ -7,17 +7,25 @@ import Html.Attributes exposing (class, id)
 
 
 featStore =
-    Feature "Store"
-        """
-        Simple object helps manage changes for immutable data.
-        """
-        [ -- 0
-          [ p []
-                [ text "To be added"
-                ]
-          , codeShow """
-    // To be added
-    """
-          ]
-        ]
+    Feature title
+        description
+        [ firstExample ]
 
+
+title =
+    "Store"
+
+
+description =
+    """
+      Simple object helps manage changes for immutable data.
+      """
+
+
+firstExample =
+    Example "ToBeAdded"
+        [ p [] [ text "To be added" ]
+        , codeShow """
+// To be added
+"""
+        ]

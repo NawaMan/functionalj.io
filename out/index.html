@@ -19,102 +19,56 @@
 	<link rel="manifest" href="/favicons/manifest.json">
 	<meta name="theme-color" content="#ffffff">
 
+	<link href="codestyles.css" rel="stylesheet" type="text/css">
+
 	<script src='layout-mode.min.js'></script>
 
 	<style>
-		pre.elmsh {
-			padding: 10px;
-			margin: 0;
-			text-align: left;
-			overflow: auto;
-			background-color: black;
-
-			font-size: 1.2em !important;
-		}
-
-		code.elmsh {
-			padding: 0;
-		}
-
-		.elmsh-line:before {
-			content: attr(data-elmsh-lc);
+		.tooltip {
+			position: relative;
 			display: inline-block;
-			text-align: right;
-			width: 40px;
-			padding: 0 20px 0 0;
-			opacity: 0.3;
+			border-bottom: 1px dotted black;
 		}
 
-		.elmsh {
-			color: #f8f8f2;
-			background: #23241f;
+		.tooltip .tooltiptext {
+			visibility: hidden;
+			width: 200px;
+			background-color: #555;
+			color: #fff;
+			text-align: center;
+			border-radius: 6px;
+			padding: 5px 0;
+			position: absolute;
+			z-index: 1;
+			top: 125%;
+			left: 50%;
+			margin-left: -100px;
+			opacity: 0;
+			transition: opacity 0.3s;
+
+			font-size: 0.5em;
 		}
 
-		.elmsh-hl {
-			background: #343434;
+		.tooltip .tooltiptext::after {
+			content: "";
+			position: absolute;
+			bottom: 75%;
+			left: 50%;
+			margin-left: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: #555 transparent transparent transparent;
 		}
 
-		.elmsh-add {
-			background: #003800;
+		.tooltip:hover .tooltiptext {
+			visibility: visible;
+			opacity: 1;
 		}
 
-		.elmsh-del {
-			background: #380000;
-		}
 
-		.elmsh-comm {
-			color: #75715e;
-		}
-
-		.elmsh1 {
-			color: #ae81ff;
-		}
-
-		.elmsh2 {
-			color: #e6db74;
-		}
-
-		.elmsh3 {
-			color: red !important;
-			font-weight: bold !important;
-		}
-
-		.elmsh4 {
-			color: #66d9ef;
-		}
-
-		.elmsh5 {
-			color: #a6e22e;
-		}
-
-		.elmsh6 {
-			color: #ae81ff;
-		}
-
-		.elmsh7 {
-			color: #fd971f;
-		}
-
-		.elmsh-elm-ts,
-		.elmsh-js-dk,
-		.elmsh-css-p {
-			font-style: italic;
-			color: #66d9ef;
-		}
-
-		.elmsh-js-ce {
-			font-style: italic;
-			color: #a6e22e;
-		}
-
-		.elmsh-css-ar-i {
-			font-weight: bold;
-			color: #f92672;
-		}
 
 		body,
 		html {
-			width: 1000px;
 			padding: 0px;
 			margin: 0px;
 			border: 0px;
@@ -241,10 +195,14 @@
 			font-family: Tahoma, Geneva, sans-serif;
 		}
 
-		.section-examples h1 {
+		.section-examples .example-feature-title {
 			text-align: center;
 			padding-bottom: 0px;
 			margin-bottom: 0px;
+		}
+
+		.section-examples .example-example-title {
+			color: #000d33;
 		}
 
 		.section-examples .example-selector {
@@ -257,6 +215,10 @@
 			cursor: pointer;
 			padding-left: 0.3em;
 			padding-right: 0.3em;
+		}
+
+		.section-examples .example-selector .example-dot::after {
+			content: "\25cf"
 		}
 
 		.section-examples .example-selector .example-dot:hover {
@@ -274,6 +236,11 @@
 			color: white;
 			font-family: Tahoma, Geneva, sans-serif;
 			text-align: justify;
+		}
+
+		.section-usages .usage-selector {
+			text-align: center;
+			font-weight: bold;
 		}
 
 		.section-usages a,

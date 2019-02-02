@@ -12,11 +12,12 @@ import Features.Result exposing (..)
 import Features.RuleTypes exposing (..)
 import Features.SideEffect exposing (..)
 import Features.Store exposing (..)
-import Features.StructTypes exposing (..)
 import Features.StreamIterator exposing (..)
-import Html exposing (Html, button, code, div, h1, p, span, text)
-import Html.Attributes exposing (class, id)
+import Features.StructTypes exposing (..)
+import Html exposing (Html, button, code, div, h1, h3, p, span, text)
+import Html.Attributes exposing (class, id, property)
 import Html.Events exposing (onClick)
+import Json.Encode exposing (string)
 import Msg exposing (..)
 
 
@@ -26,7 +27,7 @@ intiFeature =
 
 exampleView : Feature -> Int -> Html Msg
 exampleView feature index =
-    exampleAt index feature.examples
+    exampleBodyAt index feature.examples
 
 
 markSelect : Int -> Int -> String -> String -> String
@@ -38,28 +39,39 @@ markSelect index selected prefix text =
         prefix
 
 
-exampleDot index selected =
+exampleDot index selected examples =
+    let
+        title =
+            exampleTitleAt index examples
+    in
     span
         [ class (markSelect index selected "example-dot" "selected-example")
         , onClick (SelectExample index)
         ]
-        [ text "*"
+        [ span [ class "tooltip" ]
+            [ span [ class "tooltiptext" ] [ text title ]
+            ]
         ]
 
 
-exampleSelector : Int -> Int -> Html Msg
-exampleSelector selected all =
+exampleSelector : Int -> List Example -> Html Msg
+exampleSelector selected examples =
+    let
+        all =
+            List.length examples
+    in
     div [ class "example-selector" ]
         (List.range 0 (all - 1)
-            |> List.map (\index -> exampleDot index selected)
+            |> List.map (\index -> exampleDot index selected examples)
         )
 
 
 featureExampleView : Feature -> Int -> List (Html Msg)
 featureExampleView feature exampleIndex =
-    [ h1 [] [ text feature.title ]
+    [ h1 [ class "example-feature-title" ] [ text feature.title ]
+    , exampleSelector exampleIndex feature.examples
+    , h3 [ class "example-example-title" ] [ text (exampleTitleAt exampleIndex feature.examples) ]
     , exampleView feature exampleIndex
-    , exampleSelector exampleIndex (List.length feature.examples)
     ]
 
 

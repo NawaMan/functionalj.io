@@ -4527,6 +4527,10 @@ var author$project$Feature$Feature = F3(
 	function (title, description, examples) {
 		return {description: description, examples: examples, title: title};
 	});
+var author$project$Feature$Example = F2(
+	function (title, body) {
+		return {body: body, title: title};
+	});
 var elm$core$Basics$apR = F2(
 	function (x, f) {
 		return f(x);
@@ -7420,262 +7424,349 @@ var author$project$Feature$codeShow = function (codeText) {
 		elm$core$String$trim(codeText));
 };
 var elm$html$Html$p = _VirtualDom_node('p');
+var author$project$Features$Functions$exampleMethodReference = A2(
+	author$project$Feature$Example,
+	'Function from method refernece',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Since functions are functional interfaces, Java 8 method references can be used to create function.')
+				])),
+			author$project$Feature$codeShow('\npublic int toInt(String str) {\nreturn Integer.parseInt(str);\n}\n\n...\nval toInt = (Func1<String, Integer>)this::toInt;\nassertEquals(42, (int)toInt.apply("42"));\n...\n')
+		]));
+var author$project$Features$Functions$exampleSafely = A2(
+	author$project$Feature$Example,
+	'Call method safely',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Function body can throw an exception and function can be converted to return '),
+					A2(
+					elm$html$Html$code,
+					_List_Nil,
+					_List_fromArray(
+						[
+							elm$html$Html$text('Result')
+						])),
+					elm$html$Html$text(' using method '),
+					A2(
+					elm$html$Html$code,
+					_List_Nil,
+					_List_fromArray(
+						[
+							elm$html$Html$text('safely()')
+						])),
+					elm$html$Html$text('.')
+				])),
+			author$project$Feature$codeShow('\nvar readLines = f(this::readLines).safely();\nvar lines     = readLines.apply("FileNotFound.txt");\nassertEquals(\n    "Result:{ Exception: java.nio.file.NoSuchFileException: FileNotFound.txt }",\n    lines.toString());\n')
+		]));
+var author$project$Features$Functions$exampleWhenAbsent = A2(
+	author$project$Feature$Example,
+	'Recover from Absent',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$code,
+					_List_Nil,
+					_List_fromArray(
+						[
+							elm$html$Html$text('whenAbsentUse(...)')
+						])),
+					elm$html$Html$text(' method let you specify what to return if the result of the function is absent (null or exception).')
+				])),
+			author$project$Feature$codeShow('\nimport static functionalj.function.Func.f;\n\npublic List<String> readLines(String fileName) throws IOException {\n    return Files.readAllLines(Paths.get(fileName));\n}\n\n    ...\n    val readLines = f(this::readLines).whenAbsentUse(FuncList.empty());\n    val lines     = readLines.apply("FileNotFound.txt");\n    assertEquals("[]", lines.toString());\n    ...\n')
+		]));
 var author$project$Features$Functions$featFunctions = A3(
 	author$project$Feature$Feature,
 	'Functions',
 	'\n    More function types and many ways to manipulate and use them.\n    ',
 	_List_fromArray(
-		[
-			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('Since functions are functional interfaces, Java 8 method references can be used to create function.')
-					])),
-				author$project$Feature$codeShow('\npublic int toInt(String str) {\n    return Integer.parseInt(str);\n}\n\n...\n    val toInt = (Func1<String, Integer>)this::toInt;\n    assertEquals(42, (int)toInt.apply("42"));\n...\n')
-			]),
-			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('Since functions are functional interfaces, Java 8 method references can be used to create function.')
-					])),
-				author$project$Feature$codeShow('\nimport static functionalj.function.Func.f;\n\npublic List<String> readLines(String fileName) throws IOException {\n    return Files.readAllLines(Paths.get(fileName));\n}\n\n    ...\n    val readLines = f(this::readLines).whenAbsentUse(FuncList.empty());\n    val lines     = readLines.apply("FileNotFound.txt");\n    assertEquals("[]", lines.toString());\n    ...\n')
-			]),
-			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('Function body can throw an exception and function can be converted to return '),
-						A2(
-						elm$html$Html$code,
-						_List_Nil,
-						_List_fromArray(
-							[
-								elm$html$Html$text('Result')
-							])),
-						elm$html$Html$text(' using method '),
-						A2(
-						elm$html$Html$code,
-						_List_Nil,
-						_List_fromArray(
-							[
-								elm$html$Html$text('safely()')
-							])),
-						elm$html$Html$text('.')
-					])),
-				author$project$Feature$codeShow('\nvar readLines = f(this::readLines).safely();\nvar lines     = readLines.apply("FileNotFound.txt");\nassertEquals(\n        "Result:{ Exception: java.nio.file.NoSuchFileException: FileNotFound.txt }",\n        lines.toString());\n')
-			])
-		]));
+		[author$project$Features$Functions$exampleMethodReference, author$project$Features$Functions$exampleWhenAbsent, author$project$Features$Functions$exampleSafely]));
 var author$project$Features$intiFeature = author$project$Features$Functions$featFunctions;
 var author$project$Main$Gradle = {$: 'Gradle'};
+var author$project$Features$AlgebraicDataTypes$description = '\n        Struct (product) and Choice (sum) types together work as algebraic data types\n          make it easier to make illegal data unrepresentable.\n      ';
+var author$project$Features$AlgebraicDataTypes$firstExample = A2(
+	author$project$Feature$Example,
+	'ToBeAdded',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('To be added')
+				])),
+			author$project$Feature$codeShow('\n// To be added\n')
+		]));
+var author$project$Features$AlgebraicDataTypes$title = 'Algebraic Data Types';
 var author$project$Features$AlgebraicDataTypes$featAlgebraicDataTypes = A3(
 	author$project$Feature$Feature,
-	'Algebraic Data Types',
-	'\n        Struct (product) and Choice (sum) types together work as algebraic data types\n          make it easier to make illegal data unrepresentable.\n        ',
+	author$project$Features$AlgebraicDataTypes$title,
+	author$project$Features$AlgebraicDataTypes$description,
+	_List_fromArray(
+		[author$project$Features$AlgebraicDataTypes$firstExample]));
+var author$project$Features$Lens$description = '\n    Lenses are functions to access to fields of an object -- both read and write.\n    As functions, they can composed with others.\n      ';
+var author$project$Features$Lens$exampleReadAccess = A2(
+	author$project$Feature$Example,
+	'Read property with access',
 	_List_fromArray(
 		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
 			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('To be added')
-					])),
-				author$project$Feature$codeShow('\n    // To be added\n    ')
-			])
+				[
+					elm$html$Html$text('Access (read-only part of Lens) is a function to get field value of an object.')
+				])),
+			author$project$Feature$codeShow('\n// Given this data class\npublic class User {\n    private String name;\n      \n    public User(String name) { this.name = name; }\n    public String name() { return name; }\n    public String toString() { return "User(" + name + ")"; }\n}\n\n    ...\n    User user1 = new User("John");\n    \n    StringAccess<User> userName = User::name;\n      \n    // Use lens to get the field value\n    assertEquals("John", userName.apply(user1));\n      \n    // StringAccess is composed to length() and thatGreaterThan(...)\n    assertFalse(userName.length().thatGreaterThan(4).apply(user1));\n    assertTrue (userName.length().thatGreaterThan(4).apply(new User("NawaMan")));\n')
 		]));
+var author$project$Features$Lens$exampleWriteLens = A2(
+	author$project$Feature$Example,
+	'Change property with lens',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Accesses and lenses compose. In this example, when use sub-lens to change, it change all the way up.')
+				])),
+			author$project$Feature$codeShow('\n@Struct\nvoid Employee(\n        String firstName,\n        String lastName) {}\n        \n@Struct\nvoid Department(\n        String   name,\n        Employee manager) {};\n\n    ...\n    val employee   = new Employee("John", "Doe");\n    val department = new Department("Sales", employee);\n    assertEquals(\n            "Department[name: Sales, manager: Employee[firstName: John, lastName: Doe]]",\n            department.toString());\n    \n    // Change the first name of the manager\n    val department2 = theDepartment.manager.firstName.changeTo("Jonathan").apply(department);\n    assertEquals(\n            "Department[name: Sales, manager: Employee[firstName: Jonathan, lastName: Doe]]",\n            department2.toString());\n    ...\n')
+		]));
+var author$project$Features$Lens$title = 'Access and Lens';
 var author$project$Features$Lens$featLens = A3(
 	author$project$Feature$Feature,
-	'Lens',
-	'\n    Lenses are functions to access to fields of an object -- both read and write.\n    As functions, they can composed with others.\n    ',
+	author$project$Features$Lens$title,
+	author$project$Features$Lens$description,
+	_List_fromArray(
+		[author$project$Features$Lens$exampleReadAccess, author$project$Features$Lens$exampleWriteLens]));
+var author$project$Features$ListMap$description = '\n      Functional lazy-evaluated list and map.\n      This allows access functional methods right with list and map.\n      ';
+var author$project$Features$ListMap$firstExample = A2(
+	author$project$Feature$Example,
+	'ToBeAdded',
 	_List_fromArray(
 		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
 			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('Access (read-only part of Lens) is a function to get field value of an object.')
-					])),
-				author$project$Feature$codeShow('\npublic class User {\n    private String name;\n      \n    public User(String name) {\n        this.name = name;\n    }\n    public String name() {\n        return name;\n    }\n    public String toString() {\n        return "User(" + name + ")";\n    }\n}\n\n    ...\n    User user1 = new User("John");\n    \n    StringAccess<User> userName = User::name;\n      \n    // Use lens to get the field value\n    assertEquals("John", userName.apply(user1));\n      \n    // StringAccess is composed to length() and thatGreaterThan(...)\n    assertFalse(userName.length().thatGreaterThan(4).apply(user1));\n    assertTrue (userName.length().thatGreaterThan(4).apply(new User("NawaMan")));\n')
-			])
+				[
+					elm$html$Html$text('To be added')
+				])),
+			author$project$Feature$codeShow('\n// To be added\n')
 		]));
+var author$project$Features$ListMap$title = 'Functional List and Map';
 var author$project$Features$ListMap$featListMap = A3(
 	author$project$Feature$Feature,
-	'Functional List and Map',
-	'\n  Functional lazy-evaluated list and map.\n  This allows access functional methods right with list and map.\n  ',
+	author$project$Features$ListMap$title,
+	author$project$Features$ListMap$description,
+	_List_fromArray(
+		[author$project$Features$ListMap$firstExample]));
+var author$project$Features$PipeablePipeLine$description = '\n        Pipeable makes any data pipeable through a function flow.\n        PipeLine lets functions be composed together to be used as one function.\n      ';
+var author$project$Features$PipeablePipeLine$examplePipe = A2(
+	author$project$Feature$Example,
+	'Pipe object through functions',
 	_List_fromArray(
 		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
 			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('To be added')
-					])),
-				author$project$Feature$codeShow('\n// To be added\n')
-			])
+				[
+					elm$html$Html$text('Pipe any object thought functions')
+				])),
+			author$project$Feature$codeShow('\nimport static functionalj.functions.StrFuncs.replaceAll;\n\n...\n      val str = Pipeable.of("Hello world.").pipe(\n                  String::toUpperCase,\n                  replaceAll("\\.", "!!")\n            );\n      assertEquals("HELLO WORLD!!", str);\n...\n')
 		]));
+var author$project$Features$PipeablePipeLine$examplePipeLine = A2(
+	author$project$Feature$Example,
+	'PipeLine can be created in advance',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('')
+				])),
+			author$project$Feature$codeShow('\nvar readFile = PipeLine\n      .of  (String.class)\n      .then(Paths ::get)\n      .then(Files ::readAllBytes)\n      .then(String::new)\n      .thenReturn();\n...\nvar fileNames = FuncList.of("file1.txt", "file2.txt");\nvar fileContent = fileNames.map(readFile);\n')
+		]));
+var author$project$Features$PipeablePipeLine$title = 'Pipeable and PipeLine';
 var author$project$Features$PipeablePipeLine$featPipeablePipeLine = A3(
 	author$project$Feature$Feature,
-	'Pipeable and PipeLine',
-	'\n        Pipeable makes any data pipeable through a function flow.\n        PipeLine lets functions be composed together to be used as one function.\n        ',
+	author$project$Features$PipeablePipeLine$title,
+	author$project$Features$PipeablePipeLine$description,
+	_List_fromArray(
+		[author$project$Features$PipeablePipeLine$examplePipe, author$project$Features$PipeablePipeLine$examplePipeLine]));
+var author$project$Features$Ref$description = '\n        Ref (reference) enables instance-base context and dependency injection as oppose to class/annotation-base one.\n        This is very suitable to functional programming.\n      ';
+var author$project$Features$Ref$firstExample = A2(
+	author$project$Feature$Example,
+	'ToBeAdded',
 	_List_fromArray(
 		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
 			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('Access (read-only part of Lens) is a function to get field value of an object.')
-					])),
-				author$project$Feature$codeShow('\nimport static functionalj.functions.StrFuncs.replaceAll;\n\n...\n      val str = Pipeable.of("Hello world.").pipe(\n                  String::toUpperCase,\n                  replaceAll("\\.", "!!")\n            );\n      assertEquals("HELLO WORLD!!", str);\n...\n')
-			])
+				[
+					elm$html$Html$text('To be added')
+				])),
+			author$project$Feature$codeShow('\n// To be added\n')
 		]));
+var author$project$Features$Ref$title = 'Ref - Dependency Injection';
 var author$project$Features$Ref$featRef = A3(
 	author$project$Feature$Feature,
-	'Ref - Dependency Injection',
-	'\n        Ref (reference) enables instance-base context and dependency injection as oppose to class/annotation-base one.\n        This is very suitable to functional programming.\n        ',
+	author$project$Features$Ref$title,
+	author$project$Features$Ref$description,
+	_List_fromArray(
+		[author$project$Features$Ref$firstExample]));
+var author$project$Features$Result$description = '\n        Boxed object similar to MayBe or Either types.\n        Result is designed to work well with Java exception.\n      ';
+var author$project$Features$Result$firstExample = A2(
+	author$project$Feature$Example,
+	'ToBeAdded',
 	_List_fromArray(
 		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
 			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('To be added')
-					])),
-				author$project$Feature$codeShow('\n    // To be added\n    ')
-			])
+				[
+					elm$html$Html$text('To be added')
+				])),
+			author$project$Feature$codeShow('\n// To be added\n')
 		]));
+var author$project$Features$Result$title = 'Result';
 var author$project$Features$Result$featResult = A3(
 	author$project$Feature$Feature,
-	'Result',
-	'\n        Boxed object similar to MayBe or Either types.\n        Result is designed to work well with Java exception.\n        ',
+	author$project$Features$Result$title,
+	author$project$Features$Result$description,
+	_List_fromArray(
+		[author$project$Features$Result$firstExample]));
+var author$project$Features$RuleTypes$description = '\n      Rule types make it easy to create type with constrains to limit variant of data.\n      ';
+var author$project$Features$RuleTypes$firstExample = A2(
+	author$project$Feature$Example,
+	'ToBeAdded',
 	_List_fromArray(
 		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
 			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('To be added')
-					])),
-				author$project$Feature$codeShow('\n    // To be added\n    ')
-			])
+				[
+					elm$html$Html$text('To be added')
+				])),
+			author$project$Feature$codeShow('\n// To be added\n')
 		]));
+var author$project$Features$RuleTypes$title = 'Rule Types';
 var author$project$Features$RuleTypes$featRuleTypes = A3(
 	author$project$Feature$Feature,
-	'Rule Types',
-	'\n        Rule types make it easy to create type with constrains to limit variant of data.\n        ',
+	author$project$Features$RuleTypes$title,
+	author$project$Features$RuleTypes$description,
+	_List_fromArray(
+		[author$project$Features$RuleTypes$firstExample]));
+var author$project$Features$SideEffect$description = '\n      DeferAction, Promise and IO help manage side effects in functional-style way.\n      ';
+var author$project$Features$SideEffect$firstExample = A2(
+	author$project$Feature$Example,
+	'ToBeAdded',
 	_List_fromArray(
 		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
 			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('To be added')
-					])),
-				author$project$Feature$codeShow('\n    // To be added\n    ')
-			])
+				[
+					elm$html$Html$text('To be added')
+				])),
+			author$project$Feature$codeShow('\n// To be added\n')
 		]));
+var author$project$Features$SideEffect$title = 'Side Effect';
 var author$project$Features$SideEffect$featSideEffect = A3(
 	author$project$Feature$Feature,
-	'Side Effect',
-	'\n        DeferAction, Promise and IO help manage side effects in functional-style way.\n        ',
+	author$project$Features$SideEffect$title,
+	author$project$Features$SideEffect$description,
+	_List_fromArray(
+		[author$project$Features$SideEffect$firstExample]));
+var author$project$Features$Store$description = '\n      Simple object helps manage changes for immutable data.\n      ';
+var author$project$Features$Store$firstExample = A2(
+	author$project$Feature$Example,
+	'ToBeAdded',
 	_List_fromArray(
 		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
 			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('To be added')
-					])),
-				author$project$Feature$codeShow('\n    // To be added\n    ')
-			])
+				[
+					elm$html$Html$text('To be added')
+				])),
+			author$project$Feature$codeShow('\n// To be added\n')
 		]));
+var author$project$Features$Store$title = 'Store';
 var author$project$Features$Store$featStore = A3(
 	author$project$Feature$Feature,
-	'Store',
-	'\n        Simple object helps manage changes for immutable data.\n        ',
+	author$project$Features$Store$title,
+	author$project$Features$Store$description,
+	_List_fromArray(
+		[author$project$Features$Store$firstExample]));
+var author$project$Features$StreamIterator$description = '\n      Additional functionalities to Streams and Iterator.\n      ';
+var author$project$Features$StreamIterator$firstExample = A2(
+	author$project$Feature$Example,
+	'ToBeAdded',
 	_List_fromArray(
 		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
 			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('To be added')
-					])),
-				author$project$Feature$codeShow('\n    // To be added\n    ')
-			])
+				[
+					elm$html$Html$text('To be added')
+				])),
+			author$project$Feature$codeShow('\n// To be added\n')
 		]));
+var author$project$Features$StreamIterator$title = 'Stream and Iterator';
 var author$project$Features$StreamIterator$featStreamIterator = A3(
 	author$project$Feature$Feature,
-	'Stream and Iterator',
-	'\n        Additional functionalities to Streams and Iterator.\n        ',
+	author$project$Features$StreamIterator$title,
+	author$project$Features$StreamIterator$description,
+	_List_fromArray(
+		[author$project$Features$StreamIterator$firstExample]));
+var author$project$Features$StructTypes$description = '\n      Struct let us create custom immutable data type.\n      These generated types has automatically generated lens, exhaust builder and quick validatiion.\n      ';
+var author$project$Features$StructTypes$firstExample = A2(
+	author$project$Feature$Example,
+	'ToBeAdded',
 	_List_fromArray(
 		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
 			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('To be added')
-					])),
-				author$project$Feature$codeShow('\n    // To be added\n    ')
-			])
+				[
+					elm$html$Html$text('To be added')
+				])),
+			author$project$Feature$codeShow('\n// To be added\n')
 		]));
+var author$project$Features$StructTypes$title = 'Struct - Immutable Data';
 var author$project$Features$StructTypes$featStructTypes = A3(
 	author$project$Feature$Feature,
-	'Struct - Immutable Data',
-	'\n        Struct let us create custom immutable data type.\n        These generated types has automatically generated lens, exhaust builder and quick validatiion.\n        ',
+	author$project$Features$StructTypes$title,
+	author$project$Features$StructTypes$description,
 	_List_fromArray(
-		[
-			_List_fromArray(
-			[
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('To be added')
-					])),
-				author$project$Feature$codeShow('\n    // To be added\n    ')
-			])
-		]));
+		[author$project$Features$StructTypes$firstExample]));
 var author$project$Features$features = _List_fromArray(
 	[author$project$Features$Functions$featFunctions, author$project$Features$Lens$featLens, author$project$Features$PipeablePipeLine$featPipeablePipeLine, author$project$Features$ListMap$featListMap, author$project$Features$StreamIterator$featStreamIterator, author$project$Features$Result$featResult, author$project$Features$AlgebraicDataTypes$featAlgebraicDataTypes, author$project$Features$RuleTypes$featRuleTypes, author$project$Features$StructTypes$featStructTypes, author$project$Features$Ref$featRef, author$project$Features$SideEffect$featSideEffect, author$project$Features$Store$featStore]);
 var author$project$Msg$SelectFeature = function (a) {
@@ -7847,6 +7938,7 @@ var elm$core$Platform$Sub$none = elm$core$Platform$Sub$batch(_List_Nil);
 var author$project$Main$subscriptions = function (model) {
 	return elm$core$Platform$Sub$none;
 };
+var author$project$Main$Maven = {$: 'Maven'};
 var elm$core$List$drop = F2(
 	function (n, list) {
 		drop:
@@ -7909,21 +8001,34 @@ var elm$core$Platform$Cmd$batch = _Platform_batch;
 var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
 var author$project$Main$update = F2(
 	function (msg, model) {
-		if (msg.$ === 'SelectFeature') {
-			var index = msg.a;
-			var newFeature = author$project$Main$featureAt(index);
-			return _Utils_Tuple2(
-				_Utils_update(
-					model,
-					{feature: newFeature}),
-				author$project$Main$requestRandomExample(newFeature));
-		} else {
-			var index = msg.a;
-			return _Utils_Tuple2(
-				_Utils_update(
-					model,
-					{exampleIndex: index}),
-				elm$core$Platform$Cmd$none);
+		switch (msg.$) {
+			case 'SelectFeature':
+				var index = msg.a;
+				var newFeature = author$project$Main$featureAt(index);
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{feature: newFeature}),
+					author$project$Main$requestRandomExample(newFeature));
+			case 'SelectExample':
+				var index = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{exampleIndex: index}),
+					elm$core$Platform$Cmd$none);
+			case 'ChooseGradle':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{usage: author$project$Main$Gradle}),
+					elm$core$Platform$Cmd$none);
+			default:
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{usage: author$project$Main$Maven}),
+					elm$core$Platform$Cmd$none);
 		}
 	});
 var author$project$Main$firstSection = A2(
@@ -7965,7 +8070,18 @@ var author$project$Main$sectionBottom = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('© 2017-2019 NawaMan\'s FunctionalJ — FunctionalJ is Open Source, Apache 2 License')
+					elm$html$Html$text('© 2017-2019 NawaMan\'s FunctionalJ — FunctionalJ is Open Source, '),
+					A2(
+					elm$html$Html$a,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$href('https://github.com/NawaMan/FunctionalJ/blob/master/LICENSE')
+						]),
+					_List_fromArray(
+						[
+							elm$html$Html$text('MIT License')
+						])),
+					elm$html$Html$text('.')
 				])),
 			A2(
 			elm$html$Html$p,
@@ -7985,6 +8101,21 @@ var author$project$Main$sectionBottom = A2(
 						]))
 				]))
 		]));
+var author$project$Feature$emptyExample = A2(
+	author$project$Feature$Example,
+	'',
+	_List_fromArray(
+		[
+			elm$html$Html$text('')
+		]));
+var author$project$Feature$exampleTitleAt = F2(
+	function (index, examples) {
+		return A2(
+			elm$core$Maybe$withDefault,
+			author$project$Feature$emptyExample,
+			elm$core$List$head(
+				A2(elm$core$List$drop, index, examples))).title;
+	});
 var author$project$Features$markSelect = F4(
 	function (index, selected, prefix, text) {
 		return _Utils_eq(index, selected) ? (prefix + (' ' + text)) : prefix;
@@ -8006,8 +8137,9 @@ var elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		elm$json$Json$Decode$succeed(msg));
 };
-var author$project$Features$exampleDot = F2(
-	function (index, selected) {
+var author$project$Features$exampleDot = F3(
+	function (index, selected, examples) {
+		var title = A2(author$project$Feature$exampleTitleAt, index, examples);
 		return A2(
 			elm$html$Html$span,
 			_List_fromArray(
@@ -8019,11 +8151,30 @@ var author$project$Features$exampleDot = F2(
 				]),
 			_List_fromArray(
 				[
-					elm$html$Html$text('*')
+					A2(
+					elm$html$Html$span,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$class('tooltip')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$span,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$class('tooltiptext')
+								]),
+							_List_fromArray(
+								[
+									elm$html$Html$text(title)
+								]))
+						]))
 				]));
 	});
 var author$project$Features$exampleSelector = F2(
-	function (selected, all) {
+	function (selected, examples) {
+		var all = elm$core$List$length(examples);
 		return A2(
 			elm$html$Html$div,
 			_List_fromArray(
@@ -8033,45 +8184,54 @@ var author$project$Features$exampleSelector = F2(
 			A2(
 				elm$core$List$map,
 				function (index) {
-					return A2(author$project$Features$exampleDot, index, selected);
+					return A3(author$project$Features$exampleDot, index, selected, examples);
 				},
 				A2(elm$core$List$range, 0, all - 1)));
 	});
-var author$project$Feature$exampleAt = F2(
+var author$project$Feature$exampleBodyAt = F2(
 	function (index, examples) {
 		return A2(
 			elm$html$Html$div,
 			_List_Nil,
 			A2(
 				elm$core$Maybe$withDefault,
-				_List_fromArray(
-					[
-						elm$html$Html$text('')
-					]),
+				author$project$Feature$emptyExample,
 				elm$core$List$head(
-					A2(elm$core$List$drop, index, examples))));
+					A2(elm$core$List$drop, index, examples))).body);
 	});
 var author$project$Features$exampleView = F2(
 	function (feature, index) {
-		return A2(author$project$Feature$exampleAt, index, feature.examples);
+		return A2(author$project$Feature$exampleBodyAt, index, feature.examples);
 	});
 var elm$html$Html$h1 = _VirtualDom_node('h1');
+var elm$html$Html$h3 = _VirtualDom_node('h3');
 var author$project$Features$featureExampleView = F2(
 	function (feature, exampleIndex) {
 		return _List_fromArray(
 			[
 				A2(
 				elm$html$Html$h1,
-				_List_Nil,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$class('example-feature-title')
+					]),
 				_List_fromArray(
 					[
 						elm$html$Html$text(feature.title)
 					])),
-				A2(author$project$Features$exampleView, feature, exampleIndex),
+				A2(author$project$Features$exampleSelector, exampleIndex, feature.examples),
 				A2(
-				author$project$Features$exampleSelector,
-				exampleIndex,
-				elm$core$List$length(feature.examples))
+				elm$html$Html$h3,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$class('example-example-title')
+					]),
+				_List_fromArray(
+					[
+						elm$html$Html$text(
+						A2(author$project$Feature$exampleTitleAt, exampleIndex, feature.examples))
+					])),
+				A2(author$project$Features$exampleView, feature, exampleIndex)
 			]);
 	});
 var author$project$Main$sectionExamples = function (model) {
@@ -8163,7 +8323,7 @@ var author$project$Main$sectionFeatures = function (model) {
 					]),
 				_List_fromArray(
 					[
-						elm$html$Html$text('Click on any feature to see example below.')
+						elm$html$Html$text('Click on any feature to see examples below.')
 					]))
 			]));
 };
@@ -8221,25 +8381,140 @@ var author$project$Main$useGradle = A2(
 				[
 					elm$html$Html$text('and the dependencies to FunctionalJ.')
 				])),
-			author$project$CodeBlock$codeBlock('compile \'functionalj:functionalj-all:0.1.60.0\' // Please lookup for the latest version.')
-		]));
-var author$project$Main$sectionUsages = A2(
-	elm$html$Html$div,
-	_List_fromArray(
-		[
-			elm$html$Html$Attributes$class('section section-usages')
-		]),
-	_List_fromArray(
-		[
+			author$project$CodeBlock$codeBlock('compile \'functionalj:functionalj-all:0.1.60.0\' // Please lookup for the latest version.'),
 			A2(
-			elm$html$Html$h1,
+			elm$html$Html$p,
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('Usages')
-				])),
-			author$project$Main$useGradle
+					A2(
+					elm$html$Html$a,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$href('https://github.com/NawaMan/UseFunctionalJGradle')
+						]),
+					_List_fromArray(
+						[
+							elm$html$Html$text('UseFunctionalJGradle')
+						])),
+					elm$html$Html$text(' is an example project that use FunctionalJ. You can use that as a starting point.')
+				]))
 		]));
+var author$project$Main$useMaven = A2(
+	elm$html$Html$div,
+	_List_Nil,
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('This project binary is published on '),
+					A2(
+					elm$html$Html$a,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$href('https://github.com/NawaMan/nawaman-maven-repository')
+						]),
+					_List_fromArray(
+						[
+							elm$html$Html$text('my maven repo')
+						])),
+					elm$html$Html$text(' hosted on GitHub. So to use FunctionalJ you will need to ...')
+				])),
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Adding the required maven repository (hosted by github).')
+				])),
+			author$project$CodeBlock$codeBlock('\n<repository>\n    <id>Nullable-mvn-repo</id>\n    <url>https://raw.githubusercontent.com/nawaman/nawaman-maven-repository/master/</url>\n    <snapshots>\n        <enabled>true</enabled>\n        <updatePolicy>always</updatePolicy>\n    </snapshots>\n</repository>\n        '),
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('and the dependencies to FunctionalJ.')
+				])),
+			author$project$CodeBlock$codeBlock('\n    <dependency>\n        <groupId>functionalj</groupId>\n        <artifactId>functionalj-all</artifactId>\n        <version>0.1.60.0</version>\n    </dependency>\n        '),
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$a,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$href('https://github.com/NawaMan/UseFunctionalJMaven')
+						]),
+					_List_fromArray(
+						[
+							elm$html$Html$text('UseFunctionalJMaven')
+						])),
+					elm$html$Html$text(' is an example project that use FunctionalJ. You can use that as a starting point.')
+				]))
+		]));
+var author$project$Msg$ChooseGradle = {$: 'ChooseGradle'};
+var author$project$Msg$ChooseMaven = {$: 'ChooseMaven'};
+var elm$html$Html$button = _VirtualDom_node('button');
+var author$project$Main$sectionUsages = function (model) {
+	return A2(
+		elm$html$Html$div,
+		_List_fromArray(
+			[
+				elm$html$Html$Attributes$class('section section-usages')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				elm$html$Html$h1,
+				_List_Nil,
+				_List_fromArray(
+					[
+						elm$html$Html$text('Usages')
+					])),
+				A2(
+				elm$html$Html$div,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$class('usage-selector')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						elm$html$Html$button,
+						_List_fromArray(
+							[
+								elm$html$Html$Events$onClick(author$project$Msg$ChooseGradle)
+							]),
+						_List_fromArray(
+							[
+								elm$html$Html$text('GRADLE')
+							])),
+						A2(
+						elm$html$Html$button,
+						_List_fromArray(
+							[
+								elm$html$Html$Events$onClick(author$project$Msg$ChooseMaven)
+							]),
+						_List_fromArray(
+							[
+								elm$html$Html$text('MAVEN')
+							]))
+					])),
+				function () {
+				var _n0 = model.usage;
+				if (_n0.$ === 'Gradle') {
+					return author$project$Main$useGradle;
+				} else {
+					return author$project$Main$useMaven;
+				}
+			}()
+			]));
+};
 var elm$html$Html$img = _VirtualDom_node('img');
 var elm$html$Html$Attributes$id = elm$html$Html$Attributes$stringProperty('id');
 var elm$html$Html$Attributes$src = function (url) {
@@ -8297,7 +8572,7 @@ var author$project$Main$view = function (model) {
 						author$project$Main$sectionIntroduction,
 						author$project$Main$sectionFeatures(model),
 						author$project$Main$sectionExamples(model),
-						author$project$Main$sectionUsages,
+						author$project$Main$sectionUsages(model),
 						author$project$Main$sectionBottom
 					]))
 			]));

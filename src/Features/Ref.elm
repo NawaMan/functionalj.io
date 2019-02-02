@@ -7,18 +7,26 @@ import Html.Attributes exposing (class, id)
 
 
 featRef =
-    Feature "Ref - Dependency Injection"
-        """
+    Feature title
+        description
+        [ firstExample ]
+
+
+title =
+    "Ref - Dependency Injection"
+
+
+description =
+    """
         Ref (reference) enables instance-base context and dependency injection as oppose to class/annotation-base one.
         This is very suitable to functional programming.
-        """
-        [ -- 0
-          [ p []
-                [ text "To be added"
-                ]
-          , codeShow """
-    // To be added
-    """
-          ]
-        ]
+      """
 
+
+firstExample =
+    Example "ToBeAdded"
+        [ p [] [ text "To be added" ]
+        , codeShow """
+// To be added
+"""
+        ]

@@ -7,17 +7,25 @@ import Html.Attributes exposing (class, id)
 
 
 featRuleTypes =
-    Feature "Rule Types"
-        """
-        Rule types make it easy to create type with constrains to limit variant of data.
-        """
-        [ -- 0
-          [ p []
-                [ text "To be added"
-                ]
-          , codeShow """
-    // To be added
-    """
-          ]
-        ]
+    Feature title
+        description
+        [ firstExample ]
 
+
+title =
+    "Rule Types"
+
+
+description =
+    """
+      Rule types make it easy to create type with constrains to limit variant of data.
+      """
+
+
+firstExample =
+    Example "ToBeAdded"
+        [ p [] [ text "To be added" ]
+        , codeShow """
+// To be added
+"""
+        ]

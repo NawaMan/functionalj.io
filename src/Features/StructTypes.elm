@@ -7,18 +7,26 @@ import Html.Attributes exposing (class, id)
 
 
 featStructTypes =
-    Feature "Struct - Immutable Data"
-        """
-        Struct let us create custom immutable data type.
-        These generated types has automatically generated lens, exhaust builder and quick validatiion.
-        """
-        [ -- 0
-          [ p []
-                [ text "To be added"
-                ]
-          , codeShow """
-    // To be added
-    """
-          ]
-        ]
+    Feature title
+        description
+        [ firstExample ]
 
+
+title =
+    "Struct - Immutable Data"
+
+
+description =
+    """
+      Struct let us create custom immutable data type.
+      These generated types has automatically generated lens, exhaust builder and quick validatiion.
+      """
+
+
+firstExample =
+    Example "ToBeAdded"
+        [ p [] [ text "To be added" ]
+        , codeShow """
+// To be added
+"""
+        ]

@@ -2,18 +2,15 @@ module Features exposing (exampleDot, exampleSelector, exampleView, featureExamp
 
 import CodeBlock exposing (codeBlock)
 import Feature exposing (..)
-import Features.AlgebraicDataTypes exposing (..)
 import Features.Functions exposing (..)
 import Features.Lens exposing (..)
 import Features.ListMap exposing (..)
+import Features.ModelingWithTypes exposing (..)
 import Features.PipeablePipeLine exposing (..)
 import Features.Ref exposing (..)
 import Features.Result exposing (..)
-import Features.RuleTypes exposing (..)
 import Features.SideEffect exposing (..)
-import Features.Store exposing (..)
 import Features.StreamIterator exposing (..)
-import Features.StructTypes exposing (..)
 import Html exposing (Html, button, code, div, h1, h3, p, span, text)
 import Html.Attributes exposing (class, id, property)
 import Html.Events exposing (onClick)
@@ -103,10 +100,7 @@ features =
     , featListMap
     , featStreamIterator
     , featResult
-    , featAlgebraicDataTypes
-    , featRuleTypes
-    , featStructTypes
+    , featModelingWithTypes
     , featRef
     , featSideEffect
-    , featStore
     ]

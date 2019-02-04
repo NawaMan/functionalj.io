@@ -7497,28 +7497,6 @@ var author$project$Features$Functions$featFunctions = A3(
 		[author$project$Features$Functions$exampleMethodReference, author$project$Features$Functions$exampleWhenAbsent, author$project$Features$Functions$exampleSafely]));
 var author$project$Features$intiFeature = author$project$Features$Functions$featFunctions;
 var author$project$Main$Gradle = {$: 'Gradle'};
-var author$project$Features$AlgebraicDataTypes$description = '\n        Struct (product) and Choice (sum) types together work as algebraic data types\n          make it easier to make illegal data unrepresentable.\n      ';
-var author$project$Features$AlgebraicDataTypes$firstExample = A2(
-	author$project$Feature$Example,
-	'ToBeAdded',
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('To be added')
-				])),
-			author$project$Feature$codeShow('\n// To be added\n')
-		]));
-var author$project$Features$AlgebraicDataTypes$title = 'Algebraic Data Types';
-var author$project$Features$AlgebraicDataTypes$featAlgebraicDataTypes = A3(
-	author$project$Feature$Feature,
-	author$project$Features$AlgebraicDataTypes$title,
-	author$project$Features$AlgebraicDataTypes$description,
-	_List_fromArray(
-		[author$project$Features$AlgebraicDataTypes$firstExample]));
 var author$project$Features$Lens$description = '\n    Lenses are functions to access to fields of an object -- both read and write.\n    As functions, they can composed with others.\n      ';
 var author$project$Features$Lens$exampleReadAccess = A2(
 	author$project$Feature$Example,
@@ -7591,6 +7569,112 @@ var author$project$Features$ListMap$featListMap = A3(
 	author$project$Features$ListMap$description,
 	_List_fromArray(
 		[author$project$Features$ListMap$exampleFunctionalMethods, author$project$Features$ListMap$exampleImmutableModification]));
+var author$project$Features$ModelingWithTypes$description = '\n        Struct (product), Choice (sum) and Rule types together make it easier to make illegal data unrepresentable.\n        Struct with lens, exhaust builder and quick validatiion.\n        Choice comes with pattern matching-like method.\n        Rule types add contrains to existing classes.\n      ';
+var author$project$Features$ModelingWithTypes$exampleChangeLens = A2(
+	author$project$Feature$Example,
+	'Change lens',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Change lens can immutably modify the property of an object deep in the object tree')
+				])),
+			author$project$Feature$codeShow('\n@Struct\nvoid Employee(\n        String firstName,\n        String lastName) {}\n        \n@Struct\nvoid Department(\n        String   name,\n        Employee manager) {}\n\n...\nval employee   = new Employee("John", "Doe");\nval department = new Department("Sales", employee);\nassertEquals(\n        "Department[name: Sales, manager: Employee[firstName: John, lastName: Doe]]",\n        department.toString());\n\n// Change lens    vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\nval department2 = theDepartment.manager.firstName.changeTo("Jonathan").apply(department);\nassertEquals(\n        "Department[name: Sales, manager: Employee[firstName: Jonathan, lastName: Doe]]",\n        department2.toString());\n')
+		]));
+var author$project$Features$ModelingWithTypes$exampleChoiceType = A2(
+	author$project$Feature$Example,
+	'Choice type',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Choice type allow ad-hoc variant of value. It also comes with pattern matching.')
+				])),
+			author$project$Feature$codeShow('\n@Choice\ninterface LoginStatusSpec {\n    void Login(String userName);\n    void Logout();\n}\n\n...\nval f = Func.f((LoginStatus status) -> {\n    return status.match()\n            .login (s -> "User: " + s.userName()) \n            .logout("Guess");\n});\n\nLoginStatus status1 = LoginStatus.Login("root");\nLoginStatus status2 = LoginStatus.Logout();\n\nassertEquals("User: root", f.apply(status1));\nassertEquals("Guess",      f.apply(status2));\n')
+		]));
+var author$project$Features$ModelingWithTypes$exampleExhaustiveBuilder = A2(
+	author$project$Feature$Example,
+	'Exhaustive Builder',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Struct comes with an exhaustive builder.')
+				])),
+			author$project$Feature$codeShow('\n@Struct\nvoid Person(\n        String firstName,\n        @Nullable\n        String middleName,\n        String lastName,\n        @DefaultTo(DefaultValue.MINUS_ONE)\n        Integer age) {}\n\n...\nval person = new Person.Builder()\n        .firstName ("John")\n        .middleName("F")\n        .lastName  ("Kookies")\n        .build();\nassertEquals("Person[firstName: John, middleName: F, lastName: Kookies, age: -1]", person.toString());\n')
+		]));
+var author$project$Features$ModelingWithTypes$exampleSimpleValidation = A2(
+	author$project$Feature$Example,
+	'Struct validation',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Struct can have a validation to ensure valid values.')
+				])),
+			author$project$Feature$codeShow('\n@Struct\nstatic String Circle(int x, int y, int radius) {\n    return radius > 0 ? null : "Radius cannot be less than zero: " + radius;\n}\n\n...\nval validCircle = new Circle2(10, 10, 10);\nassertEquals("Circle2[x: 10, y: 10, radius: 10]", validCircle.toString());\n\ntry {\n    new Circle2(10, 10, -10);\n    fail("Except a ValidationException.");\n} catch (ValidationException e) {\n    assertEquals(\n            "functionalj.result.ValidationException: Radius cannot be less than zero: -10", \n            e.toString());\n}\n')
+		]));
+var author$project$Features$ModelingWithTypes$exampleStruct = A2(
+	author$project$Feature$Example,
+	'Struct for immutable data types',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('@Struct is used to create an immutable data type.')
+				])),
+			author$project$Feature$codeShow('\n@Struct\nvoid Person(\n        String firstName,\n        @Nullable\n        String middleName,\n        String lastName,\n        @DefaultTo(DefaultValue.MINUS_ONE)\n        Integer age) {}\n\n...\nval person = new Person("John", "Doe");\n// Access the field\nassertEquals("John", person.firstName);\nassertEquals("Doe",  person.lastName);\n// Access the field using method\nassertEquals("John", person.firstName());\nassertEquals("Doe",  person.lastName());\n// Access the field using lens (static import Person.thePerson)\nassertEquals("John", thePerson.firstName.apply(person));\nassertEquals("Doe",  thePerson.lastName.apply(person));\n// toString() - notice default value for the absent fields.\nassertEquals("Person[firstName: John, middleName: null, lastName: Doe, age: -1]", person.toString());\n')
+		]));
+var author$project$Features$ModelingWithTypes$exampleStructWithLens = A2(
+	author$project$Feature$Example,
+	'Lens for Struct',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('A Struct type come with lens -- function to access both read/change the object properties.')
+				])),
+			author$project$Feature$codeShow('\n@Struct\nvoid Employee(\n        String firstName,\n        String lastName) {}\n        \n@Struct\nvoid Department(\n        String   name,\n        Employee manager) {}\n\n...\nval departments = FuncList.of(\n        new Department("Sales",   new Employee("John", "Doe")),\n        new Department("R&D",     new Employee("John", "Jackson")),\n        new Department("Support", new Employee("Jack", "Johnson"))\n);\n// Read lens                                           \nassertEquals("[Doe, Jackson, Johnson]",\n// Read lens                 vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n             departments.map(theDepartment.manager.lastName).toString());\n')
+		]));
+var author$project$Features$ModelingWithTypes$exampleValidateEmailRuleType = A2(
+	author$project$Feature$Example,
+	'Valid Email',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Valid email is a string that fit a certain pattern.')
+				])),
+			author$project$Feature$codeShow('\n@Rule static String Email(String emailStr) {\n    return (emailStr.matches("^[^@]+@[^.]+\\..{1,3}$"))\n            ? null\n            : ("Not a valid email address: " + emailStr);\n}\n\nassertEquals("Email:{ Value: name@email.com }",                               "" + Email.from("name@email.com"));\nassertEquals("Email:{ Invalid: Not a valid email address: name_email.net }",  "" + Email.from("name_email.net"));\n')
+		]));
+var author$project$Features$ModelingWithTypes$title = 'Modeling with Types';
+var author$project$Features$ModelingWithTypes$featModelingWithTypes = A3(
+	author$project$Feature$Feature,
+	author$project$Features$ModelingWithTypes$title,
+	author$project$Features$ModelingWithTypes$description,
+	_List_fromArray(
+		[author$project$Features$ModelingWithTypes$exampleStruct, author$project$Features$ModelingWithTypes$exampleStructWithLens, author$project$Features$ModelingWithTypes$exampleChangeLens, author$project$Features$ModelingWithTypes$exampleExhaustiveBuilder, author$project$Features$ModelingWithTypes$exampleSimpleValidation, author$project$Features$ModelingWithTypes$exampleChoiceType, author$project$Features$ModelingWithTypes$exampleValidateEmailRuleType]));
 var author$project$Features$PipeablePipeLine$description = '\n        Pipeable makes any data pipeable through a function flow.\n        PipeLine lets functions be composed together to be used as one function.\n      ';
 var author$project$Features$PipeablePipeLine$examplePipe = A2(
 	author$project$Feature$Example,
@@ -7604,7 +7688,7 @@ var author$project$Features$PipeablePipeLine$examplePipe = A2(
 				[
 					elm$html$Html$text('Pipe any object thought functions')
 				])),
-			author$project$Feature$codeShow('\nimport static functionalj.functions.StrFuncs.replaceAll;\n\n...\n      val str = Pipeable.of("Hello world.").pipe(\n                  String::toUpperCase,\n                  replaceAll("\\.", "!!")\n            );\n      assertEquals("HELLO WORLD!!", str);\n...\n')
+			author$project$Feature$codeShow('\nimport static functionalj.functions.StrFuncs.replaceAll;\n\n...\n      val str = Pipeable.of("Hello world.").pipe(\n                  String::toUpperCase,\n                  replaceAll("\\\\.", "!!")\n            );\n      assertEquals("HELLO WORLD!!", str);\n')
 		]));
 var author$project$Features$PipeablePipeLine$examplePipeLine = A2(
 	author$project$Feature$Example,
@@ -7616,9 +7700,23 @@ var author$project$Features$PipeablePipeLine$examplePipeLine = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('')
+					elm$html$Html$text('PipeLine can be created in advance from functions. This allow point-free style of coding.')
 				])),
-			author$project$Feature$codeShow('\nvar readFile = PipeLine\n      .of  (String.class)\n      .then(Paths ::get)\n      .then(Files ::readAllBytes)\n      .then(String::new)\n      .thenReturn();\n...\nvar fileNames = FuncList.of("file1.txt", "file2.txt");\nvar fileContent = fileNames.map(readFile);\n')
+			author$project$Feature$codeShow('\nval readFile = PipeLine\n        .of  (String.class)\n        .then(Paths ::get)\n        .then(Files ::readAllBytes)\n        .then(String::new)\n        .thenReturn();\n    \nval fileNames = FuncList.of("file1.txt", "file2.txt");\nval fileContents = fileNames.map(readFile);\n// Notice that the error is suppressed.\nassertEquals("[null, null]", fileContents.toString());\n')
+		]));
+var author$project$Features$PipeablePipeLine$examplePipeableClass = A2(
+	author$project$Feature$Example,
+	'Pipeable interface',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Pipeable is an interface. Any class that implements it can pipe.')
+				])),
+			author$project$Feature$codeShow('\npublic class User implements Pipeable<User> {\n    private String name;\n    public User(String name) { this.name = name; }\n    public String name() { return name; }\n    @Override\n    public User __data() throws Exception { return this; }\n}\n\n...\nval user = new User("root");\nassertEquals("User name: root", user.pipe(User::name, "User name: "::concat));\n')
 		]));
 var author$project$Features$PipeablePipeLine$title = 'Pipeable and PipeLine';
 var author$project$Features$PipeablePipeLine$featPipeablePipeLine = A3(
@@ -7626,7 +7724,7 @@ var author$project$Features$PipeablePipeLine$featPipeablePipeLine = A3(
 	author$project$Features$PipeablePipeLine$title,
 	author$project$Features$PipeablePipeLine$description,
 	_List_fromArray(
-		[author$project$Features$PipeablePipeLine$examplePipe, author$project$Features$PipeablePipeLine$examplePipeLine]));
+		[author$project$Features$PipeablePipeLine$examplePipe, author$project$Features$PipeablePipeLine$examplePipeLine, author$project$Features$PipeablePipeLine$examplePipeableClass]));
 var author$project$Features$Ref$description = '\n        Ref (reference) enables instance-base context and dependency injection as oppose to class/annotation-base one.\n        This is very suitable to functional programming.\n      ';
 var author$project$Features$Ref$firstExample = A2(
 	author$project$Feature$Example,
@@ -7699,29 +7797,7 @@ var author$project$Features$Result$featResult = A3(
 	author$project$Features$Result$description,
 	_List_fromArray(
 		[author$project$Features$Result$exampleHandleException, author$project$Features$Result$exampleValidation, author$project$Features$Result$exampleAcceptable]));
-var author$project$Features$RuleTypes$description = '\n      Rule types make it easy to create type with constrains to limit variant of data.\n      ';
-var author$project$Features$RuleTypes$firstExample = A2(
-	author$project$Feature$Example,
-	'ToBeAdded',
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('To be added')
-				])),
-			author$project$Feature$codeShow('\n// To be added\n')
-		]));
-var author$project$Features$RuleTypes$title = 'Rule Types';
-var author$project$Features$RuleTypes$featRuleTypes = A3(
-	author$project$Feature$Feature,
-	author$project$Features$RuleTypes$title,
-	author$project$Features$RuleTypes$description,
-	_List_fromArray(
-		[author$project$Features$RuleTypes$firstExample]));
-var author$project$Features$SideEffect$description = '\n      DeferAction, Promise and IO help manage side effects in functional-style way.\n      ';
+var author$project$Features$SideEffect$description = '\n      DeferAction, Promise and IO help manage side effects in functional-style way.\n      Store helps collecting changes to an immutable object.\n      ';
 var author$project$Features$SideEffect$firstExample = A2(
 	author$project$Feature$Example,
 	'ToBeAdded',
@@ -7743,32 +7819,10 @@ var author$project$Features$SideEffect$featSideEffect = A3(
 	author$project$Features$SideEffect$description,
 	_List_fromArray(
 		[author$project$Features$SideEffect$firstExample]));
-var author$project$Features$Store$description = '\n      Simple object helps manage changes for immutable data.\n      ';
-var author$project$Features$Store$firstExample = A2(
-	author$project$Feature$Example,
-	'ToBeAdded',
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('To be added')
-				])),
-			author$project$Feature$codeShow('\n// To be added\n')
-		]));
-var author$project$Features$Store$title = 'Store';
-var author$project$Features$Store$featStore = A3(
-	author$project$Feature$Feature,
-	author$project$Features$Store$title,
-	author$project$Features$Store$description,
-	_List_fromArray(
-		[author$project$Features$Store$firstExample]));
 var author$project$Features$StreamIterator$description = '\n      Additional functionalities to Streams and Iterator.\n      ';
-var author$project$Features$StreamIterator$firstExample = A2(
+var author$project$Features$StreamIterator$exampleSegment = A2(
 	author$project$Feature$Example,
-	'ToBeAdded',
+	'Segment',
 	_List_fromArray(
 		[
 			A2(
@@ -7776,41 +7830,47 @@ var author$project$Features$StreamIterator$firstExample = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('To be added')
+					elm$html$Html$text('Segmenting stream into chunks - many different ways to do it.')
 				])),
-			author$project$Feature$codeShow('\n// To be added\n')
+			author$project$Feature$codeShow('\nPredicate<Integer> startCondition = i ->(i % 10) == 3;\nPredicate<Integer> endCondition   = i ->(i % 10) == 6;\n\nassertEquals("[[53, 54, 55, 56], " + \n              "[63, 64, 65, 66], " + \n              "[73, 74, 75, 76]]",\n        StreamPlus.infiniteInt()\n        .segment(startCondition, endCondition)\n        .skip   (5)\n        .limit  (3)\n        .map    (StreamPlus::toListString)\n        .toListString());\n')
 		]));
-var author$project$Features$StreamIterator$title = 'Stream and Iterator';
+var author$project$Features$StreamIterator$exampleSplit = A2(
+	author$project$Feature$Example,
+	'Split',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Split stream into group based on predicates.')
+				])),
+			author$project$Feature$codeShow('\nval stream = StreamPlus.infiniteInt().limit(20);\nassertEquals("{"\n        + "FizzBuzz:[0, 15], "\n        + "Buzz:[5, 10], "\n        + "Fizz:[3, 6, 9, 12, 18]}", \n        stream\n            .split(\n                "FizzBuzz", i -> i % (3*5) == 0,\n                "Buzz",     i -> i % 5     == 0,\n                "Fizz",     i -> i % 3     == 0,\n                null)\n            .toString());\n')
+		]));
+var author$project$Features$StreamIterator$exampleZipWith = A2(
+	author$project$Feature$Example,
+	'ZipWith',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('ZipWith command two stream into a Stream of tuples.')
+				])),
+			author$project$Feature$codeShow('\nval streamA = StreamPlus.of("A", "B", "C");\nval streamB = IntStreamPlus.infinite().asStream();\nassertEquals("(A,0), (B,1), (C,2)", streamA.zipWith(streamB, RequireBoth).joinToString(", "));\n')
+		]));
+var author$project$Features$StreamIterator$title = 'StreamPlus and IteratorPlus';
 var author$project$Features$StreamIterator$featStreamIterator = A3(
 	author$project$Feature$Feature,
 	author$project$Features$StreamIterator$title,
 	author$project$Features$StreamIterator$description,
 	_List_fromArray(
-		[author$project$Features$StreamIterator$firstExample]));
-var author$project$Features$StructTypes$description = '\n      Struct let us create custom immutable data type.\n      These generated types has automatically generated lens, exhaust builder and quick validatiion.\n      ';
-var author$project$Features$StructTypes$firstExample = A2(
-	author$project$Feature$Example,
-	'ToBeAdded',
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('To be added')
-				])),
-			author$project$Feature$codeShow('\n// To be added\n')
-		]));
-var author$project$Features$StructTypes$title = 'Struct - Immutable Data';
-var author$project$Features$StructTypes$featStructTypes = A3(
-	author$project$Feature$Feature,
-	author$project$Features$StructTypes$title,
-	author$project$Features$StructTypes$description,
-	_List_fromArray(
-		[author$project$Features$StructTypes$firstExample]));
+		[author$project$Features$StreamIterator$exampleSegment, author$project$Features$StreamIterator$exampleSplit, author$project$Features$StreamIterator$exampleZipWith]));
 var author$project$Features$features = _List_fromArray(
-	[author$project$Features$Functions$featFunctions, author$project$Features$Lens$featLens, author$project$Features$PipeablePipeLine$featPipeablePipeLine, author$project$Features$ListMap$featListMap, author$project$Features$StreamIterator$featStreamIterator, author$project$Features$Result$featResult, author$project$Features$AlgebraicDataTypes$featAlgebraicDataTypes, author$project$Features$RuleTypes$featRuleTypes, author$project$Features$StructTypes$featStructTypes, author$project$Features$Ref$featRef, author$project$Features$SideEffect$featSideEffect, author$project$Features$Store$featStore]);
+	[author$project$Features$Functions$featFunctions, author$project$Features$Lens$featLens, author$project$Features$PipeablePipeLine$featPipeablePipeLine, author$project$Features$ListMap$featListMap, author$project$Features$StreamIterator$featStreamIterator, author$project$Features$Result$featResult, author$project$Features$ModelingWithTypes$featModelingWithTypes, author$project$Features$Ref$featRef, author$project$Features$SideEffect$featSideEffect]);
 var author$project$Msg$SelectFeature = function (a) {
 	return {$: 'SelectFeature', a: a};
 };

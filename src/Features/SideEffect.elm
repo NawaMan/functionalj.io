@@ -19,6 +19,7 @@ title =
 description =
     """
       DeferAction, Promise and IO help manage side effects in functional-style way.
+      Store helps collecting changes to an immutable object.
       """
 
 

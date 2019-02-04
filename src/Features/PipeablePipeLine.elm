@@ -11,6 +11,7 @@ featPipeablePipeLine =
         description
         [ examplePipe
         , examplePipeLine
+        , examplePipeableClass
         ]
 
 
@@ -34,26 +35,46 @@ import static functionalj.functions.StrFuncs.replaceAll;
 ...
       val str = Pipeable.of("Hello world.").pipe(
                   String::toUpperCase,
-                  replaceAll("\\.", "!!")
+                  replaceAll("\\\\.", "!!")
             );
       assertEquals("HELLO WORLD!!", str);
-...
 """
         ]
 
 
 examplePipeLine =
     Example "PipeLine can be created in advance"
-        [ p [] [ text "" ]
+        [ p [] [ text "PipeLine can be created in advance from functions. This allow point-free style of coding." ]
         , codeShow """
-var readFile = PipeLine
-      .of  (String.class)
-      .then(Paths ::get)
-      .then(Files ::readAllBytes)
-      .then(String::new)
-      .thenReturn();
+val readFile = PipeLine
+        .of  (String.class)
+        .then(Paths ::get)
+        .then(Files ::readAllBytes)
+        .then(String::new)
+        .thenReturn();
+    
+val fileNames = FuncList.of("file1.txt", "file2.txt");
+val fileContents = fileNames.map(readFile);
+// Notice that the error is suppressed.
+assertEquals("[null, null]", fileContents.toString());
+"""
+        ]
+
+
+examplePipeableClass =
+    Example "Pipeable interface"
+        [ p [] [ text "Pipeable is an interface. Any class that implements it can pipe." ]
+        , codeShow """
+public class User implements Pipeable<User> {
+    private String name;
+    public User(String name) { this.name = name; }
+    public String name() { return name; }
+    @Override
+    public User __data() throws Exception { return this; }
+}
+
 ...
-var fileNames = FuncList.of("file1.txt", "file2.txt");
-var fileContent = fileNames.map(readFile);
+val user = new User("root");
+assertEquals("User name: root", user.pipe(User::name, "User name: "::concat));
 """
         ]

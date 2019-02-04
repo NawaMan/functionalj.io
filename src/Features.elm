@@ -12,7 +12,7 @@ import Features.Result exposing (..)
 import Features.SideEffect exposing (..)
 import Features.StreamIterator exposing (..)
 import Html exposing (Html, button, code, div, h1, h3, p, span, text)
-import Html.Attributes exposing (class, id, property)
+import Html.Attributes exposing (class, id, property, style)
 import Html.Events exposing (onClick)
 import Json.Encode exposing (string)
 import Msg exposing (..)
@@ -42,12 +42,10 @@ exampleDot index selected examples =
             exampleTitleAt index examples
     in
     span
-        [ class (markSelect index selected "example-dot" "selected-example")
+        [ class ("tooltip " ++ markSelect index selected "example-dot" "selected-example")
         , onClick (SelectExample index)
         ]
-        [ span [ class "tooltip" ]
-            [ span [ class "tooltiptext" ] [ text title ]
-            ]
+        [ span [ class "tooltiptext" ] [ text title ]
         ]
 
 

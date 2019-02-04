@@ -8247,7 +8247,7 @@ var author$project$Features$exampleDot = F3(
 			_List_fromArray(
 				[
 					elm$html$Html$Attributes$class(
-					A4(author$project$Features$markSelect, index, selected, 'example-dot', 'selected-example')),
+					'tooltip ' + A4(author$project$Features$markSelect, index, selected, 'example-dot', 'selected-example')),
 					elm$html$Html$Events$onClick(
 					author$project$Msg$SelectExample(index))
 				]),
@@ -8257,20 +8257,11 @@ var author$project$Features$exampleDot = F3(
 					elm$html$Html$span,
 					_List_fromArray(
 						[
-							elm$html$Html$Attributes$class('tooltip')
+							elm$html$Html$Attributes$class('tooltiptext')
 						]),
 					_List_fromArray(
 						[
-							A2(
-							elm$html$Html$span,
-							_List_fromArray(
-								[
-									elm$html$Html$Attributes$class('tooltiptext')
-								]),
-							_List_fromArray(
-								[
-									elm$html$Html$text(title)
-								]))
+							elm$html$Html$text(title)
 						]))
 				]));
 	});

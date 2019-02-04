@@ -7612,20 +7612,6 @@ var author$project$Features$ModelingWithTypes$exampleExhaustiveBuilder = A2(
 				])),
 			author$project$Feature$codeShow('\n@Struct\nvoid Person(\n        String firstName,\n        @Nullable\n        String middleName,\n        String lastName,\n        @DefaultTo(DefaultValue.MINUS_ONE)\n        Integer age) {}\n\n...\nval person = new Person.Builder()\n        .firstName ("John")\n        .middleName("F")\n        .lastName  ("Kookies")\n        .build();\nassertEquals("Person[firstName: John, middleName: F, lastName: Kookies, age: -1]", person.toString());\n')
 		]));
-var author$project$Features$ModelingWithTypes$exampleSimpleValidation = A2(
-	author$project$Feature$Example,
-	'Struct validation',
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('Struct can have a validation to ensure valid values.')
-				])),
-			author$project$Feature$codeShow('\n@Struct\nstatic String Circle(int x, int y, int radius) {\n    return radius > 0 ? null : "Radius cannot be less than zero: " + radius;\n}\n\n...\nval validCircle = new Circle2(10, 10, 10);\nassertEquals("Circle2[x: 10, y: 10, radius: 10]", validCircle.toString());\n\ntry {\n    new Circle2(10, 10, -10);\n    fail("Except a ValidationException.");\n} catch (ValidationException e) {\n    assertEquals(\n            "functionalj.result.ValidationException: Radius cannot be less than zero: -10", \n            e.toString());\n}\n')
-		]));
 var author$project$Features$ModelingWithTypes$exampleStruct = A2(
 	author$project$Feature$Example,
 	'Struct for immutable data types',
@@ -7639,6 +7625,20 @@ var author$project$Features$ModelingWithTypes$exampleStruct = A2(
 					elm$html$Html$text('@Struct is used to create an immutable data type.')
 				])),
 			author$project$Feature$codeShow('\n@Struct\nvoid Person(\n        String firstName,\n        @Nullable\n        String middleName,\n        String lastName,\n        @DefaultTo(DefaultValue.MINUS_ONE)\n        Integer age) {}\n\n...\nval person = new Person("John", "Doe");\n// Access the field\nassertEquals("John", person.firstName);\nassertEquals("Doe",  person.lastName);\n// Access the field using method\nassertEquals("John", person.firstName());\nassertEquals("Doe",  person.lastName());\n// Access the field using lens (static import Person.thePerson)\nassertEquals("John", thePerson.firstName.apply(person));\nassertEquals("Doe",  thePerson.lastName.apply(person));\n// toString() - notice default value for the absent fields.\nassertEquals("Person[firstName: John, middleName: null, lastName: Doe, age: -1]", person.toString());\n')
+		]));
+var author$project$Features$ModelingWithTypes$exampleStructValidation = A2(
+	author$project$Feature$Example,
+	'Struct validation',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Struct can have a validation to ensure valid values.')
+				])),
+			author$project$Feature$codeShow('\n@Struct\nstatic String Circle(int x, int y, int radius) {\n    return radius > 0 ? null : "Radius cannot be less than zero: " + radius;\n}\n\n...\nval validCircle = new Circle(10, 10, 10);\nassertEquals("Circle[x: 10, y: 10, radius: 10]", validCircle.toString());\n\ntry {\n    new Circles(10, 10, -10);\n    fail("Except a ValidationException.");\n} catch (ValidationException e) {\n    assertEquals(\n            "functionalj.result.ValidationException: Radius cannot be less than zero: -10", \n            e.toString());\n}\n')
 		]));
 var author$project$Features$ModelingWithTypes$exampleStructWithLens = A2(
 	author$project$Feature$Example,
@@ -7674,7 +7674,7 @@ var author$project$Features$ModelingWithTypes$featModelingWithTypes = A3(
 	author$project$Features$ModelingWithTypes$title,
 	author$project$Features$ModelingWithTypes$description,
 	_List_fromArray(
-		[author$project$Features$ModelingWithTypes$exampleStruct, author$project$Features$ModelingWithTypes$exampleStructWithLens, author$project$Features$ModelingWithTypes$exampleChangeLens, author$project$Features$ModelingWithTypes$exampleExhaustiveBuilder, author$project$Features$ModelingWithTypes$exampleSimpleValidation, author$project$Features$ModelingWithTypes$exampleChoiceType, author$project$Features$ModelingWithTypes$exampleValidateEmailRuleType]));
+		[author$project$Features$ModelingWithTypes$exampleStruct, author$project$Features$ModelingWithTypes$exampleStructWithLens, author$project$Features$ModelingWithTypes$exampleChangeLens, author$project$Features$ModelingWithTypes$exampleExhaustiveBuilder, author$project$Features$ModelingWithTypes$exampleStructValidation, author$project$Features$ModelingWithTypes$exampleChoiceType, author$project$Features$ModelingWithTypes$exampleValidateEmailRuleType]));
 var author$project$Features$PipeablePipeLine$description = '\n        Pipeable makes any data pipeable through a function flow.\n        PipeLine lets functions be composed together to be used as one function.\n      ';
 var author$project$Features$PipeablePipeLine$examplePipe = A2(
 	author$project$Feature$Example,

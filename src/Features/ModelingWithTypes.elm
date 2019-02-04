@@ -13,7 +13,7 @@ featModelingWithTypes =
         , exampleStructWithLens
         , exampleChangeLens
         , exampleExhaustiveBuilder
-        , exampleSimpleValidation
+        , exampleStructValidation
         , exampleChoiceType
         , exampleValidateEmailRuleType
         ]
@@ -144,7 +144,7 @@ assertEquals("Person[firstName: John, middleName: F, lastName: Kookies, age: -1]
         ]
 
 
-exampleSimpleValidation =
+exampleStructValidation =
     Example "Struct validation"
         [ p [] [ text "Struct can have a validation to ensure valid values." ]
         , codeShow """
@@ -154,11 +154,11 @@ static String Circle(int x, int y, int radius) {
 }
 
 ...
-val validCircle = new Circle2(10, 10, 10);
-assertEquals("Circle2[x: 10, y: 10, radius: 10]", validCircle.toString());
+val validCircle = new Circle(10, 10, 10);
+assertEquals("Circle[x: 10, y: 10, radius: 10]", validCircle.toString());
 
 try {
-    new Circle2(10, 10, -10);
+    new Circles(10, 10, -10);
     fail("Except a ValidationException.");
 } catch (ValidationException e) {
     assertEquals(

@@ -7726,9 +7726,9 @@ var author$project$Features$PipeablePipeLine$featPipeablePipeLine = A3(
 	_List_fromArray(
 		[author$project$Features$PipeablePipeLine$examplePipe, author$project$Features$PipeablePipeLine$examplePipeLine, author$project$Features$PipeablePipeLine$examplePipeableClass]));
 var author$project$Features$Ref$description = '\n        Ref (reference) enables instance-base context and dependency injection as oppose to class/annotation-base one.\n        This is very suitable to functional programming.\n      ';
-var author$project$Features$Ref$firstExample = A2(
+var author$project$Features$Ref$exampleDependencyInjection = A2(
 	author$project$Feature$Example,
-	'ToBeAdded',
+	'DependencyInjection',
 	_List_fromArray(
 		[
 			A2(
@@ -7736,9 +7736,9 @@ var author$project$Features$Ref$firstExample = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('To be added')
+					elm$html$Html$text('Ref can be used for dependency injection that works with functions.')
 				])),
-			author$project$Feature$codeShow('\n// To be added\n')
+			author$project$Feature$codeShow('\nimport static functionalj.ref.Run.With;\n\n...\n// Define injection points and the default.\nstatic Ref<Function<String, String>> greeting = Ref.ofValue(RefExamples::defaultGreeting);\nstatic Ref<Consumer<String>>         println  = Ref.ofValue(System.out ::println);\n\nprivate static String defaultGreeting(String name) {\n    return String.format("Hello %s!!", name);\n}\n\npublic static void greet(String name) {\n    // Get the injected value and use it.\n    val greeting = greeting.value().apply(name);\n    println.value().accept(greeting);\n}\n\npublic static void main(String[] args) {\n    // Using it in Production\n    greet("Jack");\n}\n\n@Test\npublic void testDefaultMessage() {\n    val logs = new ArrayList<String>();\n    // Override the injected value.\n    With(println.butWith(logs::add))\n    .run(()-> {\n        // Use it with the overried values.\n        greet("Jack");\n    });\n    assertEquals("[Hello Jack!!]", logs.toString());\n}\n\n@Test\npublic void testCustomMessage() {\n    val logs = new ArrayList<String>();\n    // Override the injected value.\n    With(println .butWith(logs::add),\n         greeting.butWith(name -> "What\'s up " + name + "?"))\n    .run(()-> {\n        // Use it with the overried values.\n        greet("Jack");\n    });\n    assertEquals("[What\'s up Jack?]", logs.toString());\n}\n')
 		]));
 var author$project$Features$Ref$title = 'Ref - Dependency Injection';
 var author$project$Features$Ref$featRef = A3(
@@ -7746,7 +7746,7 @@ var author$project$Features$Ref$featRef = A3(
 	author$project$Features$Ref$title,
 	author$project$Features$Ref$description,
 	_List_fromArray(
-		[author$project$Features$Ref$firstExample]));
+		[author$project$Features$Ref$exampleDependencyInjection]));
 var author$project$Features$Result$description = '\n        Boxed object similar to MayBe or Either types.\n        Result is designed to work well with Java exception.\n      ';
 var author$project$Features$Result$exampleAcceptable = A2(
 	author$project$Feature$Example,

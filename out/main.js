@@ -7594,7 +7594,7 @@ var author$project$Features$ModelingWithTypes$exampleChoiceType = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('Choice type allow ad-hoc variant of value. It also comes with pattern matching.')
+					elm$html$Html$text('Choice type allows ad-hoc variant of value. It also comes with pattern matching.')
 				])),
 			author$project$Feature$codeShow('\n@Choice\ninterface LoginStatusSpec {\n    void Login(String userName);\n    void Logout();\n}\n\n...\nval f = Func.f((LoginStatus status) -> {\n    return status.match()\n            .login (s -> "User: " + s.userName()) \n            .logout("Guess");\n});\n\nLoginStatus status1 = LoginStatus.Login("root");\nLoginStatus status2 = LoginStatus.Logout();\n\nassertEquals("User: root", f.apply(status1));\nassertEquals("Guess",      f.apply(status2));\n')
 		]));

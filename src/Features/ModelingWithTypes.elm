@@ -171,7 +171,7 @@ try {
 
 exampleChoiceType =
     Example "Choice type"
-        [ p [] [ text "Choice type allow ad-hoc variant of value. It also comes with pattern matching." ]
+        [ p [] [ text "Choice type allows ad-hoc variant of value. It also comes with pattern matching." ]
         , codeShow """
 @Choice
 interface LoginStatusSpec {

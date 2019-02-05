@@ -79,8 +79,8 @@ val wordCountOf = f((String fileName) ->
 // Define operations -> Notice that this is a generic operation -- no mention of Task.
 val compareWordCount = f((Integer count1, Integer count2) -> {
     return (count1 == count2) ? "Same size."
-            : (count1 >  count2) ? "First file is larger."
-                                : "Second file is larger.";
+         : (count1 >  count2) ? "First file is larger."
+                              : "Second file is larger.";
 });
 
 // Declare tasks

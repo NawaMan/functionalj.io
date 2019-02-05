@@ -5,12 +5,12 @@ import Feature exposing (..)
 import Features.Functions exposing (..)
 import Features.Lens exposing (..)
 import Features.ListMap exposing (..)
-import Features.ModelingWithTypes exposing (..)
 import Features.PipeablePipeLine exposing (..)
 import Features.Ref exposing (..)
 import Features.Result exposing (..)
 import Features.SideEffect exposing (..)
 import Features.StreamIterator exposing (..)
+import Features.Types exposing (..)
 import Html exposing (Html, button, code, div, h1, h3, p, span, text)
 import Html.Attributes exposing (class, id, property, style)
 import Html.Events exposing (onClick)
@@ -98,7 +98,7 @@ features =
     , featListMap
     , featStreamIterator
     , featResult
-    , featModelingWithTypes
+    , featTypes
     , featRef
     , featSideEffect
     ]

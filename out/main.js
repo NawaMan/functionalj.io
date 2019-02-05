@@ -7569,112 +7569,6 @@ var author$project$Features$ListMap$featListMap = A3(
 	author$project$Features$ListMap$description,
 	_List_fromArray(
 		[author$project$Features$ListMap$exampleFunctionalMethods, author$project$Features$ListMap$exampleImmutableModification]));
-var author$project$Features$ModelingWithTypes$description = '\n        Struct (product), Choice (sum) and Rule types together make it easier to make illegal data unrepresentable.\n        Struct with lens, exhaust builder and quick validatiion.\n        Choice comes with pattern matching-like method.\n        Rule types add contrains to existing classes.\n      ';
-var author$project$Features$ModelingWithTypes$exampleChangeLens = A2(
-	author$project$Feature$Example,
-	'Change lens',
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('Change lens can immutably modify the property of an object deep in the object tree')
-				])),
-			author$project$Feature$codeShow('\n@Struct\nvoid Employee(\n        String firstName,\n        String lastName) {}\n        \n@Struct\nvoid Department(\n        String   name,\n        Employee manager) {}\n\n...\nval employee   = new Employee("John", "Doe");\nval department = new Department("Sales", employee);\nassertEquals(\n        "Department[name: Sales, manager: Employee[firstName: John, lastName: Doe]]",\n        department.toString());\n\n// Change lens    vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\nval department2 = theDepartment.manager.firstName.changeTo("Jonathan").apply(department);\nassertEquals(\n        "Department[name: Sales, manager: Employee[firstName: Jonathan, lastName: Doe]]",\n        department2.toString());\n')
-		]));
-var author$project$Features$ModelingWithTypes$exampleChoiceType = A2(
-	author$project$Feature$Example,
-	'Choice type',
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('Choice type allows ad-hoc variant of value. It also comes with pattern matching.')
-				])),
-			author$project$Feature$codeShow('\n@Choice\ninterface LoginStatusSpec {\n    void Login(String userName);\n    void Logout();\n}\n\n...\nval f = Func.f((LoginStatus status) -> {\n    return status.match()\n            .login (s -> "User: " + s.userName()) \n            .logout("Guess");\n});\n\nLoginStatus status1 = LoginStatus.Login("root");\nLoginStatus status2 = LoginStatus.Logout();\n\nassertEquals("User: root", f.apply(status1));\nassertEquals("Guess",      f.apply(status2));\n')
-		]));
-var author$project$Features$ModelingWithTypes$exampleExhaustiveBuilder = A2(
-	author$project$Feature$Example,
-	'Exhaustive Builder',
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('Struct comes with an exhaustive builder.')
-				])),
-			author$project$Feature$codeShow('\n@Struct\nvoid Person(\n        String firstName,\n        @Nullable\n        String middleName,\n        String lastName,\n        @DefaultTo(DefaultValue.MINUS_ONE)\n        Integer age) {}\n\n...\nval person = new Person.Builder()\n        .firstName ("John")\n        .middleName("F")\n        .lastName  ("Kookies")\n        .build();\nassertEquals("Person[firstName: John, middleName: F, lastName: Kookies, age: -1]", person.toString());\n')
-		]));
-var author$project$Features$ModelingWithTypes$exampleStruct = A2(
-	author$project$Feature$Example,
-	'Struct for immutable data types',
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('@Struct is used to create an immutable data type.')
-				])),
-			author$project$Feature$codeShow('\n@Struct\nvoid Person(\n        String firstName,\n        @Nullable\n        String middleName,\n        String lastName,\n        @DefaultTo(DefaultValue.MINUS_ONE)\n        Integer age) {}\n\n...\nval person = new Person("John", "Doe");\n// Access the field\nassertEquals("John", person.firstName);\nassertEquals("Doe",  person.lastName);\n// Access the field using method\nassertEquals("John", person.firstName());\nassertEquals("Doe",  person.lastName());\n// Access the field using lens (static import Person.thePerson)\nassertEquals("John", thePerson.firstName.apply(person));\nassertEquals("Doe",  thePerson.lastName.apply(person));\n// toString() - notice default value for the absent fields.\nassertEquals("Person[firstName: John, middleName: null, lastName: Doe, age: -1]", person.toString());\n')
-		]));
-var author$project$Features$ModelingWithTypes$exampleStructValidation = A2(
-	author$project$Feature$Example,
-	'Struct validation',
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('Struct can have a validation to ensure valid values.')
-				])),
-			author$project$Feature$codeShow('\n@Struct\nstatic String Circle(int x, int y, int radius) {\n    return radius > 0 ? null : "Radius cannot be less than zero: " + radius;\n}\n\n...\nval validCircle = new Circle(10, 10, 10);\nassertEquals("Circle[x: 10, y: 10, radius: 10]", validCircle.toString());\n\ntry {\n    new Circles(10, 10, -10);\n    fail("Expect a ValidationException.");\n} catch (ValidationException e) {\n    assertEquals(\n            "functionalj.result.ValidationException: Radius cannot be less than zero: -10", \n            e.toString());\n}\n')
-		]));
-var author$project$Features$ModelingWithTypes$exampleStructWithLens = A2(
-	author$project$Feature$Example,
-	'Lens for Struct',
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('A Struct type come with lens -- function to access both read/change the object properties.')
-				])),
-			author$project$Feature$codeShow('\n@Struct\nvoid Employee(\n        String firstName,\n        String lastName) {}\n        \n@Struct\nvoid Department(\n        String   name,\n        Employee manager) {}\n\n...\nval departments = FuncList.of(\n        new Department("Sales",   new Employee("John", "Doe")),\n        new Department("R&D",     new Employee("John", "Jackson")),\n        new Department("Support", new Employee("Jack", "Johnson"))\n);\n// Read lens                                           \nassertEquals("[Doe, Jackson, Johnson]",\n// Read lens                 vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n             departments.map(theDepartment.manager.lastName).toString());\n')
-		]));
-var author$project$Features$ModelingWithTypes$exampleValidateEmailRuleType = A2(
-	author$project$Feature$Example,
-	'Valid Email',
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('Valid email is a string that fit a certain pattern.')
-				])),
-			author$project$Feature$codeShow('\n@Rule static String Email(String emailStr) {\n    return (emailStr.matches("^[^@]+@[^.]+\\..{1,3}$"))\n            ? null\n            : ("Not a valid email address: " + emailStr);\n}\n\nassertEquals("Email:{ Value: name@email.com }",                               "" + Email.from("name@email.com"));\nassertEquals("Email:{ Invalid: Not a valid email address: name_email.net }",  "" + Email.from("name_email.net"));\n')
-		]));
-var author$project$Features$ModelingWithTypes$title = 'Modeling with Types';
-var author$project$Features$ModelingWithTypes$featModelingWithTypes = A3(
-	author$project$Feature$Feature,
-	author$project$Features$ModelingWithTypes$title,
-	author$project$Features$ModelingWithTypes$description,
-	_List_fromArray(
-		[author$project$Features$ModelingWithTypes$exampleStruct, author$project$Features$ModelingWithTypes$exampleStructWithLens, author$project$Features$ModelingWithTypes$exampleChangeLens, author$project$Features$ModelingWithTypes$exampleExhaustiveBuilder, author$project$Features$ModelingWithTypes$exampleStructValidation, author$project$Features$ModelingWithTypes$exampleChoiceType, author$project$Features$ModelingWithTypes$exampleValidateEmailRuleType]));
 var author$project$Features$PipeablePipeLine$description = '\n        Pipeable makes any data pipeable through a function flow.\n        PipeLine lets functions be composed together to be used as one function.\n      ';
 var author$project$Features$PipeablePipeLine$examplePipe = A2(
 	author$project$Feature$Example,
@@ -7797,10 +7691,9 @@ var author$project$Features$Result$featResult = A3(
 	author$project$Features$Result$description,
 	_List_fromArray(
 		[author$project$Features$Result$exampleHandleException, author$project$Features$Result$exampleValidation, author$project$Features$Result$exampleAcceptable]));
-var author$project$Features$SideEffect$description = '\n      DeferAction, Promise and IO help manage side effects in functional-style way.\n      Store helps collecting changes to an immutable object.\n      ';
-var author$project$Features$SideEffect$firstExample = A2(
+var author$project$Features$SideEffect$deferActionPromiseExample = A2(
 	author$project$Feature$Example,
-	'ToBeAdded',
+	'DeferAction and Promise',
 	_List_fromArray(
 		[
 			A2(
@@ -7808,9 +7701,39 @@ var author$project$Features$SideEffect$firstExample = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('To be added')
+					elm$html$Html$text('DeferAction and Promise allows separation of creation and configure of side-effect and using it.'),
+					elm$html$Html$text('This allows the business logic to decouple from the the side-effect code.')
 				])),
-			author$project$Feature$codeShow('\n// To be added\n')
+			author$project$Feature$codeShow('\nval logs = new ArrayList<String>();\n\n// The preparation\nval loadFile = f((String fileName) -> {\n    return DeferAction\n        .from(()->Files.readAllBytes(Paths.get(fileName)))\n        .start()\n        .getPromise();\n});\n\nval latch = new CountDownLatch(1);\n\n// Use it in the business logic code\nloadFile.apply("fileNotFound.txt")\n.onComplete(result -> {\n    // Process result\n    logs.add(result.toString());\n    \n    latch.countDown();\n});\n\nlatch.await();\n\n// Notice the error is sent in the same channel\nassertEquals("[Result:{ Exception: java.nio.file.NoSuchFileException: path1 }]", logs.toString());\n')
+		]));
+var author$project$Features$SideEffect$description = '\n      DeferAction, Promise and Task help manage side effects in functional-style way.\n      Store helps collecting changes to an immutable object.\n      ';
+var author$project$Features$SideEffect$taskExample = A2(
+	author$project$Feature$Example,
+	'Task',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Task encapsulate the creation of promise (which is one-time use only) and that Task can be reused.')
+				])),
+			author$project$Feature$codeShow('\n// Define task\nval wordCountOf = f((String fileName) -> \n        Task.from(()->Files.readAllBytes(Paths.get(fileName)))\n        .map(String::new)\n        .map(matches("[a-zA-Z]+"))\n        .map(theResults.texts)\n        .map(StreamPlus::size)\n);\n// Define operations -> Notice that this is a generic operation -- no mention of Task.\nval compareWordCount = f((Integer count1, Integer count2) -> {\n    return (count1 == count2) ? "Same size."\n            : (count1 >  count2) ? "First file is larger."\n                                : "Second file is larger.";\n});\n\n// Declare tasks\nval task1 = wordCountOf.apply("../LICENSE");\nval task2 = wordCountOf.apply("../.travis.yml");\n// Compose the tasks\nval compareTask = compareWordCount.applyTo(task1, task2);\n\n// At this point, nothing is run.\n\n// Actually run\nassertEquals("First file is larger.", compareTask.createAction().getResult().get());\n// Reuse again\nassertEquals("First file is larger.", compareTask.createAction().getResult().get());\n')
+		]));
+var author$project$Features$SideEffect$taskStore = A2(
+	author$project$Feature$Example,
+	'Store',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Store makes it a bit easier to apply change to immurable object without having to create many variables.')
+				])),
+			author$project$Feature$codeShow('\n// The operation.\nval apppend = f((String str) -> f((FuncList<String> list)-> list.append(str)));\n\nval list = FuncList.of("One", "Two");\nval store = new Store<>(list);\n\n\nassertEquals("[One, Two]", store.value().toString());\n\n// Apply multiple changes.\nstore\n.change(\n    apppend.apply("Three"),\n    apppend.apply("Four"),\n    apppend.apply("Five"),\n    apppend.apply("Six")\n);\nassertEquals("[One, Two, Three, Four, Five, Six]", store.value().toString());\n')
 		]));
 var author$project$Features$SideEffect$title = 'Side Effect';
 var author$project$Features$SideEffect$featSideEffect = A3(
@@ -7818,7 +7741,7 @@ var author$project$Features$SideEffect$featSideEffect = A3(
 	author$project$Features$SideEffect$title,
 	author$project$Features$SideEffect$description,
 	_List_fromArray(
-		[author$project$Features$SideEffect$firstExample]));
+		[author$project$Features$SideEffect$deferActionPromiseExample, author$project$Features$SideEffect$taskExample, author$project$Features$SideEffect$taskStore]));
 var author$project$Features$StreamIterator$description = '\n      Additional functionalities to Streams and Iterator.\n      ';
 var author$project$Features$StreamIterator$exampleSegment = A2(
 	author$project$Feature$Example,
@@ -7869,8 +7792,114 @@ var author$project$Features$StreamIterator$featStreamIterator = A3(
 	author$project$Features$StreamIterator$description,
 	_List_fromArray(
 		[author$project$Features$StreamIterator$exampleSegment, author$project$Features$StreamIterator$exampleSplit, author$project$Features$StreamIterator$exampleZipWith]));
+var author$project$Features$Types$description = '\n        Struct (product), Choice (sum) and Rule types together make it easier to make illegal data unrepresentable.\n        Struct with lens, exhaust builder and quick validatiion.\n        Choice comes with pattern matching-like method.\n        Rule types add contrains to existing classes.\n      ';
+var author$project$Features$Types$exampleChangeLens = A2(
+	author$project$Feature$Example,
+	'Change lens',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Change lens can immutably modify the property of an object deep in the object tree')
+				])),
+			author$project$Feature$codeShow('\n@Struct\nvoid Employee(\n        String firstName,\n        String lastName) {}\n        \n@Struct\nvoid Department(\n        String   name,\n        Employee manager) {}\n\n...\nval employee   = new Employee("John", "Doe");\nval department = new Department("Sales", employee);\nassertEquals(\n        "Department[name: Sales, manager: Employee[firstName: John, lastName: Doe]]",\n        department.toString());\n\n// Change lens    vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\nval department2 = theDepartment.manager.firstName.changeTo("Jonathan").apply(department);\nassertEquals(\n        "Department[name: Sales, manager: Employee[firstName: Jonathan, lastName: Doe]]",\n        department2.toString());\n')
+		]));
+var author$project$Features$Types$exampleChoiceType = A2(
+	author$project$Feature$Example,
+	'Choice type',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Choice type allows ad-hoc variant of value. It also comes with pattern matching.')
+				])),
+			author$project$Feature$codeShow('\n@Choice\ninterface LoginStatusSpec {\n    void Login(String userName);\n    void Logout();\n}\n\n...\nval f = Func.f((LoginStatus status) -> {\n    return status.match()\n            .login (s -> "User: " + s.userName()) \n            .logout("Guess");\n});\n\nLoginStatus status1 = LoginStatus.Login("root");\nLoginStatus status2 = LoginStatus.Logout();\n\nassertEquals("User: root", f.apply(status1));\nassertEquals("Guess",      f.apply(status2));\n')
+		]));
+var author$project$Features$Types$exampleExhaustiveBuilder = A2(
+	author$project$Feature$Example,
+	'Exhaustive Builder',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Struct comes with an exhaustive builder.')
+				])),
+			author$project$Feature$codeShow('\n@Struct\nvoid Person(\n        String firstName,\n        @Nullable\n        String middleName,\n        String lastName,\n        @DefaultTo(DefaultValue.MINUS_ONE)\n        Integer age) {}\n\n...\nval person = new Person.Builder()\n        .firstName ("John")\n        .middleName("F")\n        .lastName  ("Kookies")\n        .build();\nassertEquals("Person[firstName: John, middleName: F, lastName: Kookies, age: -1]", person.toString());\n')
+		]));
+var author$project$Features$Types$exampleStruct = A2(
+	author$project$Feature$Example,
+	'Struct for immutable data types',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('@Struct is used to create an immutable data type.')
+				])),
+			author$project$Feature$codeShow('\n@Struct\nvoid Person(\n        String firstName,\n        @Nullable\n        String middleName,\n        String lastName,\n        @DefaultTo(DefaultValue.MINUS_ONE)\n        Integer age) {}\n\n...\nval person = new Person("John", "Doe");\n// Access the field\nassertEquals("John", person.firstName);\nassertEquals("Doe",  person.lastName);\n// Access the field using method\nassertEquals("John", person.firstName());\nassertEquals("Doe",  person.lastName());\n// Access the field using lens (static import Person.thePerson)\nassertEquals("John", thePerson.firstName.apply(person));\nassertEquals("Doe",  thePerson.lastName.apply(person));\n// toString() - notice default value for the absent fields.\nassertEquals("Person[firstName: John, middleName: null, lastName: Doe, age: -1]", person.toString());\n')
+		]));
+var author$project$Features$Types$exampleStructValidation = A2(
+	author$project$Feature$Example,
+	'Struct validation',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Struct can have a validation to ensure valid values.')
+				])),
+			author$project$Feature$codeShow('\n@Struct\nstatic String Circle(int x, int y, int radius) {\n    return radius > 0 ? null : "Radius cannot be less than zero: " + radius;\n}\n\n...\nval validCircle = new Circle(10, 10, 10);\nassertEquals("Circle[x: 10, y: 10, radius: 10]", validCircle.toString());\n\ntry {\n    new Circles(10, 10, -10);\n    fail("Expect a ValidationException.");\n} catch (ValidationException e) {\n    assertEquals(\n            "functionalj.result.ValidationException: Radius cannot be less than zero: -10", \n            e.toString());\n}\n')
+		]));
+var author$project$Features$Types$exampleStructWithLens = A2(
+	author$project$Feature$Example,
+	'Lens for Struct',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('A Struct type come with lens -- function to access both read/change the object properties.')
+				])),
+			author$project$Feature$codeShow('\n@Struct\nvoid Employee(\n        String firstName,\n        String lastName) {}\n        \n@Struct\nvoid Department(\n        String   name,\n        Employee manager) {}\n\n...\nval departments = FuncList.of(\n        new Department("Sales",   new Employee("John", "Doe")),\n        new Department("R&D",     new Employee("John", "Jackson")),\n        new Department("Support", new Employee("Jack", "Johnson"))\n);\n// Read lens                                           \nassertEquals("[Doe, Jackson, Johnson]",\n// Read lens                 vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n             departments.map(theDepartment.manager.lastName).toString());\n')
+		]));
+var author$project$Features$Types$exampleValidateEmailRuleType = A2(
+	author$project$Feature$Example,
+	'Valid Email',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Valid email is a string that fit a certain pattern.')
+				])),
+			author$project$Feature$codeShow('\n@Rule static String Email(String emailStr) {\n    return (emailStr.matches("^[^@]+@[^.]+\\..{1,3}$"))\n            ? null\n            : ("Not a valid email address: " + emailStr);\n}\n\nassertEquals("Email:{ Value: name@email.com }",                               "" + Email.from("name@email.com"));\nassertEquals("Email:{ Invalid: Not a valid email address: name_email.net }",  "" + Email.from("name_email.net"));\n')
+		]));
+var author$project$Features$Types$title = 'Types';
+var author$project$Features$Types$featTypes = A3(
+	author$project$Feature$Feature,
+	author$project$Features$Types$title,
+	author$project$Features$Types$description,
+	_List_fromArray(
+		[author$project$Features$Types$exampleStruct, author$project$Features$Types$exampleStructWithLens, author$project$Features$Types$exampleChangeLens, author$project$Features$Types$exampleExhaustiveBuilder, author$project$Features$Types$exampleStructValidation, author$project$Features$Types$exampleChoiceType, author$project$Features$Types$exampleValidateEmailRuleType]));
 var author$project$Features$features = _List_fromArray(
-	[author$project$Features$Functions$featFunctions, author$project$Features$Lens$featLens, author$project$Features$PipeablePipeLine$featPipeablePipeLine, author$project$Features$ListMap$featListMap, author$project$Features$StreamIterator$featStreamIterator, author$project$Features$Result$featResult, author$project$Features$ModelingWithTypes$featModelingWithTypes, author$project$Features$Ref$featRef, author$project$Features$SideEffect$featSideEffect]);
+	[author$project$Features$Functions$featFunctions, author$project$Features$Lens$featLens, author$project$Features$PipeablePipeLine$featPipeablePipeLine, author$project$Features$ListMap$featListMap, author$project$Features$StreamIterator$featStreamIterator, author$project$Features$Result$featResult, author$project$Features$Types$featTypes, author$project$Features$Ref$featRef, author$project$Features$SideEffect$featSideEffect]);
 var author$project$Msg$SelectFeature = function (a) {
 	return {$: 'SelectFeature', a: a};
 };

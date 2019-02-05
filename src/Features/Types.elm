@@ -1,4 +1,4 @@
-module Features.ModelingWithTypes exposing (featModelingWithTypes)
+module Features.Types exposing (featTypes)
 
 import CodeBlock exposing (codeBlock)
 import Feature exposing (Example, Feature, codeShow)
@@ -6,7 +6,7 @@ import Html exposing (Html, button, code, div, h1, p, span, text)
 import Html.Attributes exposing (class, id)
 
 
-featModelingWithTypes =
+featTypes =
     Feature title
         description
         [ exampleStruct
@@ -20,7 +20,7 @@ featModelingWithTypes =
 
 
 title =
-    "Modeling with Types"
+    "Types"
 
 
 description =

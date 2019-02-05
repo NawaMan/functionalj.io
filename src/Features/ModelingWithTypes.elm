@@ -159,7 +159,7 @@ assertEquals("Circle[x: 10, y: 10, radius: 10]", validCircle.toString());
 
 try {
     new Circles(10, 10, -10);
-    fail("Except a ValidationException.");
+    fail("Expect a ValidationException.");
 } catch (ValidationException e) {
     assertEquals(
             "functionalj.result.ValidationException: Radius cannot be less than zero: -10", 

@@ -7638,7 +7638,7 @@ var author$project$Features$ModelingWithTypes$exampleStructValidation = A2(
 				[
 					elm$html$Html$text('Struct can have a validation to ensure valid values.')
 				])),
-			author$project$Feature$codeShow('\n@Struct\nstatic String Circle(int x, int y, int radius) {\n    return radius > 0 ? null : "Radius cannot be less than zero: " + radius;\n}\n\n...\nval validCircle = new Circle(10, 10, 10);\nassertEquals("Circle[x: 10, y: 10, radius: 10]", validCircle.toString());\n\ntry {\n    new Circles(10, 10, -10);\n    fail("Except a ValidationException.");\n} catch (ValidationException e) {\n    assertEquals(\n            "functionalj.result.ValidationException: Radius cannot be less than zero: -10", \n            e.toString());\n}\n')
+			author$project$Feature$codeShow('\n@Struct\nstatic String Circle(int x, int y, int radius) {\n    return radius > 0 ? null : "Radius cannot be less than zero: " + radius;\n}\n\n...\nval validCircle = new Circle(10, 10, 10);\nassertEquals("Circle[x: 10, y: 10, radius: 10]", validCircle.toString());\n\ntry {\n    new Circles(10, 10, -10);\n    fail("Expect a ValidationException.");\n} catch (ValidationException e) {\n    assertEquals(\n            "functionalj.result.ValidationException: Radius cannot be less than zero: -10", \n            e.toString());\n}\n')
 		]));
 var author$project$Features$ModelingWithTypes$exampleStructWithLens = A2(
 	author$project$Feature$Example,

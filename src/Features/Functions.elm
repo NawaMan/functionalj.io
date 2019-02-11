@@ -14,6 +14,7 @@ featFunctions =
         [ exampleMethodReference
         , exampleWhenAbsent
         , exampleSafely
+        , examplePartialApplication
         ]
 
 
@@ -82,5 +83,20 @@ var lines     = readLines.apply("FileNotFound.txt");
 assertEquals(
     "Result:{ Exception: java.nio.file.NoSuchFileException: FileNotFound.txt }",
     lines.toString());
+"""
+        ]
+
+
+examplePartialApplication =
+    Example "Partial application"
+        [ p []
+            [ text "There is a number of ways to do parial applications. Here we use method bind to do that. "
+            , text "In the following code a function query is create from queryDB with all the connection information partiallt applied but the sqlStatement left to the applied later."
+            ]
+        , codeShow """
+var queryDB = f((String jdbcUrl, String userName, String passWord, String sqlStatement) -> .....));
+...
+import static functionalj.function.Absent.__;
+var query = queryDB.bind(url, uname, passwd, __);
 """
         ]

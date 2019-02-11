@@ -32,7 +32,7 @@ exampleMethodReference =
         [ p [] [ text "Since functions are functional interfaces, Java 8 method references can be used to create function." ]
         , codeShow """
 public int toInt(String str) {
-return Integer.parseInt(str);
+    return Integer.parseInt(str);
 }
 
 ...

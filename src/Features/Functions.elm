@@ -36,7 +36,9 @@ public int toInt(String str) {
 }
 
 ...
-val toInt = (Func1<String, Integer>)this::toInt;
+import static functionalj.function.Func.f;
+...
+val toInt = f(this::toInt);
 assertEquals(42, (int)toInt.apply("42"));
 ...
 """

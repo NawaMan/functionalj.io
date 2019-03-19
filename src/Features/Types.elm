@@ -26,7 +26,7 @@ title =
 description =
     """
         Struct (product), Choice (sum) and Rule types together make it easier to make illegal data unrepresentable.
-        Struct with lens, exhaust builder and quick validatiion.
+        Struct with lens, exhaust builder and quick validation.
         Choice comes with pattern matching-like method.
         Rule types add contrains to existing classes.
       """

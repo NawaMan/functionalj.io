@@ -7436,7 +7436,22 @@ var author$project$Features$Functions$exampleMethodReference = A2(
 				[
 					elm$html$Html$text('Since functions are functional interfaces, Java 8 method references can be used to create function.')
 				])),
-			author$project$Feature$codeShow('\npublic int toInt(String str) {\nreturn Integer.parseInt(str);\n}\n\n...\nval toInt = (Func1<String, Integer>)this::toInt;\nassertEquals(42, (int)toInt.apply("42"));\n...\n')
+			author$project$Feature$codeShow('\npublic int toInt(String str) {\n    return Integer.parseInt(str);\n}\n\n...\nimport static functionalj.function.Func.f;\n...\nval toInt = f(this::toInt);\nassertEquals(42, (int)toInt.apply("42"));\n...\n')
+		]));
+var author$project$Features$Functions$examplePartialApplication = A2(
+	author$project$Feature$Example,
+	'Partial application',
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('There is a number of ways to do parial applications. Here we use method bind to do that. '),
+					elm$html$Html$text('In the following code a function query is create from queryDB with all the connection information partiallt applied but the sqlStatement left to the applied later.')
+				])),
+			author$project$Feature$codeShow('\nvar queryDB = f((String jdbcUrl, String userName, String passWord, String sqlStatement) -> .....));\n...\nimport static functionalj.function.Absent.__;\nvar query = queryDB.bind(url, uname, passwd, __);\n')
 		]));
 var author$project$Features$Functions$exampleSafely = A2(
 	author$project$Feature$Example,
@@ -7494,7 +7509,7 @@ var author$project$Features$Functions$featFunctions = A3(
 	'Functions',
 	'\n    More function types and many ways to manipulate and use them.\n    ',
 	_List_fromArray(
-		[author$project$Features$Functions$exampleMethodReference, author$project$Features$Functions$exampleWhenAbsent, author$project$Features$Functions$exampleSafely]));
+		[author$project$Features$Functions$exampleMethodReference, author$project$Features$Functions$exampleWhenAbsent, author$project$Features$Functions$exampleSafely, author$project$Features$Functions$examplePartialApplication]));
 var author$project$Features$intiFeature = author$project$Features$Functions$featFunctions;
 var author$project$Main$Gradle = {$: 'Gradle'};
 var author$project$Features$Lens$description = '\n    Lenses are functions to access to fields of an object -- both read and write.\n    As functions, they can composed with others.\n      ';

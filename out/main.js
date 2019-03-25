@@ -7807,7 +7807,7 @@ var author$project$Features$StreamIterator$featStreamIterator = A3(
 	author$project$Features$StreamIterator$description,
 	_List_fromArray(
 		[author$project$Features$StreamIterator$exampleSegment, author$project$Features$StreamIterator$exampleSplit, author$project$Features$StreamIterator$exampleZipWith]));
-var author$project$Features$Types$description = '\n        Struct (product), Choice (sum) and Rule types together make it easier to make illegal data unrepresentable.\n        Struct with lens, exhaust builder and quick validatiion.\n        Choice comes with pattern matching-like method.\n        Rule types add contrains to existing classes.\n      ';
+var author$project$Features$Types$description = '\n        Struct (product), Choice (sum) and Rule types together make it easier to make illegal data unrepresentable.\n        Struct with lens, exhaust builder and quick validation.\n        Choice comes with pattern matching-like method.\n        Rule types add contrains to existing classes.\n      ';
 var author$project$Features$Types$exampleChangeLens = A2(
 	author$project$Feature$Example,
 	'Change lens',
@@ -8216,7 +8216,7 @@ var author$project$Main$sectionBottom = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('© 2017-2019 NawaMan\'s FunctionalJ — FunctionalJ is Open Source, '),
+					elm$html$Html$text('© 2017-2019 NawaMan\'s FunctionalJ.io — FunctionalJ.io is Open Source, '),
 					A2(
 					elm$html$Html$a,
 					_List_fromArray(
@@ -8464,7 +8464,7 @@ var author$project$Main$sectionFeatures = function (model) {
 					]))
 			]));
 };
-var author$project$Introduction$introduction = '\nFunctionalJ is a library for writing functional style code in Java.\nIt aims be a practical expansion to functional programming added in Java 8.\nFunctionalJ is a pure Java library with all code written in Java\n  so its usages will be just like other Java library.\nNo additional build steps or tools are required outside of adding dependencies.\nFuncionalJ works with Java 8 and up.\n';
+var author$project$Introduction$introduction = '\nFunctionalJ.io is a library for writing functional style code in Java.\nIt aims be a practical expansion to functional programming added in Java 8.\nFunctionalJ.io is a pure Java library with all code written in Java\n  so its usages will be just like other Java library.\nNo additional build steps or tools are required outside of adding dependencies.\nFuncionalJ.io works with Java 8 and up.\n';
 var author$project$Introduction$introductionView = A2(
 	elm$html$Html$div,
 	_List_Nil,
@@ -8480,6 +8480,341 @@ var author$project$Main$sectionIntroduction = A2(
 		]),
 	_List_fromArray(
 		[author$project$Introduction$introductionView]));
+var elm$html$Html$b = _VirtualDom_node('b');
+var elm$html$Html$img = _VirtualDom_node('img');
+var elm$html$Html$li = _VirtualDom_node('li');
+var elm$html$Html$ul = _VirtualDom_node('ul');
+var elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
+var elm$html$Html$Attributes$target = elm$html$Html$Attributes$stringProperty('target');
+var elm$html$Html$Attributes$width = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'width',
+		elm$core$String$fromInt(n));
+};
+var author$project$References$referencesView = A2(
+	elm$html$Html$div,
+	_List_fromArray(
+		[
+			elm$html$Html$Attributes$class('section section-references')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$h1,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('References')
+				])),
+			A2(
+			elm$html$Html$div,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$class('list-articles')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$h3,
+					_List_Nil,
+					_List_fromArray(
+						[
+							elm$html$Html$text('Articles')
+						])),
+					A2(
+					elm$html$Html$ul,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$li,
+							_List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$b,
+									_List_Nil,
+									_List_fromArray(
+										[
+											elm$html$Html$text('Introducing FunctionalJ')
+										])),
+									elm$html$Html$text(' - Adding more functional spice to Java with FunctionalJ.'),
+									A2(
+									elm$html$Html$a,
+									_List_fromArray(
+										[
+											elm$html$Html$Attributes$href('https://nawaman.net/blog/2019-02-12#IntroducingFunctionalJ'),
+											elm$html$Html$Attributes$target('_blank')
+										]),
+									_List_fromArray(
+										[
+											elm$html$Html$text('▲')
+										]))
+								])),
+							A2(
+							elm$html$Html$li,
+							_List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$b,
+									_List_Nil,
+									_List_fromArray(
+										[
+											elm$html$Html$text('Setup FunctionalJ for Eclipse')
+										])),
+									elm$html$Html$text(' - Make use of FunctionalJ types with Eclipse IDE.'),
+									A2(
+									elm$html$Html$a,
+									_List_fromArray(
+										[
+											elm$html$Html$Attributes$href('https://nawaman.net/blog/2019-02-26#FunctionalJEclipse'),
+											elm$html$Html$Attributes$target('_blank')
+										]),
+									_List_fromArray(
+										[
+											elm$html$Html$text('▲')
+										]))
+								])),
+							A2(
+							elm$html$Html$li,
+							_List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$b,
+									_List_Nil,
+									_List_fromArray(
+										[
+											elm$html$Html$text('Immutable Data With FunctionalJ.io')
+										])),
+									elm$html$Html$text(' - Quick and easy way to create and use immutable data using FunctionalJ.io.'),
+									A2(
+									elm$html$Html$a,
+									_List_fromArray(
+										[
+											elm$html$Html$Attributes$href('https://dzone.com/articles/immutable-data-with-functionalio'),
+											elm$html$Html$Attributes$target('_blank')
+										]),
+									_List_fromArray(
+										[
+											elm$html$Html$text('▲')
+										]))
+								]))
+						]))
+				])),
+			A2(
+			elm$html$Html$div,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$class('list-vdos')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$h3,
+					_List_Nil,
+					_List_fromArray(
+						[
+							elm$html$Html$text('Videos')
+						])),
+					A2(
+					elm$html$Html$ul,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$li,
+							_List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$p,
+									_List_Nil,
+									_List_fromArray(
+										[
+											A2(
+											elm$html$Html$a,
+											_List_fromArray(
+												[
+													elm$html$Html$Attributes$href('https://www.youtube.com/watch?v=gIHY1wUSQzs'),
+													elm$html$Html$Attributes$target('_blank')
+												]),
+											_List_fromArray(
+												[
+													A2(
+													elm$html$Html$img,
+													_List_fromArray(
+														[
+															elm$html$Html$Attributes$src('https://img.youtube.com/vi/gIHY1wUSQzs/mqdefault.jpg'),
+															elm$html$Html$Attributes$width(128)
+														]),
+													_List_Nil)
+												])),
+											A2(
+											elm$html$Html$div,
+											_List_Nil,
+											_List_fromArray(
+												[
+													A2(
+													elm$html$Html$a,
+													_List_fromArray(
+														[
+															elm$html$Html$Attributes$href('https://www.youtube.com/watch?v=gIHY1wUSQzs'),
+															elm$html$Html$Attributes$target('_blank')
+														]),
+													_List_fromArray(
+														[
+															A2(
+															elm$html$Html$b,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	elm$html$Html$text('Introducing FunctionalJ')
+																]))
+														])),
+													A2(
+													elm$html$Html$p,
+													_List_Nil,
+													_List_fromArray(
+														[
+															elm$html$Html$text('Introducing FunctionalJ library - a library to bring in numbers of functional programming goodness to Java.')
+														]))
+												]))
+										]))
+								])),
+							A2(
+							elm$html$Html$li,
+							_List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$p,
+									_List_Nil,
+									_List_fromArray(
+										[
+											A2(
+											elm$html$Html$a,
+											_List_fromArray(
+												[
+													elm$html$Html$Attributes$href('https://www.youtube.com/watch?v=nTOb6r13HvM'),
+													elm$html$Html$Attributes$target('_blank')
+												]),
+											_List_fromArray(
+												[
+													A2(
+													elm$html$Html$img,
+													_List_fromArray(
+														[
+															elm$html$Html$Attributes$src('https://img.youtube.com/vi/nTOb6r13HvM/mqdefault.jpg'),
+															elm$html$Html$Attributes$width(128)
+														]),
+													_List_Nil)
+												])),
+											A2(
+											elm$html$Html$div,
+											_List_Nil,
+											_List_fromArray(
+												[
+													A2(
+													elm$html$Html$a,
+													_List_fromArray(
+														[
+															elm$html$Html$Attributes$href('https://www.youtube.com/watch?v=nTOb6r13HvM'),
+															elm$html$Html$Attributes$target('_blank')
+														]),
+													_List_fromArray(
+														[
+															A2(
+															elm$html$Html$b,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	elm$html$Html$text('Setup Eclipse for FunctionalJ')
+																]))
+														])),
+													A2(
+													elm$html$Html$p,
+													_List_Nil,
+													_List_fromArray(
+														[
+															elm$html$Html$text('FunctionalJ.io helps writing functional style of code easier in Java. Most of its features work already with Eclipse except for the types. Types use annotation process to generate classes so we need to tell Eclipse to look for these generated classes. This VDO shows how to set up Eclipse so that FunctionaJ\'s types are visible to Eclipse as you develop.')
+														]))
+												]))
+										]))
+								])),
+							A2(
+							elm$html$Html$li,
+							_List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$p,
+									_List_Nil,
+									_List_fromArray(
+										[
+											A2(
+											elm$html$Html$a,
+											_List_fromArray(
+												[
+													elm$html$Html$Attributes$href('https://www.youtube.com/watch?v=Q_cdFh9fhxY'),
+													elm$html$Html$Attributes$target('_blank')
+												]),
+											_List_fromArray(
+												[
+													A2(
+													elm$html$Html$img,
+													_List_fromArray(
+														[
+															elm$html$Html$Attributes$src('https://img.youtube.com/vi/Q_cdFh9fhxY/mqdefault.jpg'),
+															elm$html$Html$Attributes$width(128)
+														]),
+													_List_Nil)
+												])),
+											A2(
+											elm$html$Html$div,
+											_List_Nil,
+											_List_fromArray(
+												[
+													A2(
+													elm$html$Html$a,
+													_List_fromArray(
+														[
+															elm$html$Html$Attributes$href('https://www.youtube.com/watch?v=Q_cdFh9fhxY'),
+															elm$html$Html$Attributes$target('_blank')
+														]),
+													_List_fromArray(
+														[
+															A2(
+															elm$html$Html$b,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	elm$html$Html$text('Immutable Data with FunctionalJ.io')
+																]))
+														])),
+													A2(
+													elm$html$Html$p,
+													_List_Nil,
+													_List_fromArray(
+														[
+															elm$html$Html$text('Immutability is an important principle of functional programming. Mutable objects hide changes. And hidden changes can lead to unpredictability and chaos.')
+														]))
+												]))
+										]))
+								]))
+						]))
+				]))
+		]));
+var author$project$Main$sectionReferences = function (model) {
+	return author$project$References$referencesView;
+};
 var author$project$Main$useGradle = A2(
 	elm$html$Html$div,
 	_List_Nil,
@@ -8501,7 +8836,7 @@ var author$project$Main$useGradle = A2(
 						[
 							elm$html$Html$text('my maven repo')
 						])),
-					elm$html$Html$text(' hosted on GitHub. So to use FunctionalJ you will need to ...')
+					elm$html$Html$text(' hosted on GitHub. So to use FunctionalJ.io you will need to ...')
 				])),
 			A2(
 			elm$html$Html$p,
@@ -8516,9 +8851,9 @@ var author$project$Main$useGradle = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('and the dependencies to FunctionalJ.')
+					elm$html$Html$text('and the dependencies to FunctionalJ.io.')
 				])),
-			author$project$CodeBlock$codeBlock('compile \'functionalj:functionalj-all:0.1.60.0\' // Please lookup for the latest version.'),
+			author$project$CodeBlock$codeBlock('compile \'functionalj:functionalj-all:0.1.68.0\' // Please lookup for the latest version.'),
 			A2(
 			elm$html$Html$p,
 			_List_Nil,
@@ -8534,7 +8869,7 @@ var author$project$Main$useGradle = A2(
 						[
 							elm$html$Html$text('UseFunctionalJGradle')
 						])),
-					elm$html$Html$text(' is an example project that use FunctionalJ. You can use that as a starting point.')
+					elm$html$Html$text(' is an example project that use FunctionalJ.io. You can use that as a starting point.')
 				]))
 		]));
 var author$project$Main$useMaven = A2(
@@ -8558,7 +8893,7 @@ var author$project$Main$useMaven = A2(
 						[
 							elm$html$Html$text('my maven repo')
 						])),
-					elm$html$Html$text(' hosted on GitHub. So to use FunctionalJ you will need to ...')
+					elm$html$Html$text(' hosted on GitHub. So to use FunctionalJ.io you will need to ...')
 				])),
 			A2(
 			elm$html$Html$p,
@@ -8573,9 +8908,9 @@ var author$project$Main$useMaven = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('and the dependencies to FunctionalJ.')
+					elm$html$Html$text('and the dependencies to FunctionalJ.io.')
 				])),
-			author$project$CodeBlock$codeBlock('\n    <dependency>\n        <groupId>functionalj</groupId>\n        <artifactId>functionalj-all</artifactId>\n        <version>0.1.60.0</version>\n    </dependency>\n        '),
+			author$project$CodeBlock$codeBlock('\n    <dependency>\n        <groupId>functionalj</groupId>\n        <artifactId>functionalj-all</artifactId>\n        <version>0.1.68.0</version>\n    </dependency>\n        '),
 			A2(
 			elm$html$Html$p,
 			_List_Nil,
@@ -8591,7 +8926,7 @@ var author$project$Main$useMaven = A2(
 						[
 							elm$html$Html$text('UseFunctionalJMaven')
 						])),
-					elm$html$Html$text(' is an example project that use FunctionalJ. You can use that as a starting point.')
+					elm$html$Html$text(' is an example project that use FunctionalJ.io. You can use that as a starting point.')
 				]))
 		]));
 var author$project$Msg$ChooseGradle = {$: 'ChooseGradle'};
@@ -8652,14 +8987,7 @@ var author$project$Main$sectionUsages = function (model) {
 			}()
 			]));
 };
-var elm$html$Html$img = _VirtualDom_node('img');
 var elm$html$Html$Attributes$id = elm$html$Html$Attributes$stringProperty('id');
-var elm$html$Html$Attributes$src = function (url) {
-	return A2(
-		elm$html$Html$Attributes$stringProperty,
-		'src',
-		_VirtualDom_noJavaScriptOrHtmlUri(url));
-};
 var author$project$Main$topBar = A2(
 	elm$html$Html$div,
 	_List_Nil,
@@ -8709,6 +9037,7 @@ var author$project$Main$view = function (model) {
 						author$project$Main$sectionIntroduction,
 						author$project$Main$sectionFeatures(model),
 						author$project$Main$sectionExamples(model),
+						author$project$Main$sectionReferences(model),
 						author$project$Main$sectionUsages(model),
 						author$project$Main$sectionBottom
 					]))

@@ -1,2 +1,2 @@
 # functionalj.io
-FunctionalJ website.
+FunctionalJ.io website.

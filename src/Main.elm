@@ -4,6 +4,7 @@ import Browser
 import CodeBlock exposing (codeBlock)
 import Feature exposing (..)
 import Features exposing (..)
+import References exposing (..)
 import Html exposing (Html, a, button, code, div, h1, img, p, pre, span, text)
 import Html.Attributes exposing (class, href, id, name, src)
 import Html.Events exposing (onClick)
@@ -86,6 +87,7 @@ view model =
             , sectionIntroduction
             , sectionFeatures model
             , sectionExamples model
+            , sectionReferences model
             , sectionUsages model
             , sectionBottom
             ]
@@ -154,15 +156,15 @@ useGradle =
             , a [ href "https://github.com/NawaMan/nawaman-maven-repository" ]
                 [ text "my maven repo"
                 ]
-            , text " hosted on GitHub. So to use FunctionalJ you will need to ..."
+            , text " hosted on GitHub. So to use FunctionalJ.io you will need to ..."
             ]
         , p [] [ text "Add the maven repository ..." ]
         , codeBlock "maven { url 'https://raw.githubusercontent.com/nawmaman/nawaman-maven-repository/master/' }"
-        , p [] [ text "and the dependencies to FunctionalJ." ]
+        , p [] [ text "and the dependencies to FunctionalJ.io." ]
         , codeBlock "compile 'functionalj:functionalj-all:0.1.68.0' // Please lookup for the latest version."
         , p []
             [ a [ href "https://github.com/NawaMan/UseFunctionalJGradle" ] [ text "UseFunctionalJGradle" ]
-            , text " is an example project that use FunctionalJ. You can use that as a starting point."
+            , text " is an example project that use FunctionalJ.io. You can use that as a starting point."
             ]
         ]
 
@@ -175,7 +177,7 @@ useMaven =
             , a [ href "https://github.com/NawaMan/nawaman-maven-repository" ]
                 [ text "my maven repo"
                 ]
-            , text " hosted on GitHub. So to use FunctionalJ you will need to ..."
+            , text " hosted on GitHub. So to use FunctionalJ.io you will need to ..."
             ]
         , p [] [ text "Adding the required maven repository (hosted by github)." ]
         , codeBlock """
@@ -188,7 +190,7 @@ useMaven =
     </snapshots>
 </repository>
         """
-        , p [] [ text "and the dependencies to FunctionalJ." ]
+        , p [] [ text "and the dependencies to FunctionalJ.io." ]
         , codeBlock """
     <dependency>
         <groupId>functionalj</groupId>
@@ -198,7 +200,7 @@ useMaven =
         """
         , p []
             [ a [ href "https://github.com/NawaMan/UseFunctionalJMaven" ] [ text "UseFunctionalJMaven" ]
-            , text " is an example project that use FunctionalJ. You can use that as a starting point."
+            , text " is an example project that use FunctionalJ.io. You can use that as a starting point."
             ]
         ]
 
@@ -220,11 +222,15 @@ sectionUsages model =
         ]
 
 
+sectionReferences : Model -> Html Msg
+sectionReferences model = referencesView
+
+
 sectionBottom : Html Msg
 sectionBottom =
     div [ class "section section-bottom" ]
         [ p []
-            [ text "© 2017-2019 NawaMan's FunctionalJ — FunctionalJ is Open Source, "
+            [ text "© 2017-2019 NawaMan's FunctionalJ.io — FunctionalJ.io is Open Source, "
             , a [ href "https://github.com/NawaMan/FunctionalJ/blob/master/LICENSE" ] [ text "MIT License" ]
             , text "."
             ]

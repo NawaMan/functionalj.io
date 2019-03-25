@@ -8544,7 +8544,7 @@ var author$project$References$referencesView = A2(
 										[
 											elm$html$Html$text('Introducing FunctionalJ')
 										])),
-									elm$html$Html$text(' - Adding more functional spice to Java with FunctionalJ.'),
+									elm$html$Html$text(' - Adding more functional spice to Java with FunctionalJ. '),
 									A2(
 									elm$html$Html$a,
 									_List_fromArray(
@@ -8554,7 +8554,13 @@ var author$project$References$referencesView = A2(
 										]),
 									_List_fromArray(
 										[
-											elm$html$Html$text('▲')
+											A2(
+											elm$html$Html$img,
+											_List_fromArray(
+												[
+													elm$html$Html$Attributes$src('external-link-icon.png')
+												]),
+											_List_Nil)
 										]))
 								])),
 							A2(
@@ -8569,7 +8575,7 @@ var author$project$References$referencesView = A2(
 										[
 											elm$html$Html$text('Setup FunctionalJ for Eclipse')
 										])),
-									elm$html$Html$text(' - Make use of FunctionalJ types with Eclipse IDE.'),
+									elm$html$Html$text(' - Make use of FunctionalJ types with Eclipse IDE. '),
 									A2(
 									elm$html$Html$a,
 									_List_fromArray(
@@ -8579,7 +8585,13 @@ var author$project$References$referencesView = A2(
 										]),
 									_List_fromArray(
 										[
-											elm$html$Html$text('▲')
+											A2(
+											elm$html$Html$img,
+											_List_fromArray(
+												[
+													elm$html$Html$Attributes$src('external-link-icon.png')
+												]),
+											_List_Nil)
 										]))
 								])),
 							A2(
@@ -8594,7 +8606,7 @@ var author$project$References$referencesView = A2(
 										[
 											elm$html$Html$text('Immutable Data With FunctionalJ.io')
 										])),
-									elm$html$Html$text(' - Quick and easy way to create and use immutable data using FunctionalJ.io.'),
+									elm$html$Html$text(' - Quick and easy way to create and use immutable data using FunctionalJ.io. '),
 									A2(
 									elm$html$Html$a,
 									_List_fromArray(
@@ -8604,7 +8616,13 @@ var author$project$References$referencesView = A2(
 										]),
 									_List_fromArray(
 										[
-											elm$html$Html$text('▲')
+											A2(
+											elm$html$Html$img,
+											_List_fromArray(
+												[
+													elm$html$Html$Attributes$src('external-link-icon.png')
+												]),
+											_List_Nil)
 										]))
 								]))
 						]))

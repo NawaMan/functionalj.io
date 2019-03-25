@@ -14,18 +14,21 @@ referencesView =
             , ul []
                 [ li []
                     [ b [] [ text "Introducing FunctionalJ" ]
-                    , text " - Adding more functional spice to Java with FunctionalJ."
-                    , a [ href "https://nawaman.net/blog/2019-02-12#IntroducingFunctionalJ", target "_blank" ] [ text "▲" ]
+                    , text " - Adding more functional spice to Java with FunctionalJ. "
+                    , a [ href "https://nawaman.net/blog/2019-02-12#IntroducingFunctionalJ", target "_blank" ]
+                        [ img [ src "external-link-icon.png" ] [] ]
                     ]
                 , li []
                     [ b [] [ text "Setup FunctionalJ for Eclipse" ]
-                    , text " - Make use of FunctionalJ types with Eclipse IDE."
-                    , a [ href "https://nawaman.net/blog/2019-02-26#FunctionalJEclipse", target "_blank" ] [ text "▲" ]
+                    , text " - Make use of FunctionalJ types with Eclipse IDE. "
+                    , a [ href "https://nawaman.net/blog/2019-02-26#FunctionalJEclipse", target "_blank" ]
+                        [ img [ src "external-link-icon.png" ] [] ]
                     ]
                 , li []
                     [ b [] [ text "Immutable Data With FunctionalJ.io" ]
-                    , text " - Quick and easy way to create and use immutable data using FunctionalJ.io."
-                    , a [ href "https://dzone.com/articles/immutable-data-with-functionalio", target "_blank" ] [ text "▲" ]
+                    , text " - Quick and easy way to create and use immutable data using FunctionalJ.io. "
+                    , a [ href "https://dzone.com/articles/immutable-data-with-functionalio", target "_blank" ]
+                        [ img [ src "external-link-icon.png" ] [] ]
                     ]
                 ]
             ]

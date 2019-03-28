@@ -122,7 +122,7 @@ topBar =
 firstSection : Html Msg
 firstSection =
     div [ class "section section-first" ]
-        [ div [ class "content" ] [ text "FunctionaJ" ]
+        [ div [ class "content" ] [ text "FunctionalJ" ]
         ]
 
 

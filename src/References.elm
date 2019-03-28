@@ -53,7 +53,7 @@ referencesView =
                         , div []
                             [ a [ href "https://www.youtube.com/watch?v=nTOb6r13HvM", target "_blank" ]
                                 [ b [] [ text "Setup Eclipse for FunctionalJ" ] ]
-                            , p [] [ text "FunctionalJ.io helps writing functional style of code easier in Java. Most of its features work already with Eclipse except for the types. Types use annotation process to generate classes so we need to tell Eclipse to look for these generated classes. This VDO shows how to set up Eclipse so that FunctionaJ's types are visible to Eclipse as you develop." ]
+                            , p [] [ text "FunctionalJ.io helps writing functional style of code easier in Java. Most of its features work already with Eclipse except for the types. Types use annotation process to generate classes so we need to tell Eclipse to look for these generated classes. This VDO shows how to set up Eclipse so that FunctionalJ's types are visible to Eclipse as you develop." ]
                             ]
                         ]
                     ]

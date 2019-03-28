@@ -8193,7 +8193,7 @@ var author$project$Main$firstSection = A2(
 				]),
 			_List_fromArray(
 				[
-					elm$html$Html$text('FunctionaJ')
+					elm$html$Html$text('FunctionalJ')
 				]))
 		]));
 var elm$html$Html$a = _VirtualDom_node('a');
@@ -8762,7 +8762,7 @@ var author$project$References$referencesView = A2(
 													_List_Nil,
 													_List_fromArray(
 														[
-															elm$html$Html$text('FunctionalJ.io helps writing functional style of code easier in Java. Most of its features work already with Eclipse except for the types. Types use annotation process to generate classes so we need to tell Eclipse to look for these generated classes. This VDO shows how to set up Eclipse so that FunctionaJ\'s types are visible to Eclipse as you develop.')
+															elm$html$Html$text('FunctionalJ.io helps writing functional style of code easier in Java. Most of its features work already with Eclipse except for the types. Types use annotation process to generate classes so we need to tell Eclipse to look for these generated classes. This VDO shows how to set up Eclipse so that FunctionalJ\'s types are visible to Eclipse as you develop.')
 														]))
 												]))
 										]))

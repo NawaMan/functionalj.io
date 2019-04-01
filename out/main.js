@@ -8871,7 +8871,7 @@ var author$project$Main$useGradle = A2(
 				[
 					elm$html$Html$text('and the dependencies to FunctionalJ.io.')
 				])),
-			author$project$CodeBlock$codeBlock('compile \'functionalj:functionalj-all:0.1.68.0\' // Please lookup for the latest version.'),
+			author$project$CodeBlock$codeBlock('compile \'functionalj:functionalj-all:0.1.69.0\' // Please lookup for the latest version.'),
 			A2(
 			elm$html$Html$p,
 			_List_Nil,
@@ -8928,7 +8928,7 @@ var author$project$Main$useMaven = A2(
 				[
 					elm$html$Html$text('and the dependencies to FunctionalJ.io.')
 				])),
-			author$project$CodeBlock$codeBlock('\n    <dependency>\n        <groupId>functionalj</groupId>\n        <artifactId>functionalj-all</artifactId>\n        <version>0.1.68.0</version>\n    </dependency>\n        '),
+			author$project$CodeBlock$codeBlock('\n    <dependency>\n        <groupId>functionalj</groupId>\n        <artifactId>functionalj-all</artifactId>\n        <version>0.1.69.0</version>\n    </dependency>\n        '),
 			A2(
 			elm$html$Html$p,
 			_List_Nil,

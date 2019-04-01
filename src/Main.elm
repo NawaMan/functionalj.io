@@ -161,7 +161,7 @@ useGradle =
         , p [] [ text "Add the maven repository ..." ]
         , codeBlock "maven { url 'https://raw.githubusercontent.com/nawmaman/nawaman-maven-repository/master/' }"
         , p [] [ text "and the dependencies to FunctionalJ.io." ]
-        , codeBlock "compile 'functionalj:functionalj-all:0.1.68.0' // Please lookup for the latest version."
+        , codeBlock "compile 'functionalj:functionalj-all:0.1.69.0' // Please lookup for the latest version."
         , p []
             [ a [ href "https://github.com/NawaMan/UseFunctionalJGradle" ] [ text "UseFunctionalJGradle" ]
             , text " is an example project that use FunctionalJ.io. You can use that as a starting point."
@@ -195,7 +195,7 @@ useMaven =
     <dependency>
         <groupId>functionalj</groupId>
         <artifactId>functionalj-all</artifactId>
-        <version>0.1.68.0</version>
+        <version>0.1.69.0</version>
     </dependency>
         """
         , p []

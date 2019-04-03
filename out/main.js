@@ -8624,6 +8624,37 @@ var author$project$References$referencesView = A2(
 												]),
 											_List_Nil)
 										]))
+								])),
+							A2(
+							elm$html$Html$li,
+							_List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$b,
+									_List_Nil,
+									_List_fromArray(
+										[
+											elm$html$Html$text('Immutable Data With FunctionalJ.io')
+										])),
+									elm$html$Html$text(' - Quick and easy way to create and use immutable data using FunctionalJ.io. '),
+									A2(
+									elm$html$Html$a,
+									_List_fromArray(
+										[
+											elm$html$Html$Attributes$href('https://dzone.com/articles/immutable-data-with-functionalio'),
+											elm$html$Html$Attributes$target('_blank')
+										]),
+									_List_fromArray(
+										[
+											A2(
+											elm$html$Html$img,
+											_List_fromArray(
+												[
+													elm$html$Html$Attributes$src('external-link-icon.png')
+												]),
+											_List_Nil)
+										]))
 								]))
 						]))
 				])),

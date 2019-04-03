@@ -31,9 +31,9 @@ referencesView =
                         [ img [ src "external-link-icon.png" ] [] ]
                     ]
                 , li []
-                    [ b [] [ text "Immutable Data With FunctionalJ.io" ]
-                    , text " - Quick and easy way to create and use immutable data using FunctionalJ.io. "
-                    , a [ href "https://dzone.com/articles/immutable-data-with-functionalio", target "_blank" ]
+                    [ b [] [ text "Choice types in Java with FunctionalJ.io" ]
+                    , text " - A \"Tagged Union\" implementation in Java "
+                    , a [ href "https://dzone.com/articles/choice-types-in-java-with-functionaljio", target "_blank" ]
                         [ img [ src "external-link-icon.png" ] [] ]
                     ]
                 ]

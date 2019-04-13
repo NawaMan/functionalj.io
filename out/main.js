@@ -8635,14 +8635,14 @@ var author$project$References$referencesView = A2(
 									_List_Nil,
 									_List_fromArray(
 										[
-											elm$html$Html$text('Immutable Data With FunctionalJ.io')
+											elm$html$Html$text('Choice types in Java with FunctionalJ.io')
 										])),
-									elm$html$Html$text(' - Quick and easy way to create and use immutable data using FunctionalJ.io. '),
+									elm$html$Html$text(' - A \"Tagged Union\" implementation in Java '),
 									A2(
 									elm$html$Html$a,
 									_List_fromArray(
 										[
-											elm$html$Html$Attributes$href('https://dzone.com/articles/immutable-data-with-functionalio'),
+											elm$html$Html$Attributes$href('https://dzone.com/articles/choice-types-in-java-with-functionaljio'),
 											elm$html$Html$Attributes$target('_blank')
 										]),
 									_List_fromArray(
@@ -8854,6 +8854,66 @@ var author$project$References$referencesView = A2(
 													_List_fromArray(
 														[
 															elm$html$Html$text('Immutability is an important principle of functional programming. Mutable objects hide changes. And hidden changes can lead to unpredictability and chaos.')
+														]))
+												]))
+										]))
+								])),
+							A2(
+							elm$html$Html$li,
+							_List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$p,
+									_List_Nil,
+									_List_fromArray(
+										[
+											A2(
+											elm$html$Html$a,
+											_List_fromArray(
+												[
+													elm$html$Html$Attributes$href('https://www.youtube.com/watch?v=JWKl2cfkVrw'),
+													elm$html$Html$Attributes$target('_blank')
+												]),
+											_List_fromArray(
+												[
+													A2(
+													elm$html$Html$img,
+													_List_fromArray(
+														[
+															elm$html$Html$Attributes$src('https://img.youtube.com/vi/JWKl2cfkVrw/mqdefault.jpg'),
+															elm$html$Html$Attributes$width(128)
+														]),
+													_List_Nil)
+												])),
+											A2(
+											elm$html$Html$div,
+											_List_Nil,
+											_List_fromArray(
+												[
+													A2(
+													elm$html$Html$a,
+													_List_fromArray(
+														[
+															elm$html$Html$Attributes$href('https://www.youtube.com/watch?v=JWKl2cfkVrw'),
+															elm$html$Html$Attributes$target('_blank')
+														]),
+													_List_fromArray(
+														[
+															A2(
+															elm$html$Html$b,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	elm$html$Html$text('Choice Types in Java with FunctionalJ.io')
+																]))
+														])),
+													A2(
+													elm$html$Html$p,
+													_List_Nil,
+													_List_fromArray(
+														[
+															elm$html$Html$text('Choice types allow the specification of possible values in an ad-hoc fasion.')
 														]))
 												]))
 										]))

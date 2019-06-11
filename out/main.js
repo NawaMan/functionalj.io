@@ -8245,6 +8245,13 @@ var author$project$Main$sectionBottom = A2(
 						[
 							elm$html$Html$text('GitHub')
 						]))
+				])),
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('SonaType OSSRH-49288')
 				]))
 		]));
 var author$project$Feature$emptyExample = A2(

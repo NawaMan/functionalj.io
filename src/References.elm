@@ -5,6 +5,60 @@ import Html.Attributes exposing (class, href, id, property, src, style, target, 
 import Msg exposing (..)
 
 
+type alias Article =
+    { title : String
+    , subTitle : String
+    , link : String
+    }
+
+
+type alias Vdo =
+    { title : String
+    , subTitle : String
+    , link : String
+    }
+
+
+articles =
+    [ { title = "Introducing FunctionalJ"
+      , subTitle = "Adding more functional spice to Java with FunctionalJ."
+      , link = "https://nawaman.net/blog/2019-02-12#IntroducingFunctionalJ"
+      }
+    , { title = "Setup FunctionalJ for Eclipse"
+      , subTitle = "Make use of FunctionalJ types with Eclipse IDE."
+      , link = "https://nawaman.net/blog/2019-02-26#FunctionalJEclipse"
+      }
+    , { title = "Immutable Data With FunctionalJ.io"
+      , subTitle = "Quick and easy way to create and use immutable data using FunctionalJ.io."
+      , link = "https://dzone.com/articles/immutable-data-with-functionalio"
+      }
+    , { title = "Choice types in Java with FunctionalJ.io"
+      , subTitle = "A \"Tagged Union\" implementation in Java."
+      , link = "https://dzone.com/articles/choice-types-in-java-with-functionaljio"
+      }
+    ]
+
+
+vdos =
+    [ { title = "Introducing FunctionalJ"
+      , subTitle = "Introducing FunctionalJ library - a library to bring in numbers of functional programming goodness to Java."
+      , link = "gIHY1wUSQzs"
+      },
+      { title = "Setup Eclipse for FunctionalJ"
+      , subTitle = "FunctionalJ.io helps writing functional style of code easier in Java. Most of its features work already with Eclipse except for the types. Types use annotation process to generate classes so we need to tell Eclipse to look for these generated classes. This VDO shows how to set up Eclipse so that FunctionalJ's types are visible to Eclipse as you develop."
+      , link = "nTOb6r13HvM"
+      },
+      { title = "Immutable Data with FunctionalJ.io"
+      , subTitle = "Immutability is an important principle of functional programming. Mutable objects hide changes. And hidden changes can lead to unpredictability and chaos."
+      , link = "Q_cdFh9fhxY"
+      },
+      { title = "Choice Types in Java with FunctionalJ.io"
+      , subTitle = "Choice types allow the specification of possible values in an ad-hoc fasion."
+      , link = "JWKl2cfkVrw"
+      }
+    ]
+
+
 referencesView : Html Msg
 referencesView =
     div [ class "section section-references" ]

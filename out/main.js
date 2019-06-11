@@ -8662,6 +8662,37 @@ var author$project$References$referencesView = A2(
 												]),
 											_List_Nil)
 										]))
+								])),
+							A2(
+							elm$html$Html$li,
+							_List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$b,
+									_List_Nil,
+									_List_fromArray(
+										[
+											elm$html$Html$text('Lazy-Evaluated Functional Lists')
+										])),
+									elm$html$Html$text(' - Haskel Style List in Java With FunctionalJ.io '),
+									A2(
+									elm$html$Html$a,
+									_List_fromArray(
+										[
+											elm$html$Html$Attributes$href('https://dzone.com/articles/lazy-evaluated-functional-lists'),
+											elm$html$Html$Attributes$target('_blank')
+										]),
+									_List_fromArray(
+										[
+											A2(
+											elm$html$Html$img,
+											_List_fromArray(
+												[
+													elm$html$Html$Attributes$src('external-link-icon.png')
+												]),
+											_List_Nil)
+										]))
 								]))
 						]))
 				])),

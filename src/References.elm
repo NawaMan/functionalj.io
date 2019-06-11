@@ -90,6 +90,12 @@ referencesView =
                     , a [ href "https://dzone.com/articles/choice-types-in-java-with-functionaljio", target "_blank" ]
                         [ img [ src "external-link-icon.png" ] [] ]
                     ]
+                , li []
+                    [ b [] [ text "Lazy-Evaluated Functional Lists" ]
+                    , text " - Haskel Style List in Java With FunctionalJ.io "
+                    , a [ href "https://dzone.com/articles/lazy-evaluated-functional-lists", target "_blank" ]
+                        [ img [ src "external-link-icon.png" ] [] ]
+                    ]
                 ]
             ]
         , div [ class "list-vdos" ]

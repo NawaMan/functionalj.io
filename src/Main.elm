@@ -238,9 +238,6 @@ sectionBottom =
             [ text "Find code on "
             , a [ href "https://github.com/NawaMan/FunctionalJ" ] [ text "GitHub" ]
             ]
-        , p []
-            [ text "SonaType OSSRH-49288"
-            ]
         ]
 
         

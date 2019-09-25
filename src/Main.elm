@@ -151,17 +151,11 @@ sectionExamples model =
 useGradle : Html Msg
 useGradle =
     div []
-        [ p []
-            [ text "This project binary is published on "
-            , a [ href "https://github.com/NawaMan/nawaman-maven-repository" ]
-                [ text "my maven repo"
-                ]
-            , text " hosted on GitHub. So to use FunctionalJ.io you will need to ..."
-            ]
-        , p [] [ text "Add the maven repository ..." ]
-        , codeBlock "maven { url 'https://raw.githubusercontent.com/nawmaman/nawaman-maven-repository/master/' }"
-        , p [] [ text "and the dependencies to FunctionalJ.io." ]
-        , codeBlock "compile 'functionalj:functionalj-all:0.1.69.0' // Please lookup for the latest version."
+        [ p [] [ text "Add gradle dependency ..." ]
+        , codeBlock """
+    compile             'functionalj:functionalj-all:0.4.0.0' // Please lookup for the latest version.
+    annotationProcessor 'io.functionalj:functionalj-types:0.4.0.0' // Please lookup for the latest version."
+            """
         , p []
             [ a [ href "https://github.com/NawaMan/UseFunctionalJGradle" ] [ text "UseFunctionalJGradle" ]
             , text " is an example project that use FunctionalJ.io. You can use that as a starting point."
@@ -172,30 +166,12 @@ useGradle =
 useMaven : Html Msg
 useMaven =
     div []
-        [ p []
-            [ text "This project binary is published on "
-            , a [ href "https://github.com/NawaMan/nawaman-maven-repository" ]
-                [ text "my maven repo"
-                ]
-            , text " hosted on GitHub. So to use FunctionalJ.io you will need to ..."
-            ]
-        , p [] [ text "Adding the required maven repository (hosted by github)." ]
-        , codeBlock """
-<repository>
-    <id>Nullable-mvn-repo</id>
-    <url>https://raw.githubusercontent.com/nawaman/nawaman-maven-repository/master/</url>
-    <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-    </snapshots>
-</repository>
-        """
-        , p [] [ text "and the dependencies to FunctionalJ.io." ]
+        [ p [] [ text "Add maven dependency ... "]
         , codeBlock """
     <dependency>
         <groupId>functionalj</groupId>
         <artifactId>functionalj-all</artifactId>
-        <version>0.1.69.0</version>
+        <version>0.4.0.0</version>
     </dependency>
         """
         , p []

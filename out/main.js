@@ -8965,35 +8965,9 @@ var author$project$Main$useGradle = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('This project binary is published on '),
-					A2(
-					elm$html$Html$a,
-					_List_fromArray(
-						[
-							elm$html$Html$Attributes$href('https://github.com/NawaMan/nawaman-maven-repository')
-						]),
-					_List_fromArray(
-						[
-							elm$html$Html$text('my maven repo')
-						])),
-					elm$html$Html$text(' hosted on GitHub. So to use FunctionalJ.io you will need to ...')
+					elm$html$Html$text('Add gradle dependency ...')
 				])),
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('Add the maven repository ...')
-				])),
-			author$project$CodeBlock$codeBlock('maven { url \'https://raw.githubusercontent.com/nawmaman/nawaman-maven-repository/master/\' }'),
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('and the dependencies to FunctionalJ.io.')
-				])),
-			author$project$CodeBlock$codeBlock('compile \'functionalj:functionalj-all:0.1.69.0\' // Please lookup for the latest version.'),
+			author$project$CodeBlock$codeBlock('\n    compile             \'functionalj:functionalj-all:0.4.0.0\' // Please lookup for the latest version.\n    annotationProcessor \'io.functionalj:functionalj-types:0.4.0.0\' // Please lookup for the latest version."\n            '),
 			A2(
 			elm$html$Html$p,
 			_List_Nil,
@@ -9022,35 +8996,9 @@ var author$project$Main$useMaven = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					elm$html$Html$text('This project binary is published on '),
-					A2(
-					elm$html$Html$a,
-					_List_fromArray(
-						[
-							elm$html$Html$Attributes$href('https://github.com/NawaMan/nawaman-maven-repository')
-						]),
-					_List_fromArray(
-						[
-							elm$html$Html$text('my maven repo')
-						])),
-					elm$html$Html$text(' hosted on GitHub. So to use FunctionalJ.io you will need to ...')
+					elm$html$Html$text('Add maven dependency ... ')
 				])),
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('Adding the required maven repository (hosted by github).')
-				])),
-			author$project$CodeBlock$codeBlock('\n<repository>\n    <id>Nullable-mvn-repo</id>\n    <url>https://raw.githubusercontent.com/nawaman/nawaman-maven-repository/master/</url>\n    <snapshots>\n        <enabled>true</enabled>\n        <updatePolicy>always</updatePolicy>\n    </snapshots>\n</repository>\n        '),
-			A2(
-			elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					elm$html$Html$text('and the dependencies to FunctionalJ.io.')
-				])),
-			author$project$CodeBlock$codeBlock('\n    <dependency>\n        <groupId>functionalj</groupId>\n        <artifactId>functionalj-all</artifactId>\n        <version>0.1.69.0</version>\n    </dependency>\n        '),
+			author$project$CodeBlock$codeBlock('\n    <dependency>\n        <groupId>functionalj</groupId>\n        <artifactId>functionalj-all</artifactId>\n        <version>0.4.0.0</version>\n    </dependency>\n        '),
 			A2(
 			elm$html$Html$p,
 			_List_Nil,

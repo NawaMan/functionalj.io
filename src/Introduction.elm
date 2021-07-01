@@ -3,6 +3,12 @@ module Introduction exposing (introduction, introductionView)
 import Html exposing (Html, div, text)
 
 
+-- Add as required by elm build 
+main =
+  Html.text "Hello!"
+
+
+
 introductionView : Html msg
 introductionView = div [] [ text introduction ]
 

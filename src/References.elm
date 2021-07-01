@@ -5,6 +5,12 @@ import Html.Attributes exposing (class, href, id, property, src, style, target, 
 import Msg exposing (..)
 
 
+-- Add as required by elm build 
+main =
+  Html.text "Hello!"
+
+
+
 type alias Article =
     { title : String
     , subTitle : String

@@ -6,6 +6,11 @@ import Html.Attributes exposing (class, id)
 import Msg exposing (..)
 
 
+-- Add as required by elm build 
+main =
+  Html.text "Hello!"
+
+
 type alias Feature =
     { title : String
     , description : String

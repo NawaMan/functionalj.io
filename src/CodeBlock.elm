@@ -5,6 +5,10 @@ import Html.Attributes exposing (class, href, id, name)
 import SyntaxHighlight exposing (javascript, monokai, toBlockHtml, useTheme)
 
 
+main =
+  Html.text "Hello!"
+
+
 codeBlock : String -> Html msg
 codeBlock codeText =
     div []

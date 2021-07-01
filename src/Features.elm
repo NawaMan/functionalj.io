@@ -18,6 +18,11 @@ import Json.Encode exposing (string)
 import Msg exposing (..)
 
 
+-- Add as required by elm build 
+main =
+  Html.text "Hello!"
+
+
 intiFeature =
     featFunctions
 

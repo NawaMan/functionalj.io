@@ -1,2 +1,2 @@
-# nullablej.io
-NullableJ.io website.
+# functionalj.io
+FunctionalJ.io website.

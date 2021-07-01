@@ -9192,7 +9192,7 @@ var $author$project$Main$useGradle = A2(
 				[
 					$elm$html$Html$text('Add gradle dependency ...')
 				])),
-			$author$project$CodeBlock$codeBlock('\n    compile             \'functionalj:functionalj-all:0.4.0.0\' // Please lookup for the latest version.\n    annotationProcessor \'io.functionalj:functionalj-types:0.4.0.0\' // Please lookup for the latest version."\n            '),
+			$author$project$CodeBlock$codeBlock('\n    compile             \'functionalj:functionalj-all:0.5.2.0\' // Please lookup for the latest version.\n    annotationProcessor \'io.functionalj:functionalj-types:0.5.2.0\' // Please lookup for the latest version."\n            '),
 			A2(
 			$elm$html$Html$p,
 			_List_Nil,
@@ -9223,7 +9223,7 @@ var $author$project$Main$useMaven = A2(
 				[
 					$elm$html$Html$text('Add maven dependency ... ')
 				])),
-			$author$project$CodeBlock$codeBlock('\n    <dependency>\n        <groupId>functionalj</groupId>\n        <artifactId>functionalj-all</artifactId>\n        <version>0.4.0.0</version>\n    </dependency>\n        '),
+			$author$project$CodeBlock$codeBlock('\n    <dependency>\n        <groupId>functionalj</groupId>\n        <artifactId>functionalj-all</artifactId>\n        <version>0.5.2.0</version>\n    </dependency>\n        '),
 			A2(
 			$elm$html$Html$p,
 			_List_Nil,

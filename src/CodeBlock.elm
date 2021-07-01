@@ -5,6 +5,7 @@ import Html.Attributes exposing (class, href, id, name)
 import SyntaxHighlight exposing (javascript, monokai, toBlockHtml, useTheme)
 
 
+-- Add as required by elm build 
 main =
   Html.text "Hello!"
 

@@ -154,7 +154,7 @@ useGradle =
         [ p [] [ text "Add gradle dependency ..." ]
         , codeBlock """
     compile             'functionalj:functionalj-all:0.5.5.0' // Please lookup for the latest version.
-    annotationProcessor 'io.functionalj:functionalj-types:0.5.2.0' // Please lookup for the latest version."
+    annotationProcessor 'io.functionalj:functionalj-types:0.5.5.0' // Please lookup for the latest version."
             """
         , p []
             [ a [ href "https://github.com/NawaMan/UseFunctionalJGradle" ] [ text "UseFunctionalJGradle" ]

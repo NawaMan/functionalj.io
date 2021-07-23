@@ -9192,7 +9192,7 @@ var $author$project$Main$useGradle = A2(
 				[
 					$elm$html$Html$text('Add gradle dependency ...')
 				])),
-			$author$project$CodeBlock$codeBlock('\n    compile             \'functionalj:functionalj-all:0.5.5.0\' // Please lookup for the latest version.\n    annotationProcessor \'io.functionalj:functionalj-types:0.5.2.0\' // Please lookup for the latest version."\n            '),
+			$author$project$CodeBlock$codeBlock('\n    compile             \'functionalj:functionalj-all:0.5.5.0\' // Please lookup for the latest version.\n    annotationProcessor \'io.functionalj:functionalj-types:0.5.5.0\' // Please lookup for the latest version."\n            '),
 			A2(
 			$elm$html$Html$p,
 			_List_Nil,

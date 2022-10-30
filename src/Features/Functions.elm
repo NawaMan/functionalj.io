@@ -2,8 +2,8 @@ module Features.Functions exposing (featFunctions)
 
 import CodeBlock exposing (codeBlock)
 import Feature exposing (..)
-import Html exposing (Html, button, code, div, h1, p, span, text)
-import Html.Attributes exposing (class, id)
+import Html exposing (Html, button, code, div, h1, p, span, text, a)
+import Html.Attributes exposing (class, id, href)
 
 
 featFunctions =
@@ -32,17 +32,43 @@ exampleMethodReference =
     Example "Function from method refernece"
         [ p [] [ text "Since functions are functional interfaces, Java 8 method references can be used to create function." ]
         , codeShow """
+...
+import functionalj.function.Func.f;
+...
+
 public int toInt(String str) {
     return Integer.parseInt(str);
 }
+public static int toIntWithBase(String str, int base) {
+    return Integer.parseInt(str, base);
+}
 
 ...
-import static functionalj.function.Func.f;
-...
-val toInt = f(this::toInt);
-assertEquals(42, (int)toInt.apply("42"));
+
+// Since functions are functional interfaces,
+//     Java 8 method references can be used to create functions.
+
+// With FunctionalJ, the `Func.f` method allows you to easily turn a method reference to a function.
+var toInt = f(Main::toInt);
+validate("toInt.apply(\"42\") = 42",
+          toInt.apply("42"),  42);
+
+// It also automatically takes are of the types.
+// Notice that we use `f` for both `toInt` and `toIntWithBase` which have different signature.
+var toIntWithBase = f(Main::toIntWithBase);
+validate("toIntWithBase.apply(\"11\", 9) = 9",
+          toIntWithBase.apply("11", 8),  9);
+
+// As a function object, we can use it as such. Like with `andThen()`.
+validate("f(Main::toInt).andThen(i -> i + 8).apply(\"42\") = 50",
+          f(Main::toInt).andThen(i -> i + 8).apply("42"),  50);
 ...
 """
+        , p [] [
+            text "Try it out for your self "
+            , a [ href "https://replit.com/@NawaMan/TryFunctionalJ-Function-from-method-reference#src/main/java/main/Main.java" ] [ text "here" ]
+            , text "!!!"
+            ]
         ]
 
 

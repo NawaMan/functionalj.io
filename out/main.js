@@ -5325,6 +5325,7 @@ var $author$project$Feature$Example = F2(
 	function (title, body) {
 		return {body: body, title: title};
 	});
+var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -7648,6 +7649,12 @@ var $author$project$Feature$codeShow = function (codeText) {
 	return $author$project$CodeBlock$codeBlock(
 		$elm$core$String$trim(codeText));
 };
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $author$project$Features$Functions$exampleMethodReference = A2(
 	$author$project$Feature$Example,
@@ -7661,7 +7668,25 @@ var $author$project$Features$Functions$exampleMethodReference = A2(
 				[
 					$elm$html$Html$text('Since functions are functional interfaces, Java 8 method references can be used to create function.')
 				])),
-			$author$project$Feature$codeShow('\npublic int toInt(String str) {\n    return Integer.parseInt(str);\n}\n\n...\nimport static functionalj.function.Func.f;\n...\nval toInt = f(this::toInt);\nassertEquals(42, (int)toInt.apply("42"));\n...\n')
+			$author$project$Feature$codeShow('\n...\nimport functionalj.function.Func.f;\n...\n\npublic int toInt(String str) {\n    return Integer.parseInt(str);\n}\npublic static int toIntWithBase(String str, int base) {\n    return Integer.parseInt(str, base);\n}\n\n...\n\n// Since functions are functional interfaces,\n//     Java 8 method references can be used to create functions.\n\n// With FunctionalJ, the `Func.f` method allows you to easily turn a method reference to a function.\nvar toInt = f(Main::toInt);\nvalidate("toInt.apply(\"42\") = 42",\n          toInt.apply("42"),  42);\n\n// It also automatically takes are of the types.\n// Notice that we use `f` for both `toInt` and `toIntWithBase` which have different signature.\nvar toIntWithBase = f(Main::toIntWithBase);\nvalidate("toIntWithBase.apply(\"11\", 9) = 9",\n          toIntWithBase.apply("11", 8),  9);\n\n// As a function object, we can use it as such. Like with `andThen()`.\nvalidate("f(Main::toInt).andThen(i -> i + 8).apply(\"42\") = 50",\n          f(Main::toInt).andThen(i -> i + 8).apply("42"),  50);\n...\n'),
+			A2(
+			$elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Try it out for your self '),
+					A2(
+					$elm$html$Html$a,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$href('https://replit.com/@NawaMan/TryFunctionalJ-Function-from-method-reference#src/main/java/main/Main.java')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('here')
+						])),
+					$elm$html$Html$text('!!!')
+				]))
 		]));
 var $author$project$Features$Functions$examplePartialApplication = A2(
 	$author$project$Feature$Example,
@@ -8418,13 +8443,6 @@ var $author$project$Main$firstSection = A2(
 				]))
 		]));
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
-var $elm$html$Html$a = _VirtualDom_node('a');
-var $elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
 var $author$project$Main$sectionBottom = A2(
 	$elm$html$Html$div,
 	_List_fromArray(

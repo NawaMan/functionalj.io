@@ -39,7 +39,7 @@ import functionalj.function.Func.f;
 public int toInt(String str) {
     return Integer.parseInt(str);
 }
-public static int toIntWithBase(String str, int base) {
+public int toIntWithBase(String str, int base) {
     return Integer.parseInt(str, base);
 }
 
@@ -49,19 +49,19 @@ public static int toIntWithBase(String str, int base) {
 //     Java 8 method references can be used to create functions.
 
 // With FunctionalJ, the `Func.f` method allows you to easily turn a method reference to a function.
-var toInt = f(Main::toInt);
+var toInt = f(this::toInt);
 validate("toInt.apply(\"42\") = 42",
           toInt.apply("42"),  42);
 
 // It also automatically takes are of the types.
 // Notice that we use `f` for both `toInt` and `toIntWithBase` which have different signature.
-var toIntWithBase = f(Main::toIntWithBase);
+var toIntWithBase = f(this::toIntWithBase);
 validate("toIntWithBase.apply(\"11\", 9) = 9",
           toIntWithBase.apply("11", 8),  9);
 
 // As a function object, we can use it as such. Like with `andThen()`.
-validate("f(Main::toInt).andThen(i -> i + 8).apply(\"42\") = 50",
-          f(Main::toInt).andThen(i -> i + 8).apply("42"),  50);
+validate("f(this::toInt).andThen(i -> i + 8).apply(\"42\") = 50",
+          f(this::toInt).andThen(i -> i + 8).apply("42"),  50);
 ...
 """
         , p [] [

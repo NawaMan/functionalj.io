@@ -7656,6 +7656,7 @@ var $elm$html$Html$Attributes$href = function (url) {
 		_VirtualDom_noJavaScriptUri(url));
 };
 var $elm$html$Html$p = _VirtualDom_node('p');
+var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $author$project$Features$Functions$exampleMethodReference = A2(
 	$author$project$Feature$Example,
 	'Function from method refernece',
@@ -7679,7 +7680,8 @@ var $author$project$Features$Functions$exampleMethodReference = A2(
 					$elm$html$Html$a,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$href('https://replit.com/@NawaMan/TryFunctionalJ-Function-from-method-reference#src/main/java/main/Main.java')
+							$elm$html$Html$Attributes$href('https://replit.com/@NawaMan/TryFunctionalJ-Function-from-method-reference#src/main/java/Main.java'),
+							$elm$html$Html$Attributes$target('_blank')
 						]),
 					_List_fromArray(
 						[
@@ -8729,7 +8731,6 @@ var $elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
-var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $elm$html$Html$Attributes$width = function (n) {
 	return A2(

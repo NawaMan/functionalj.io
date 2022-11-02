@@ -3,7 +3,7 @@ module Features.Functions exposing (featFunctions)
 import CodeBlock exposing (codeBlock)
 import Feature exposing (..)
 import Html exposing (Html, button, code, div, h1, p, span, text, a)
-import Html.Attributes exposing (class, id, href)
+import Html.Attributes exposing (class, id, href, target)
 
 
 featFunctions =
@@ -66,7 +66,7 @@ validate("f(this::toInt).andThen(i -> i + 8).apply(\"42\") = 50",
 """
         , p [] [
             text "Try it out for your self "
-            , a [ href "https://replit.com/@NawaMan/TryFunctionalJ-Function-from-method-reference#src/main/java/main/Main.java" ] [ text "here" ]
+            , a [ href "https://replit.com/@NawaMan/TryFunctionalJ-Function-from-method-reference#src/main/java/Main.java", target "_blank" ] [ text "here" ]
             , text "!!!"
             ]
         ]

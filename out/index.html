@@ -335,9 +335,10 @@
 	<script src="main.js"></script>
 	<script>
 		var layoutMode = LayoutMode.init(['mobile', 'desktop'])
-
-
-		var app = Elm.Main.init({ node: document.querySelector('main') })
+		var app = Elm.Main.init({
+			node: document.querySelector('main'),
+			flags: window.location.search
+		})
 	</script>
 
 	<div id="bottom-spacer" style='height: 500px'>

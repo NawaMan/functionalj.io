@@ -4442,6 +4442,23 @@ var _Parser_findSubString = F5(function(smallString, offset, row, col, bigString
 });
 
 
+function _Url_percentEncode(string)
+{
+	return encodeURIComponent(string);
+}
+
+function _Url_percentDecode(string)
+{
+	try
+	{
+		return $elm$core$Maybe$Just(decodeURIComponent(string));
+	}
+	catch (e)
+	{
+		return $elm$core$Maybe$Nothing;
+	}
+}
+
 
 var _Bitwise_and = F2(function(a, b)
 {
@@ -5317,6 +5334,27 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Main$Gradle = {$: 'Gradle'};
+var $elm$core$List$drop = F2(
+	function (n, list) {
+		drop:
+		while (true) {
+			if (n <= 0) {
+				return list;
+			} else {
+				if (!list.b) {
+					return list;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs;
+					n = $temp$n;
+					list = $temp$list;
+					continue drop;
+				}
+			}
+		}
+	});
 var $author$project$Feature$Feature = F3(
 	function (title, description, examples) {
 		return {description: description, examples: examples, title: title};
@@ -7762,10 +7800,6 @@ var $author$project$Features$Functions$featFunctions = A3(
 	'\n    More function types and many ways to manipulate and use them.\n    ',
 	_List_fromArray(
 		[$author$project$Features$Functions$exampleMethodReference, $author$project$Features$Functions$exampleWhenAbsent, $author$project$Features$Functions$exampleSafely, $author$project$Features$Functions$examplePartialApplication]));
-var $author$project$Features$intiFeature = $author$project$Features$Functions$featFunctions;
-var $author$project$Msg$SelectFeature = function (a) {
-	return {$: 'SelectFeature', a: a};
-};
 var $author$project$Features$Lens$description = '\n    Lenses are functions to access to fields of an object -- both read and write.\n    As functions, they can composed with others.\n      ';
 var $author$project$Features$Lens$exampleReadAccess = A2(
 	$author$project$Feature$Example,
@@ -8169,6 +8203,210 @@ var $author$project$Features$Types$featTypes = A3(
 		[$author$project$Features$Types$exampleStruct, $author$project$Features$Types$exampleStructWithLens, $author$project$Features$Types$exampleChangeLens, $author$project$Features$Types$exampleExhaustiveBuilder, $author$project$Features$Types$exampleStructValidation, $author$project$Features$Types$exampleChoiceType, $author$project$Features$Types$exampleValidateEmailRuleType]));
 var $author$project$Features$features = _List_fromArray(
 	[$author$project$Features$Functions$featFunctions, $author$project$Features$Lens$featLens, $author$project$Features$PipeablePipeLine$featPipeablePipeLine, $author$project$Features$ListMap$featListMap, $author$project$Features$StreamIterator$featStreamIterator, $author$project$Features$Result$featResult, $author$project$Features$Types$featTypes, $author$project$Features$Ref$featRef, $author$project$Features$SideEffect$featSideEffect]);
+var $elm$core$List$head = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(x);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $author$project$Features$intiFeature = $author$project$Features$Functions$featFunctions;
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var $author$project$Main$featureAt = function (index) {
+	return A2(
+		$elm$core$Maybe$withDefault,
+		$author$project$Features$intiFeature,
+		$elm$core$List$head(
+			A2($elm$core$List$drop, index, $author$project$Features$features)));
+};
+var $elm$core$Platform$Cmd$batch = _Platform_batch;
+var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
+var $sporto$qs$QS$Config = function (a) {
+	return {$: 'Config', a: a};
+};
+var $sporto$qs$QS$config = $sporto$qs$QS$Config(
+	{addQuestionMark: true, encodeBrackets: true});
+var $sporto$qs$QS$get = F2(
+	function (key, query) {
+		return A2($elm$core$Dict$get, key, query);
+	});
+var $sporto$qs$QS$Many = function (a) {
+	return {$: 'Many', a: a};
+};
+var $sporto$qs$QS$rawValueToValue = F2(
+	function (cfg, val) {
+		var trimmed = $elm$core$String$trim(val);
+		var isEmpty = trimmed === '';
+		return isEmpty ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(trimmed);
+	});
+var $sporto$qs$QS$set = F3(
+	function (key, value, query) {
+		return A3($elm$core$Dict$insert, key, value, query);
+	});
+var $sporto$qs$QS$addListValToQuery = F4(
+	function (cfg, key, rawValue, query) {
+		var currentVals = A2($sporto$qs$QS$get, key, query);
+		var pushValue = function (value) {
+			if (currentVals.$ === 'Just') {
+				if (currentVals.a.$ === 'Many') {
+					var vals = currentVals.a.a;
+					return $sporto$qs$QS$Many(
+						A2(
+							$elm$core$List$append,
+							vals,
+							_List_fromArray(
+								[value])));
+				} else {
+					var preValue = currentVals.a.a;
+					return $sporto$qs$QS$Many(
+						_List_fromArray(
+							[preValue, value]));
+				}
+			} else {
+				return $sporto$qs$QS$Many(
+					_List_fromArray(
+						[value]));
+			}
+		};
+		var _v0 = A2($sporto$qs$QS$rawValueToValue, cfg, rawValue);
+		if (_v0.$ === 'Nothing') {
+			return query;
+		} else {
+			var value = _v0.a;
+			return A3(
+				$sporto$qs$QS$set,
+				key,
+				pushValue(value),
+				query);
+		}
+	});
+var $sporto$qs$QS$One = function (a) {
+	return {$: 'One', a: a};
+};
+var $sporto$qs$QS$addUniqueValToQuery = F4(
+	function (cfg, key, val, query) {
+		var _v0 = A2($sporto$qs$QS$rawValueToValue, cfg, val);
+		if (_v0.$ === 'Nothing') {
+			return query;
+		} else {
+			var value = _v0.a;
+			return A3(
+				$sporto$qs$QS$set,
+				key,
+				$sporto$qs$QS$One(value),
+				query);
+		}
+	});
+var $elm$core$String$dropRight = F2(
+	function (n, string) {
+		return (n < 1) ? string : A3($elm$core$String$slice, 0, -n, string);
+	});
+var $elm$core$String$endsWith = _String_endsWith;
+var $elm$url$Url$percentDecode = _Url_percentDecode;
+var $sporto$qs$QS$querySegmentToTuple = function (element) {
+	var splitted = A2($elm$core$String$split, '=', element);
+	var second = A2(
+		$elm$core$Maybe$withDefault,
+		'',
+		$elm$core$List$head(
+			A2($elm$core$List$drop, 1, splitted)));
+	var secondDecoded = A2(
+		$elm$core$Maybe$withDefault,
+		'',
+		$elm$url$Url$percentDecode(second));
+	var first = A2(
+		$elm$core$Maybe$withDefault,
+		'',
+		$elm$core$List$head(splitted));
+	var firstDecoded = A2(
+		$elm$core$Maybe$withDefault,
+		'',
+		$elm$url$Url$percentDecode(first));
+	return _Utils_Tuple2(firstDecoded, secondDecoded);
+};
+var $sporto$qs$QS$addSegmentToQuery = F3(
+	function (cfg, segment, query) {
+		var _v0 = $sporto$qs$QS$querySegmentToTuple(segment);
+		var key = _v0.a;
+		var val = _v0.b;
+		if (A2($elm$core$String$endsWith, '[]', key)) {
+			var newKey = A2($elm$core$String$dropRight, 2, key);
+			return A4($sporto$qs$QS$addListValToQuery, cfg, newKey, val, query);
+		} else {
+			return A4($sporto$qs$QS$addUniqueValToQuery, cfg, key, val, query);
+		}
+	});
+var $sporto$qs$QS$empty = $elm$core$Dict$empty;
+var $sporto$qs$QS$parse = F2(
+	function (_v0, queryString) {
+		var cfg = _v0.a;
+		var trimmed = A2(
+			$elm$core$String$join,
+			'',
+			A2($elm$core$String$split, '?', queryString));
+		return $elm$core$String$isEmpty(trimmed) ? $sporto$qs$QS$empty : A3(
+			$elm$core$List$foldl,
+			$sporto$qs$QS$addSegmentToQuery(cfg),
+			$sporto$qs$QS$empty,
+			A2($elm$core$String$split, '&', trimmed));
+	});
+var $author$project$Main$parseSelectExampleIndex = function (queryString) {
+	var _v0 = A2(
+		$sporto$qs$QS$get,
+		'e',
+		A2($sporto$qs$QS$parse, $sporto$qs$QS$config, queryString));
+	if (_v0.$ === 'Just') {
+		var selected = _v0.a;
+		if (selected.$ === 'One') {
+			var one = selected.a;
+			return $elm$core$String$toInt(one);
+		} else {
+			var many = selected.a;
+			return $elm$core$String$toInt(
+				A2(
+					$elm$core$Maybe$withDefault,
+					'0',
+					$elm$core$List$head(many)));
+		}
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $author$project$Main$parseSelectFeatureIndex = function (queryString) {
+	var _v0 = A2(
+		$sporto$qs$QS$get,
+		'f',
+		A2($sporto$qs$QS$parse, $sporto$qs$QS$config, queryString));
+	if (_v0.$ === 'Just') {
+		var selected = _v0.a;
+		if (selected.$ === 'One') {
+			var one = selected.a;
+			return $elm$core$String$toInt(one);
+		} else {
+			var many = selected.a;
+			return $elm$core$String$toInt(
+				A2(
+					$elm$core$Maybe$withDefault,
+					'0',
+					$elm$core$List$head(many)));
+		}
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $author$project$Msg$SelectExample = function (a) {
+	return {$: 'SelectExample', a: a};
+};
 var $elm$random$Random$Generate = function (a) {
 	return {$: 'Generate', a: a};
 };
@@ -8315,75 +8553,6 @@ var $elm$random$Random$int = F2(
 				}
 			});
 	});
-var $author$project$Main$requestRandomFeature = A2(
-	$elm$random$Random$generate,
-	$author$project$Msg$SelectFeature,
-	A2(
-		$elm$random$Random$int,
-		0,
-		$elm$core$List$length($author$project$Features$features) - 1));
-var $author$project$Main$initialModel = function (flag) {
-	return _Utils_Tuple2(
-		{exampleIndex: 0, feature: $author$project$Features$intiFeature, usage: $author$project$Main$Gradle},
-		$author$project$Main$requestRandomFeature);
-};
-var $elm$core$Platform$Sub$batch = _Platform_batch;
-var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $author$project$Main$subscriptions = function (model) {
-	return $elm$core$Platform$Sub$none;
-};
-var $author$project$Main$Maven = {$: 'Maven'};
-var $elm$core$List$drop = F2(
-	function (n, list) {
-		drop:
-		while (true) {
-			if (n <= 0) {
-				return list;
-			} else {
-				if (!list.b) {
-					return list;
-				} else {
-					var x = list.a;
-					var xs = list.b;
-					var $temp$n = n - 1,
-						$temp$list = xs;
-					n = $temp$n;
-					list = $temp$list;
-					continue drop;
-				}
-			}
-		}
-	});
-var $elm$core$List$head = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(x);
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
-var $elm$core$Maybe$withDefault = F2(
-	function (_default, maybe) {
-		if (maybe.$ === 'Just') {
-			var value = maybe.a;
-			return value;
-		} else {
-			return _default;
-		}
-	});
-var $author$project$Main$featureAt = function (index) {
-	return A2(
-		$elm$core$Maybe$withDefault,
-		$author$project$Features$intiFeature,
-		$elm$core$List$head(
-			A2($elm$core$List$drop, index, $author$project$Features$features)));
-};
-var $elm$core$Platform$Cmd$batch = _Platform_batch;
-var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$Msg$SelectExample = function (a) {
-	return {$: 'SelectExample', a: a};
-};
 var $author$project$Main$requestRandomExample = function (feature) {
 	return A2(
 		$elm$random$Random$generate,
@@ -8393,6 +8562,53 @@ var $author$project$Main$requestRandomExample = function (feature) {
 			0,
 			$elm$core$List$length(feature.examples) - 1));
 };
+var $author$project$Msg$SelectFeature = function (a) {
+	return {$: 'SelectFeature', a: a};
+};
+var $author$project$Main$requestRandomFeature = A2(
+	$elm$random$Random$generate,
+	$author$project$Msg$SelectFeature,
+	A2(
+		$elm$random$Random$int,
+		0,
+		$elm$core$List$length($author$project$Features$features) - 1));
+var $author$project$Main$initialModel = function (queryString) {
+	var selectedFeatureIdx = $author$project$Main$parseSelectFeatureIndex(queryString);
+	var selectedExampleIdx = $author$project$Main$parseSelectExampleIndex(queryString);
+	if (selectedFeatureIdx.$ === 'Just') {
+		var featureIdx = selectedFeatureIdx.a;
+		if (selectedExampleIdx.$ === 'Just') {
+			var exampleIdx = selectedExampleIdx.a;
+			return _Utils_Tuple2(
+				{
+					exampleIndex: exampleIdx,
+					feature: $author$project$Main$featureAt(featureIdx),
+					usage: $author$project$Main$Gradle
+				},
+				$elm$core$Platform$Cmd$none);
+		} else {
+			return _Utils_Tuple2(
+				{
+					exampleIndex: 0,
+					feature: $author$project$Main$featureAt(featureIdx),
+					usage: $author$project$Main$Gradle
+				},
+				$author$project$Main$requestRandomExample(
+					$author$project$Main$featureAt(featureIdx)));
+		}
+	} else {
+		return _Utils_Tuple2(
+			{exampleIndex: 0, feature: $author$project$Features$intiFeature, usage: $author$project$Main$Gradle},
+			$author$project$Main$requestRandomFeature);
+	}
+};
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $elm$core$Platform$Sub$batch = _Platform_batch;
+var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
+var $author$project$Main$subscriptions = function (model) {
+	return $elm$core$Platform$Sub$none;
+};
+var $author$project$Main$Maven = {$: 'Maven'};
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -9377,5 +9593,4 @@ var $author$project$Introduction$main = $elm$html$Html$text('Hello!');
 var $author$project$Features$main = $elm$html$Html$text('Hello!');
 var $author$project$Feature$main = $elm$html$Html$text('Hello!');
 var $author$project$CodeBlock$main = $elm$html$Html$text('Hello!');
-_Platform_export({'CodeBlock':{'init':_VirtualDom_init($author$project$CodeBlock$main)(0)(0)},'References':{'init':_VirtualDom_init($author$project$References$main)(0)(0)},'Msg':{'init':_VirtualDom_init($author$project$Msg$main)(0)(0)},'Main':{'init':$author$project$Main$main(
-	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)},'Introduction':{'init':_VirtualDom_init($author$project$Introduction$main)(0)(0)},'Features':{'init':_VirtualDom_init($author$project$Features$main)(0)(0)},'Feature':{'init':_VirtualDom_init($author$project$Feature$main)(0)(0)}});}(this));
+_Platform_export({'CodeBlock':{'init':_VirtualDom_init($author$project$CodeBlock$main)(0)(0)},'References':{'init':_VirtualDom_init($author$project$References$main)(0)(0)},'Msg':{'init':_VirtualDom_init($author$project$Msg$main)(0)(0)},'Main':{'init':$author$project$Main$main($elm$json$Json$Decode$string)(0)},'Introduction':{'init':_VirtualDom_init($author$project$Introduction$main)(0)(0)},'Features':{'init':_VirtualDom_init($author$project$Features$main)(0)(0)},'Feature':{'init':_VirtualDom_init($author$project$Feature$main)(0)(0)}});}(this));

@@ -11,7 +11,9 @@ import Html.Events exposing (onClick)
 import Introduction exposing (introduction, introductionView)
 import Msg exposing (..)
 import Random
-
+import QS exposing (..)
+import Url.Parser exposing (Parser, (</>), (<?>), int, map, oneOf, s, string)
+import Url.Parser.Query as Query
 
 type Usage
     = Gradle
@@ -21,6 +23,11 @@ type Usage
 type alias Model =
     { usage : Usage
     , feature : Feature
+    , exampleIndex : Int
+    }
+
+type alias Route =
+    { featureIndex : Int
     , exampleIndex : Int
     }
 
@@ -40,14 +47,51 @@ featureAt index =
     Maybe.withDefault intiFeature (List.head (List.drop index features))
 
 
-initialModel : flag -> ( Model, Cmd Msg )
-initialModel flag =
-    ( { usage = Gradle
-      , feature = intiFeature
-      , exampleIndex = 0
-      }
-    , requestRandomFeature
-    )
+parseSelectFeatureIndex : String -> Maybe Int
+parseSelectFeatureIndex queryString = 
+    case (QS.get "f" (QS.parse QS.config queryString)) of
+        Just selected -> 
+            case selected of
+                One  one  -> String.toInt one
+                Many many -> String.toInt (List.head many |> Maybe.withDefault "0")
+        Nothing -> Nothing
+
+
+parseSelectExampleIndex : String -> Maybe Int
+parseSelectExampleIndex queryString = 
+    case (QS.get "e" (QS.parse QS.config queryString)) of
+        Just selected -> 
+            case selected of
+                One  one  -> String.toInt one
+                Many many -> String.toInt (List.head many |> Maybe.withDefault "0")
+        Nothing -> Nothing
+
+
+initialModel : String -> ( Model, Cmd Msg )
+initialModel queryString =
+    let selectedFeatureIdx = parseSelectFeatureIndex queryString in
+    let selectedExampleIdx = parseSelectExampleIndex queryString in
+    case selectedFeatureIdx of
+        Just featureIdx ->
+            case selectedExampleIdx of
+                Just exampleIdx -> ( { usage = Gradle
+                                   , feature = featureAt featureIdx
+                                   , exampleIndex = exampleIdx
+                                   }
+                                   , Cmd.none
+                                   )
+                Nothing         -> ( { usage = Gradle
+                                   , feature = featureAt featureIdx
+                                   , exampleIndex = 0
+                                   }
+                                   , requestRandomExample (featureAt featureIdx)
+                                   )
+        Nothing                 -> ( { usage = Gradle
+                                   , feature = intiFeature
+                                   , exampleIndex = 0
+                                   }
+                                   , requestRandomFeature
+                                   )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -99,7 +143,7 @@ subscriptions model =
     Sub.none
 
 
-main : Program () Model Msg
+main : Program String Model Msg
 main =
     -- Browser.application
     Browser.element

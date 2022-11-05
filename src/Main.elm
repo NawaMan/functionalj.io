@@ -12,8 +12,6 @@ import Introduction exposing (introduction, introductionView)
 import Msg exposing (..)
 import Random
 import QS exposing (..)
-import Url.Parser exposing (Parser, (</>), (<?>), int, map, oneOf, s, string)
-import Url.Parser.Query as Query
 
 type Usage
     = Gradle

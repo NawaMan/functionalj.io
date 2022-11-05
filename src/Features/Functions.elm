@@ -50,17 +50,17 @@ public int toIntWithBase(String str, int base) {
 
 // With FunctionalJ, the `Func.f` method allows you to easily turn a method reference to a function.
 var toInt = f(this::toInt);
-validate("toInt.apply(\"42\") = 42",
+validate("toInt.apply(\"42\")",
           toInt.apply("42"),  42);
 
 // It also automatically takes are of the types.
 // Notice that we use `f` for both `toInt` and `toIntWithBase` which have different signature.
 var toIntWithBase = f(this::toIntWithBase);
-validate("toIntWithBase.apply(\"11\", 9) = 9",
+validate("toIntWithBase.apply(\"11\", 9)",
           toIntWithBase.apply("11", 8),  9);
 
 // As a function object, we can use it as such. Like with `andThen()`.
-validate("f(this::toInt).andThen(i -> i + 8).apply(\"42\") = 50",
+validate("f(this::toInt).andThen(i -> i + 8).apply(\"42\")",
           f(this::toInt).andThen(i -> i + 8).apply("42"),  50);
 ...
 """

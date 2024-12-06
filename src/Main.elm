@@ -195,8 +195,8 @@ useGradle =
     div []
         [ p [] [ text "Add gradle dependency ..." ]
         , codeBlock """
-    compile             'functionalj:functionalj-all:0.5.5.0' // Please lookup for the latest version.
-    annotationProcessor 'io.functionalj:functionalj-types:0.5.5.0' // Please lookup for the latest version."
+    compile             'functionalj:functionalj-all:1.0.17' // Please lookup for the latest version.
+    annotationProcessor 'io.functionalj:functionalj-types:1.0.17' // Please lookup for the latest version."
             """
         , p []
             [ a [ href "https://github.com/NawaMan/UseFunctionalJGradle" ] [ text "UseFunctionalJGradle" ]
@@ -213,7 +213,7 @@ useMaven =
     <dependency>
         <groupId>functionalj</groupId>
         <artifactId>functionalj-all</artifactId>
-        <version>0.5.5.0</version>
+        <version>1.0.17</version>
     </dependency>
         """
         , p []

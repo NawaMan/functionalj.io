@@ -8674,7 +8674,7 @@ var $author$project$Main$sectionBottom = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					$elm$html$Html$text('© 2017-2022 NawaMan\'s FunctionalJ.io — FunctionalJ.io is Open Source, '),
+					$elm$html$Html$text('© 2017-2024 NawaMan\'s FunctionalJ.io — FunctionalJ.io is Open Source, '),
 					A2(
 					$elm$html$Html$a,
 					_List_fromArray(

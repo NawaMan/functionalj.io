@@ -248,7 +248,7 @@ sectionBottom : Html Msg
 sectionBottom =
     div [ class "section section-bottom" ]
         [ p []
-            [ text "© 2017-2022 NawaMan's FunctionalJ.io — FunctionalJ.io is Open Source, "
+            [ text "© 2017-2024 NawaMan's FunctionalJ.io — FunctionalJ.io is Open Source, "
             , a [ href "https://github.com/NawaMan/FunctionalJ/blob/master/LICENSE" ] [ text "MIT License" ]
             , text "."
             ]
